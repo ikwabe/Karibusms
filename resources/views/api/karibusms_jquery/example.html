@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+	<title>karibuSMS jQuery API sample</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script type="text/javascript" language="JavaScript" src="jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" language="JavaScript" src="karibusms.js"></script>
+    </head>
+    <body>
+	<script type="text/javascript">
+	    karibu = function() {
+		var param = {
+		    api_key: '21541789095', //your API KEY here
+		    api_secret: '9c57d6c6f41b893123a286e5803ae95a8b52d395', //your API SECRET
+		    message: "Hello, I have fix it and is fine", // Message to be sent
+		    karibusmspro: '0' // 0=karibusms, 1=karibuSMS pro
+		};
+		var stat = {
+		    api_key: '21541789095', //your API KEY here
+		    api_secret: '9c57d6c6f41b893123a286e5803ae95a8b52d395', //your API SECRET
+		    tag :"get_statistics", // 
+		};
+		/**
+		 * if you want to send SMS, use this method
+		 */
+		karibusms.sendSms(param,function(data) {
+		    //get the result here
+		    console.log(data);
+		    alert(data.message);
+		}); 
+		/**
+		 * if you want to get statistics, use this method
+		 */
+		karibusms.getStatistics(stat,function(data){
+		    console.log(data);
+		})
+	    };
+	    $(document).ready(karibu);
+	</script>
+    </body>
+</html>

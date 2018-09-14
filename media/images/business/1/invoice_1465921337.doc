@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="keywords" content="karibu, SMS web app, SMS business support, people get connected with business, Customer support application, be the first to know" />
+	<meta name="description" content="" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" /> 
+	<meta charset="utf-8"/>
+	<link href="media/images/logo.png" rel="shortcut icon" type="image/x-icon" />
+
+	<meta name="google-translate-customization" content="AIzaSyAEswiv76lGpmcCBQC7yAmyzZzvHOnve_Y"></meta>
+
+
+	<script type="text/javascript">
+	    function change_cost(cost, to) {
+		switch (to) {
+		    case 'usd':
+			return  Math.ceil(cost / 1620 * 1) / 1; //we need 2dp in us $
+			break;
+		    default:
+			return cost;
+			break;
+		}
+	    }
+	</script> 
+	<link href="http://localhost/karibu_laravel/media/css/app.v2.css" rel="stylesheet">
+	<link href="http://localhost/karibu_laravel/media/css/landing.css" rel="stylesheet">
+	<script src="http://localhost/karibu_laravel/media/js/app.v2.js"></script>
+
+	<script src="http://localhost/karibu_laravel/media/js/custom.js"></script>
+	<script src="http://localhost/karibu_laravel/media/js/jquery.form.js"></script>
+	<script src="http://localhost/karibu_laravel/media/js/jquery.jcryption.3.0.1.js"></script>
+	<script src="http://localhost/karibu_laravel/media/js/jquery.loadmask.min.js"></script>
+
+	<meta name="csrf-token" content="KjaNee4zkZ0KEab0ZYVhTd4RhVlFH9vmeHLBQQX6" />
+	
+		<!--[if lt IE 9]> 
+	<script src="js/ie/html5shiv.js"></script> 
+	<script src="js/ie/respond.min.js"></script>
+	<script src="js/ie/excanvas.js"></script> 
+	<![endif]-->
+	<title>KaribuSMS</title>  
+    </head>
+
+    <body style="width: 80%; margin: 0 auto;">
+
+	<!--<div class="container">-->
+	<section class="vbox">
+
+	    <header class="bg-light dk header navbar navbar-fixed-top-xs"> 
+
+
+
+	    </header>
+
+
+
+
+	    <!--start section after banner-->
+
+	    <section> 
+		<section class="hbox stretch">
+
+
+
+		    
+		    <section id="content">
+
+			<section class="vbox">
+
+
+			    <section> <section class="hbox stretch"> <!-- .aside --> 
+
+				    <!-- /.aside --> <section id="content"> 
+					<section class="vbox bg-white"> 
+					    <header class="header b-b b-light hidden-print">
+
+						<p>Invoice</p> </header>
+					    <section class="scrollable wrapper"> 
+						<img src="http://localhost/karibu_laravel/media/images/inets.jpg" width="80" height="50"/>
+						<div class="row">
+						    <div class="col-xs-6">
+							<h4>Inets Company Limited.</h4> <p>
+							    <a href="http://www.inetstz.com/">www.inetstz.com</a>
+							</p>
+							<p>11th Block, Bima Road, Mikocheni B <br> Dar es salaam<br> Tanzania </p> 
+							<p> Telephone: +255 22278 0228<br> Mobile: +255 655 406 004 </p>
+						    </div> 
+						    <div class="col-xs-6 text-right"> 
+							<p class="h4">#312495</p> 
+							<h5>14 Jun 2016</h5>
+
+						    </div>
+						</div>
+						<div class="well m-t"> 
+						    <div class="row"> 
+							<div class="col-xs-6">
+							    <strong>TO:</strong>
+							    <h4>KaribuSMS</h4> 
+							    <p>Dar es Salaam. Mikocheni B, Bima road,Block 11<br>  Tanzania United Republic of								<br> Phone: 255759553355								<br> Email: info@inetstz.com<br> </p> 
+							</div>
+							<div class="col-xs-6"> 
+
+							</div>
+						    </div>
+						</div>
+						<p class="m-t m-b">Order date: <strong>14 Jun 2016</strong>
+
+						    <br> Invoice No: <strong>#312495</strong> </p>
+						<div class="line"></div>
+						<table class="table">
+						    <thead>
+							<tr> 
+							    <th width="60">QTY</th> 
+							    <th>DESCRIPTION</th>
+							    <th width="140">UNIT PRICE</th> 
+							    <th width="140">QUANTITY</th> 
+							    <th width="90">TOTAL</th>
+							</tr> 
+						    </thead>
+						    <tbody>
+							
+							<tr> <td>1</td>
+							    <td>Payment for Internet Messages</td>
+							    <td>0.008695652173913</td> 
+							    <td>2300</td>
+							    <td>20</td>
+							</tr>
+							<tr> 
+							    <td colspan="4" class="text-right no-border"><strong>Total</strong></td> 
+							    <td><strong>20</strong></td> 
+							</tr> 
+						    </tbody> 
+						</table>
+						<ul>
+						    <p>Total amount in words:
+							<b> Twenty</b> 
+								USD						    </p>
+						    <p></p>
+						    <b>PAYMENT METHODS</b>
+						    <p>To be paid via mobile payments, bank cheque, cash or direct bank deposits via </p>
+						    <p>BANK NAME: <b>KCB</b></p>
+						    <p>Account name: <b>INETS COMPANY LIMITED</b></p>
+						    <p>Account Number:  <b>3301107206</b></p>
+						</ul>
+					    </section> 
+					</section> 
+					<a href="#" class="hide nav-off-screen-block" data-toggle="class:nav-off-screen" data-target="#nav"></a>
+				    </section> 
+
+				</section> 
+			    </section>
+			</section>
+		    </section> 
+
+		</section>
+	    </section>
+	</section>
+	<br/><br/>
+
+	<footer id="footer" class="footer bg-white b-t b-light fixed">
+
+	    <div class="text-center padder"> 
+		<p> <small>KaribuSMS web application<br>&copy; 2016</small> </p> 
+
+	    </div>
+	</footer>
+	<script src="http://localhost/karibu_laravel/media/js/charts/easypiechart/jquery.easy-pie-chart.js"></script><script src="http://localhost/karibu_laravel/media/js/charts/sparkline/jquery.sparkline.min.js"></script><script src="http://localhost/karibu_laravel/media/js/charts/flot/jquery.flot.min.js"></script><script src="http://localhost/karibu_laravel/media/js/charts/flot/jquery.flot.tooltip.min.js"></script><script src="http://localhost/karibu_laravel/media/js/charts/flot/jquery.flot.resize.js"></script><script src="http://localhost/karibu_laravel/media/js/sortable/jquery.sortable.js"></script>    </body>
+</html>
+
