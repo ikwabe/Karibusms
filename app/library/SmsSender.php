@@ -151,7 +151,8 @@ class SmsSender {
 	$destination = array("messageId" => $messageId,
 	    "to" => $this->phone_number);
 
-	$message = array("from" => urlencode($this->name),
+	 $this->name= $this->name=='SUFA' ? 'SUFA SCHOOL': $this->name;
+	$message = array("from" =>in_array($this->name,['INETS','SHULESOFT','ERB','karibuSMS','SUFA SCHOOL','ACCLAVIA','MALEWOGROUP','MASEAA','WAT_SACCOS']) ? $this->name:'karibuSMS',
 	    "destinations" => array($destination),
 	    "text" =>$this->message,
 	    "notifyUrl" => 'www.karibusms.com',
