@@ -28,19 +28,19 @@ class SignupController extends Controller {
     }
 
     public function addPayment($client_id) {
-	$data = array(
-	    'client_id' => $client_id,
-	    'method' => 'registration',
-	    'amount' => 100,
-	    'transaction_code' => 'NULL',
-	    'approved' => 1,
-	    'payment_per_sms' => 1,
-	    'currency' => 'TZS',
-	    'cost_per_sms' => 20,
-	    'sms_provided' => 5,
-	    'confirmed' => 1
-	);
-	DB::table('payment')->insertGetId($data, "payment_id");
+//	$data = array(
+//	    'client_id' => $client_id,
+//	    'method' => 'registration',
+//	    'amount' => 100,
+//	    'transaction_code' => 'NULL',
+//	    'approved' => 1,
+//	    'payment_per_sms' => 1,
+//	    'currency' => 'TZS',
+//	    'cost_per_sms' => 20,
+//	    'sms_provided' => 5,
+//	    'confirmed' => 1
+//	);
+//	DB::table('payment')->insertGetId($data, "payment_id");
     }
 
     public function validateSignupData($data) {

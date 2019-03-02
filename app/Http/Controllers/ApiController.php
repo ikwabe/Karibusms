@@ -213,6 +213,7 @@ class ApiController extends Controller {
 		->value('message_left');
 	return json_encode(array(
 	    'success' => 1,
+            'phone'=> $this->phone_number,
 	    'sms_remain' => $message_left,
 	    'message' => 'message sent successfully'
 	));
