@@ -275,6 +275,35 @@ class AndroidTestController extends Controller
         echo json_encode(['status' => 'success', 'message'=>'Messages Updated successful']);
     }
 
+
+    //NEW:  In some cases token can be null(not generated) during login so we have to update it when it is available
+    public function updateGCMToken(){
+        DB::table('client')
+            ->where('client_id', $this->client_id)
+            ->update(['gcm_id' => request('token')]);
+        echo json_encode(['status' => 'success', 'message'=>'Messages Updated successful']);
+    }
+
+    /**
+     * //NEW: A way for an App to notify server that it is online
+     *
+     * to Request up to send status:  \Gcm::sendAction("REPORT_ONLINE_PRESENCE",null,$client->gcm_id);
+     **/
+    public function helloFromApp(){
+        DB::table('client')
+            ->where('client_id', $this->client_id)
+            ->update(['last_reported_online' => date('Y-m-d H:i:s')]);
+        echo json_encode(['status' => 'success', 'message'=>'Messages Updated successful']);
+    }
+
+    /***
+     * Hello test
+     */
+    public function helloToApp(){
+        $client = DB::table('client')->where('client_id', $this->client_id)->first();
+        print_r(\Gcm::sendAction("REPORT_ONLINE_PRESENCE",null,$client->gcm_id));
+    }
+
     public function deleteMessage()
     {
         $message = new MessageController();
