@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -21,22 +22,22 @@ class ApiController extends Controller {
     private $karibusmspro;
     public $client_id;
     private $error = array(
-	'error' => 1,
-	'error_message' => "system error",
-	"success" => 0,
+        'error' => 1,
+        'error_message' => "system error",
+        "success" => 0,
     );
 
     public function addInvoice() {
-	$payments = DB::table('payment')->get();
-	foreach ($payments as $payment) {
-	    $invoice = random_int(10000, str_replace(1465, NULL, time()));
-	    if ($payment->invoice == '' || $payment->invoice == 'null') {
+        $payments = DB::table('payment')->get();
+        foreach ($payments as $payment) {
+            $invoice = random_int(10000, str_replace(1465, NULL, time()));
+            if ($payment->invoice == '' || $payment->invoice == 'null') {
 
-		DB::table('payment')->where('payment_id', $payment->payment_id)->update([
-		    'invoice' => $invoice
-		]);
-	    }
-	}
+                DB::table('payment')->where('payment_id', $payment->payment_id)->update([
+                    'invoice' => $invoice
+                ]);
+            }
+        }
     }
 
     public function test() {
@@ -66,19 +67,19 @@ class ApiController extends Controller {
 //	$push2 = \Gcm::send($content, '255714825469', 'Ephraim', $gcm_id);
 //	print_r($push2);
 
-	$users = DB::table('pending_sms')->select('phone_number', 'pending_sms_id')->where(['status' => 1])->get();
-	foreach ($users as $user) {
-	   // echo $user->phone_number . '<br/>';
-	   // $username = preg_replace("/[^A-Za-z0-9]/", '', $user->phone_number);
-	    $number=  validate_phone_number($user->phone_number);
-	    print_r($number);
-	    echo '<br/>';
+        $users = DB::table('pending_sms')->select('phone_number', 'pending_sms_id')->where(['status' => 1])->get();
+        foreach ($users as $user) {
+            // echo $user->phone_number . '<br/>';
+            // $username = preg_replace("/[^A-Za-z0-9]/", '', $user->phone_number);
+            $number = validate_phone_number($user->phone_number);
+            print_r($number);
+            echo '<br/>';
 //	    $limit = substr($username, 0, 10);
-	   // $phone_number = str_replace(' ', '', $user->phone_number);
+            // $phone_number = str_replace(' ', '', $user->phone_number);
 //	    DB::table('pending_sms')
 //		    ->where('pending_sms_id', $user->pending_sms_id)
 //		    ->update(['phone_number' => $username]);
-	}
+        }
     }
 
     /**
@@ -87,83 +88,85 @@ class ApiController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-	
+        
     }
 
     public function api($data) {
-	if (isset($_GET['callback']) === TRUE) {
-	    header('Content-Type: text/javascript;');
-	    header('Access-Control-Allow-Origin: http://client');
-	    header('Access-Control-Max-Age: 3628800');
-	    header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
-	    //lets call the api class now
-	    $data = json_encode(array(
-		'success' => 0,
-		'message' => "All is well and not empty"
-	    ));
-	    return request('callback') . '(' . $this->call($data) . ')';
-	} else {
-	    return $this->call($data);
-	}
+        if (isset($_GET['callback']) === TRUE) {
+            header('Content-Type: text/javascript;');
+            header('Access-Control-Allow-Origin: http://client');
+            header('Access-Control-Max-Age: 3628800');
+            header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
+            //lets call the api class now
+            $data = json_encode(array(
+                'success' => 0,
+                'message' => "All is well and not empty"
+            ));
+            return request('callback') . '(' . $this->call($data) . ')';
+        } else {
+            return $this->call($data);
+        }
     }
 
     public function init(Request $request) {
-	$data = $request->all();
-	return $this->api($data);
+        $data = $request->all();
+        return $this->api($data);
     }
 
     private function call($data) {
-	foreach ($data as $key => $value) {
-	    if ($data[$key] == '') {
-		return (json_encode(array(
-			    'success' => 0,
-			    'message' => $key . " is empty"
-		)));
-	    }
-	    $this->$key = $value;
-	}
-	if ($this->findApp() == TRUE) {
-	    if (request('tag') == 'get_statistics') {
+        foreach ($data as $key => $value) {
+            if ($data[$key] == '') {
+                return (json_encode(array(
+                            'success' => 0,
+                            'message' => $key . " is empty"
+                )));
+            }
+            $this->$key = $value;
+        }
+        if ($this->findApp() == TRUE) {
+            if (request('tag') == 'get_statistics') {
 
-		return json_encode($this->getStatistics($this->developer->name, $this->developer->client_id));
-	    } else if (request('tag') == 'get_report') {
+                return json_encode($this->getStatistics($this->developer->name, $this->developer->client_id));
+            } else if (request('tag') == 'get_report') {
 
-		return $this->getReport($this->developer->name, $this->developer->client_id);
-	    } else {
+                return $this->getReport($this->developer->name, $this->developer->client_id);
+            } else if (request('tag') == 'get_phone_status') {
+                return $this->checkPhoneStatus();
+            } else {
 
-		return $this->start();
-	    }
-	} else {
-	    return (json_encode(array(
-			'success' => 0,
-			'message' => "Wrong API_KEY or SECRET_KEY is supplied"
-	    )));
-	}
+                return $this->start();
+            }
+        } else {
+            return (json_encode(array(
+                        'success' => 0,
+                        'message' => "Wrong API_KEY or SECRET_KEY is supplied"
+            )));
+        }
     }
 
     private function getStatistics($name, $client_id = NULL) {
-	$id = $client_id == NULL ? $this->client_id : $client_id;
-	$statistics = DB::table('pending_sms')->where('username', $name)->get();
-	$sms_status = DB::table('sms_status')->where('client_id', $id)->first();
-	$sms_used = count($statistics);
-	return array(
-	    'sms_used' => $sms_used,
-	    'sms_remain' => $sms_status->message_left,
-	    'app_name' => $name
-	);
+        $id = $client_id == NULL ? $this->client_id : $client_id;
+        $statistics = DB::table('pending_sms')->where('username', $name)->get();
+        $sms_status = DB::table('sms_status')->where('client_id', $id)->first();
+        $sms_used = count($statistics);
+        return array(
+            'sms_used' => $sms_used,
+            'sms_remain' => $sms_status->message_left,
+            'app_name' => $name
+        );
     }
 
     private function getReport($name, $client_id = NULL) {
-	$id = $client_id == NULL ? $this->client_id : $client_id;
-	$range = " and (reg_time::date >= '" . request('start_date') . "' AND reg_time::date <= '" . request('end_date') . "')";
-	$date = (request('start_date') !== null ) ?
-		$range :
-		'';
-	return response()->json(
-			[
-			    'success' => '1',
-			    'messages' => DB::select("select content as message, phone_number as phone, from_smart as karibusmspro, status, reg_time as sent_time, username as sender_name, delivered_status FROM pending_sms where username='{$name}' AND client_id={$id} $date")
-	]);
+        $id = $client_id == NULL ? $this->client_id : $client_id;
+        $range = " and (reg_time::date >= '" . request('start_date') . "' AND reg_time::date <= '" . request('end_date') . "')";
+        $date = (request('start_date') !== null ) ?
+                $range :
+                '';
+        return response()->json(
+                        [
+                            'success' => '1',
+                            'messages' => DB::select("select content as message, phone_number as phone, from_smart as karibusmspro, status, reg_time as sent_time, username as sender_name, delivered_status FROM pending_sms where username='{$name}' AND client_id={$id} $date")
+        ]);
     }
 
     /**
@@ -172,7 +175,7 @@ class ApiController extends Controller {
      * @return Object
      */
     public static function getDeveloperApp($client_id) {
-	return DB::select("SELECT * FROM developer_app WHERE client_id='" . $client_id . "' ");
+        return DB::select("SELECT * FROM developer_app WHERE client_id='" . $client_id . "' ");
     }
 
     /**
@@ -181,168 +184,175 @@ class ApiController extends Controller {
      * @return Object
      */
     public static function getAppStat($developer_id) {
-	return DB::table('developer_message')->where('developer_id', $developer_id)->first();
+        return DB::table('developer_message')->where('developer_id', $developer_id)->first();
     }
 
     private function start() {
 
-	$numbers = $this->getNumbers();
+        $numbers = $this->getNumbers();
 
-	foreach ($numbers as $phone_number) {
-	    $this->addNewNumber($phone_number);
-	}
+        foreach ($numbers as $phone_number) {
+            $this->addNewNumber($phone_number);
+        }
 
 
-	if ($this->business->gcm_id == '' && $this->karibusmspro == FALSE) {
-	    die(json_encode(array(
-		"success" => 0,
-		'message' => 'You do not have a latest karibuSMS app in your phone. Please download the latest version of karibuSMS in google play: https://goo.gl/APJaej and login first in the android app'
-	    )));
-	}
-	if ($this->karibusmspro == TRUE || $this->karibusmspro==1) {
-	    $this->proCheckPaymentStatus();
-	}
+        if ($this->business->gcm_id == '' && $this->karibusmspro == FALSE) {
+            die(json_encode(array(
+                "success" => 0,
+                'message' => 'You do not have a latest karibuSMS app in your phone. Please download the latest version of karibuSMS in google play: https://goo.gl/APJaej and login first in the android app'
+            )));
+        }
+        if ($this->karibusmspro == TRUE || $this->karibusmspro == 1) {
+            $this->proCheckPaymentStatus();
+        }
 
-	$message = new MessageController($this->developer->client_id);
-	$name = ($this->name == '0' || $this->name == NULL || $this->name =='') ? $this->developer->name : $this->name;
+        $message = new MessageController($this->developer->client_id);
+        $name = ($this->name == '0' || $this->name == NULL || $this->name == '') ? $this->developer->name : $this->name;
 
-	$message->saveSms($this->message, $numbers, $this->karibusmspro, NULL, $name, $this->developer->developer_id);
+        $message->saveSms($this->message, $numbers, $this->karibusmspro, NULL, $name, $this->developer->developer_id);
 
-	$message_left = DB::table('sms_status')
-		->where('client_id', $this->developer->client_id)
-		->value('message_left');
-	return json_encode(array(
-	    'success' => 1,
-            'phone'=> $this->phone_number,
-	    'sms_remain' => $message_left,
-	    'message' => 'message sent successfully'
-	));
+        $message_left = DB::table('sms_status')
+                ->where('client_id', $this->developer->client_id)
+                ->value('message_left');
+        return json_encode(array(
+            'success' => 1,
+            'phone' => $this->phone_number,
+            'sms_remain' => $message_left,
+            'message' => 'message sent successfully'
+        ));
     }
 
     private function getNumbers() {
-	$numbers = explode(',', $this->phone_number);
-	$phone_numbers = array();
-	foreach ($numbers as $number) {
-	    $valid_number = validate_phone_number($number);
-	    if (!is_array($valid_number)) {
-		die(json_encode(array(
-		    "success" => 0,
-		    "message" => $number . ' is not a valid number'
-		)));
-	    } else {
-		array_push($phone_numbers, $valid_number[1]);
-	    }
-	}
-	return $phone_numbers;
+        $numbers = explode(',', $this->phone_number);
+        $phone_numbers = array();
+        foreach ($numbers as $number) {
+            $valid_number = validate_phone_number($number);
+            if (!is_array($valid_number)) {
+                die(json_encode(array(
+                    "success" => 0,
+                    "message" => $number . ' is not a valid number'
+                )));
+            } else {
+                array_push($phone_numbers, $valid_number[1]);
+            }
+        }
+        return $phone_numbers;
     }
 
     private function findApp() {
-	$developer_info = DB::table('developer_app')
-			->where('api_key', $this->api_key)
-			->where('api_secret', $this->api_secret)->first();
-	if (!empty($developer_info)) {
-	    $this->developer = $developer_info;
-	    $this->business = DB::table('client')->where('client_id', $this->developer->client_id)->first();
-	    return TRUE;
-	} else {
-	    return FALSE;
-	}
+        $developer_info = DB::table('developer_app')
+                        ->where('api_key', $this->api_key)
+                        ->where('api_secret', $this->api_secret)->first();
+        if (!empty($developer_info)) {
+            $this->developer = $developer_info;
+            $this->business = DB::table('client')->where('client_id', $this->developer->client_id)->first();
+            return TRUE;
+        } else {
+            return FALSE;
+        }
     }
 
     /**
      * Returns decrypted original string
      */
     private function decryptApp($encrypted_string, $encryption_key) {
-	$iv_size = mcrypt_get_iv_size(MCRYPT_BLOWFISH, MCRYPT_MODE_ECB);
-	$iv = mcrypt_create_iv($iv_size, MCRYPT_RAND);
-	$decrypted_string = mcrypt_decrypt(MCRYPT_BLOWFISH, ECRYPTION_KEY, base64_decode($encrypted_string), MCRYPT_MODE_ECB, $iv);
-	return $decrypted_string;
+        $iv_size = mcrypt_get_iv_size(MCRYPT_BLOWFISH, MCRYPT_MODE_ECB);
+        $iv = mcrypt_create_iv($iv_size, MCRYPT_RAND);
+        $decrypted_string = mcrypt_decrypt(MCRYPT_BLOWFISH, ECRYPTION_KEY, base64_decode($encrypted_string), MCRYPT_MODE_ECB, $iv);
+        return $decrypted_string;
     }
 
     private function encryptApp($pure_string) {
-	$iv_size = mcrypt_get_iv_size(MCRYPT_BLOWFISH, MCRYPT_MODE_ECB);
-	$iv = mcrypt_create_iv($iv_size, MCRYPT_RAND);
-	$encrypted_string = mcrypt_encrypt(MCRYPT_BLOWFISH, ECRYPTION_KEY, utf8_encode($pure_string), MCRYPT_MODE_ECB, $iv);
-	return base64_encode($encrypted_string);
+        $iv_size = mcrypt_get_iv_size(MCRYPT_BLOWFISH, MCRYPT_MODE_ECB);
+        $iv = mcrypt_create_iv($iv_size, MCRYPT_RAND);
+        $encrypted_string = mcrypt_encrypt(MCRYPT_BLOWFISH, ECRYPTION_KEY, utf8_encode($pure_string), MCRYPT_MODE_ECB, $iv);
+        return base64_encode($encrypted_string);
     }
 
     public function addNewNumber($phone_number, $name = '') {
 
-	$subscriber_info = DB::table('subscriber_info')
-			->where("phone_number", $phone_number)
-			->where('client_id', $this->developer->client_id)->first();
+        $subscriber_info = DB::table('subscriber_info')
+                        ->where("phone_number", $phone_number)
+                        ->where('client_id', $this->developer->client_id)->first();
 
-	if (empty($subscriber_info)) {
-	    $people = new PeopleController();
-	    $request = array(
-		'firstname' => $name,
-		'phone_number' => $phone_number,
-		'category' => $this->developer->name,
-		'client_id' => $this->developer->client_id,
-		'added_by' => 'api_call'
-	    );
-	    $people->addSubscriberInfo($request);
-	}
+        if (empty($subscriber_info)) {
+            $people = new PeopleController();
+            $request = array(
+                'firstname' => $name,
+                'phone_number' => $phone_number,
+                'category' => $this->developer->name,
+                'client_id' => $this->developer->client_id,
+                'added_by' => 'api_call'
+            );
+            $people->addSubscriberInfo($request);
+        }
     }
 
     public function proCheckPaymentStatus() {
 
-	$record = DB::table('sms_status')->where('client_id', $this->developer->client_id)->first();
-	if (!empty($record)) {
-	    //this user has some SMS remain
+        $record = DB::table('sms_status')->where('client_id', $this->developer->client_id)->first();
+        if (!empty($record)) {
+            //this user has some SMS remain
 
-	    $phone_numbers = explode(',', $this->phone_number);
-	    $sms_count_per_sms = ceil(strlen($this->message) / 160);
-	    $total_sms = $sms_count_per_sms * count($phone_numbers);
-	    if ((int)$record->message_left < (int)$total_sms || (int)$record->message_left <= 0) {
-		die(json_encode(array(
-		    'message' => 'Insufficient credit, send your payments to us or contact us via info@karibusms.com',
-		    'success' => 0)));
-	    } else {
-		return TRUE;
-	    }
-	} else {
-	    //check the status if business exist
-	    die(json_encode(array(
-		'message' => 'Insufficient credit, send your payments to us or contact us via info@karibusms.com',
-		'success' => 0)));
-	}
+            $phone_numbers = explode(',', $this->phone_number);
+            $sms_count_per_sms = ceil(strlen($this->message) / 160);
+            $total_sms = $sms_count_per_sms * count($phone_numbers);
+            if ((int) $record->message_left < (int) $total_sms || (int) $record->message_left <= 0) {
+                die(json_encode(array(
+                    'message' => 'Insufficient credit, send your payments to us or contact us via info@karibusms.com',
+                    'success' => 0)));
+            } else {
+                return TRUE;
+            }
+        } else {
+            //check the status if business exist
+            die(json_encode(array(
+                'message' => 'Insufficient credit, send your payments to us or contact us via info@karibusms.com',
+                'success' => 0)));
+        }
     }
 
     public function karibusms_payment_status() {
-	global $db;
-	$business_info = business::find_where(array('imei' => $this->IMEI));
-	$business = array_shift($business_info);
+        global $db;
+        $business_info = business::find_where(array('imei' => $this->IMEI));
+        $business = array_shift($business_info);
 
-	//check start offer
-	$db->query("select * from smart_start_offer where business_id = '" . $business->client_id . "'");
-	$row = $db->fetchArray();
+        //check start offer
+        $db->query("select * from smart_start_offer where business_id = '" . $business->client_id . "'");
+        $row = $db->fetchArray();
 
-	if (empty($row)) {
-	    //no start offer continue...
-	    unset($row);
-	    $db->query("select * from smart_bundles where business_id='" . $business->client_id . "'");
-	    $row = $db->fetchArray();
-	    if (empty($row)) {
+        if (empty($row)) {
+            //no start offer continue...
+            unset($row);
+            $db->query("select * from smart_bundles where business_id='" . $business->client_id . "'");
+            $row = $db->fetchArray();
+            if (empty($row)) {
 
-		$message = "Package is over. Please add payment to access this service.";
-		$status = array(
-		    'error' => 1,
-		    'error_message' => $message,
-		    'success' => 0
-		);
-		$this->status = $status;
-		echo json_encode($status);
-		exit;
-	    } else {
-		// there is an active bundle, check the number of contacts depending on the bundle enrolled.
-		//unset($row);  
-		$this->max_contacts = $row['total_contacts'];
-	    }
-	} else {
-	    $this->max_contacts = 400; //maximum number of contacts for the start offer.   
-	    $this->offer_days = $row['days_remain'];
-	}
+                $message = "Package is over. Please add payment to access this service.";
+                $status = array(
+                    'error' => 1,
+                    'error_message' => $message,
+                    'success' => 0
+                );
+                $this->status = $status;
+                echo json_encode($status);
+                exit;
+            } else {
+                // there is an active bundle, check the number of contacts depending on the bundle enrolled.
+                //unset($row);  
+                $this->max_contacts = $row['total_contacts'];
+            }
+        } else {
+            $this->max_contacts = 400; //maximum number of contacts for the start offer.   
+            $this->offer_days = $row['days_remain'];
+        }
+    }
+
+    public function checkPhoneStatus() {
+        \Gcm::sendAction("REPORT_ONLINE_PRESENCE", null, $this->developer->client_id);
+        sleep(5);
+        $client = \DB::table('client')->where('client_id', $this->developer->client_id)->first();
+        return $client->last_reported_online;
     }
 
 }
