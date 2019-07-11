@@ -349,10 +349,11 @@ class ApiController extends Controller {
     }
 
     public function checkPhoneStatus() {
+
         \Gcm::sendAction("REPORT_ONLINE_PRESENCE", null, $this->developer->client_id);
         sleep(5);
         $client = \DB::table('client')->where('client_id', $this->developer->client_id)->first();
-        return $client->last_reported_online;
+        return json_encode($client);
     }
 
 }
