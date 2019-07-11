@@ -353,7 +353,7 @@ class ApiController extends Controller {
         \Gcm::sendAction("REPORT_ONLINE_PRESENCE", null, $this->business->gcm_id);
         sleep(5);
         $client = \DB::table('client')->where('client_id', $this->developer->client_id)->first();
-        return json_encode($client);
+        return json_encode(['gcm_id'=>$this->business->gcm_id,'last_online'=>$client->last_reported_online]);
     }
 
 }
