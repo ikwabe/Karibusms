@@ -225,7 +225,7 @@ class ApiController extends Controller {
 
     public function pushSms() {
         $message = new MessageController($this->developer->client_id);
-        $message->sendPullRequest($this->developer->client_id);
+        return $message->sendPullRequest($this->developer->client_id);
     }
 
     private function getNumbers() {

@@ -399,7 +399,7 @@ class MessageController extends Controller {
      */
     public function sendPullRequest($client_id) {
         $client = DB::table('client')->where('client_id', $client_id)->first();
-        \Gcm::sendAction("PULL_SMS_TO_SEND", null, $client->gcm_id);
+      return  \Gcm::sendAction("PULL_SMS_TO_SEND", null, $client->gcm_id);
     }
 
     public function checkSmsStatus($phone_numbers_count = null) {
