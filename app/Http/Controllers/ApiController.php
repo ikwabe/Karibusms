@@ -166,7 +166,7 @@ class ApiController extends Controller {
         return response()->json(
                         [
                             'success' => '1',
-                            'messages' => DB::select("select content as message, phone_number as phone, from_smart as karibusmspro, status, reg_time as sent_time, username as sender_name, delivered_status FROM pending_sms where username='{$name}' AND client_id={$id} $date")
+                            'messages' => DB::select("select content as message, phone_number as phone, from_smart as karibusmspro, status, reg_time as sent_time, username as sender_name, delivered_status FROM pending_sms where client_id={$id} $date")
         ]);
     }
 
