@@ -397,9 +397,9 @@ class MessageController extends Controller {
      * Notifies client with client Id, there is new sms
      * @param $client_id
      */
-    public function sendPullRequest($client_id) {
+    public function sendPullRequest($client_id) { 
         $client = DB::table('client')->where('client_id', $client_id)->first();
-      return  \Gcm::sendAction("PULL_SMS_TO_SEND", null, $client->gcm_id);
+        return response()->json(\Gcm::sendAction("PULL_SMS_TO_SEND", null, $client->gcm_id));
     }
 
     public function checkSmsStatus($phone_numbers_count = null) {
