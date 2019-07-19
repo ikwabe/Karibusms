@@ -19,8 +19,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use DB;
 
-class MessageController extends Controller
-{
+class MessageController extends Controller {
 
     public $username;
     private $sms_count_per_sms;
@@ -29,19 +28,17 @@ class MessageController extends Controller
      *
      * @return type
      */
-    public function __construct($client_id = NULL)
-    {
+    public function __construct($client_id = NULL) {
         parent::__construct();
         $this->client_id = $client_id == NULL ? $this->client_id : $client_id;
 
         $this->username = DB::table('client')->where('client_id', $this->client_id)->value('username');
     }
 
-    public function sms($offset = 0)
-    {
+    public function sms($offset = 0) {
         $skip = $offset * 10;
         $sms = DB::select("SELECT * from message WHERE "
-            . "client_id='" . $this->client_id . "' ORDER BY time DESC OFFSET {$skip} LIMIT 10");
+                        . "client_id='" . $this->client_id . "' ORDER BY time DESC OFFSET {$skip} LIMIT 10");
         if ($offset == 0) {
             $return = view('message.sms')->with(array('sms' => $sms, 'gcm_id' => $this->gcmId()));
         } else {
@@ -50,17 +47,15 @@ class MessageController extends Controller
         return $return;
     }
 
-    public function pendingSms()
-    {
+    public function pendingSms() {
         $sms = DB::select("SELECT * from pending_sms WHERE "
-            . "client_id='" . $this->client_id . "' AND status='0' ORDER BY reg_time DESC");
+                        . "client_id='" . $this->client_id . "' AND status='0' ORDER BY reg_time DESC");
 
         $return = view('message.pending_sms')->with(array('sms' => $sms, 'gcm_id' => $this->gcmId()));
         return $return;
     }
 
-    public function loadMoreSms($sms)
-    {
+    public function loadMoreSms($sms) {
         $user = self::user_info();
         $link = 'media/images/business/' . $user->client_id . '/' . $user->profile_pic;
         $path = file_exists($link) ? $link : 'media/images/business/0/default.png';
@@ -83,12 +78,11 @@ class MessageController extends Controller
      * @param type $message_id : integer, message ID from DB
      * @return type View: SMS content
      */
-    public function show($message_id)
-    {
+    public function show($message_id) {
         $message = DB::table('message')->where('message_id', decryptApp($message_id))
-            ->where('message.client_id', $this->client_id)
-            ->leftJoin('category', 'message.category_id', '=', 'category.category_id')
-            ->first();
+                ->where('message.client_id', $this->client_id)
+                ->leftJoin('category', 'message.category_id', '=', 'category.category_id')
+                ->first();
         $phone_numbers = DB::table('pending_sms')->where('message_id', decryptApp($message_id))->get();
         return view('message.sms_content')->with(array('message' => $message, 'phone_numbers' => $phone_numbers));
     }
@@ -97,8 +91,7 @@ class MessageController extends Controller
      *
      * @return HTML : view to send SMS
      */
-    public function send_sms()
-    {
+    public function send_sms() {
         $username = DB::table('client')->where('client_id', $this->client_id)->value('username');
         return view('message.send_sms')->with(array('gcm_id' => $this->gcmId(), 'username' => $username));
     }
@@ -107,8 +100,7 @@ class MessageController extends Controller
      *
      * @return HTML : view to send Email
      */
-    public function send_email()
-    {
+    public function send_email() {
         $username = DB::table('client')->where('client_id', $this->client_id)->value('username');
         return view('message.send_email')->with(array('gcm_id' => $this->gcmId(), 'username' => $username));
     }
@@ -117,8 +109,7 @@ class MessageController extends Controller
      *
      * @return type
      */
-    public function getCategoryId()
-    {
+    public function getCategoryId() {
         $id = DB::table('category')->where('name', request('category_name'))->where('client_id', request('business_id'))->value('category_id');
         if (empty($id)) {
             $category_id = 0;
@@ -131,8 +122,7 @@ class MessageController extends Controller
     /**
      * @uses Send SMS function by category
      */
-    public function sendSmsByCategory()
-    {
+    public function sendSmsByCategory() {
         $category_id = request('category') == NULL ? $this->getCategoryId() : request('category');
         $content = htmlspecialchars(request('content'));
         $this->sms_count_per_sms = ceil(strlen($content) / 160);
@@ -168,8 +158,7 @@ class MessageController extends Controller
      * @depends saveSms method is called inside. The main advantage of this method is it validate sms remain
      *                   while calling saveSms directly does not
      */
-    public function sendSmsByNumbers($sms_content = NULL, $phone_number = NULL, $sms_type = 1)
-    {
+    public function sendSmsByNumbers($sms_content = NULL, $phone_number = NULL, $sms_type = 1) {
         $content = $sms_content == NULL ? htmlspecialchars(request('content')) : $sms_content;
         $phone = $phone_number == NULL ? request('phone_numbers') : $phone_number;
 
@@ -203,8 +192,7 @@ class MessageController extends Controller
      * @param Integer $type : Type of request
      * @return Method to be called
      */
-    public function sms_send($type = null)
-    {
+    public function sms_send($type = null) {
         if ($type == 1) {
             $return = $this->sendSmsByCategory();
         } else {
@@ -213,8 +201,7 @@ class MessageController extends Controller
         return $return;
     }
 
-    public function sendEmailByCategory()
-    {
+    public function sendEmailByCategory() {
         $category_id = request('category') == NULL ? $this->getCategoryId() : request('category');
         $content = nl2br(request('content'));
         $subject = request('subject');
@@ -239,8 +226,7 @@ class MessageController extends Controller
         ));
     }
 
-    public function sendEmailByList($email = NULL, $subject = NULL, $content = null)
-    {
+    public function sendEmailByList($email = NULL, $subject = NULL, $content = null) {
         $email_body = $content == NULL ? nl2br(request('content')) : $content;
         $emails = $email == NULL ? request('emails') : $email;
         $email_subject = $subject == NULL ? request('subject') : $subject;
@@ -266,8 +252,7 @@ class MessageController extends Controller
      * @param Integer $type : Type of request
      * @return Method to be called
      */
-    public function email_send($type = null)
-    {
+    public function email_send($type = null) {
         if ($type == 1) {
             $return = $this->sendEmailByCategory();
         } else {
@@ -276,8 +261,7 @@ class MessageController extends Controller
         return $return;
     }
 
-    private function sendAndroid($numbers, $messaging_type)
-    {
+    private function sendAndroid($numbers, $messaging_type) {
         if (request('tag') == 'sendMessage' && $messaging_type == 0) {
             $res = array();
             foreach ($numbers as $number) {
@@ -312,22 +296,21 @@ class MessageController extends Controller
      * @param String $username Option
      * @param int $developer_id Mandatory only for API sms
      */
-    public function saveSms($content, $numbers, $messaging_type, $category_id = NULL, $username = NULL, $developer_id = NULL)
-    {
+    public function saveSms($content, $numbers, $messaging_type, $category_id = NULL, $username = NULL, $developer_id = NULL) {
 
         $name = $username == NULL ? $this->username : $username;
         $sms_count_per_sms = ceil(strlen($content) / 160);
         $message_id = DB::table('message')->insertGetId(
-            [
-                'is_bulk' => $messaging_type == NULL ? 0 : $messaging_type,
-                'content' => $content,
-                'client_id' => $this->client_id,
-                'developer_id' => $developer_id,
-                'to_ids' => count($numbers),
-                'messaging_type' => $messaging_type,
-                'message_count' => count($numbers) * $sms_count_per_sms,
-                'category_id' => $category_id
-            ], 'message_id'
+                [
+            'is_bulk' => $messaging_type == NULL ? 0 : $messaging_type,
+            'content' => $content,
+            'client_id' => $this->client_id,
+            'developer_id' => $developer_id,
+            'to_ids' => count($numbers),
+            'messaging_type' => $messaging_type,
+            'message_count' => count($numbers) * $sms_count_per_sms,
+            'category_id' => $category_id
+                ], 'message_id'
         );
 
         foreach ($numbers as $number) {
@@ -341,28 +324,30 @@ class MessageController extends Controller
             $number = validate_phone_number($phone_number);
 
             DB::table('pending_sms')->insert(
-                [
-                    'phone_number' => $number[1],
-                    'content' => $this->customizeContent($content, $number[1], $this->client_id),
-                    'client_id' => $this->client_id,
-                    'message_id' => $message_id,
-                    'from_smart' => $messaging_type == 1 ? 0 : 1,
-                    'status' => 0,
-                    'username' => substr($name, 0, 11)
-                ]
+                    [
+                        'phone_number' => $number[1],
+                        'content' => $this->customizeContent($content, $number[1], $this->client_id),
+                        'client_id' => $this->client_id,
+                        'message_id' => $message_id,
+                        'from_smart' => $messaging_type == 1 ? 0 : 1,
+                        'status' => 0,
+                        'username' => substr($name, 0, 11)
+                    ]
             );
         }
 
         //request('tag') == 'sendMessage' ? sleep(5) :'';
-
         //new: sends a pull request to the mobile
-        $this->sendPullRequest($this->client_id);
-
+        if (request('tag') == 'store') {
+            
+        } else {
+            $this->sendPullRequest($this->client_id);
+        }
         echo request('tag') == 'sendMessage' ?
-            json_encode(array(
-                'message' => 'Message Sent Successfully',
-                'status' => 'internet'
-            )) : '';
+                json_encode(array(
+                    'message' => 'Message Sent Successfully',
+                    'status' => 'internet'
+                )) : '';
     }
 
     /**
@@ -375,12 +360,11 @@ class MessageController extends Controller
      * $organization_name
      * $organization_position
      */
-    public function customizeContent($content, $phone_number, $client_id)
-    {
+    public function customizeContent($content, $phone_number, $client_id) {
 
         $user = DB::table('subscriber_info')
-            ->where('client_id', $client_id)
-            ->where('phone_number', $phone_number)->first();
+                        ->where('client_id', $client_id)
+                        ->where('phone_number', $phone_number)->first();
 
         $patterns = array(
             '/#name/', '/#phone_number/', '/#country/', '/#email/',
@@ -388,7 +372,7 @@ class MessageController extends Controller
         );
         if (!empty($user)) {
             $name = $user->title . ' ' . $user->firstname . ' ' . $user->lastname;
-            $promise_remain = (int)$user->promise - (int)$user->promise_submitted;
+            $promise_remain = (int) $user->promise - (int) $user->promise_submitted;
             $replacements = array(
                 $name, $user->phone_number, $user->country, $user->email,
                 $user->location, $user->organization_name, $user->organization_position, $user->promise, $user->promise_submitted, $promise_remain
@@ -403,8 +387,7 @@ class MessageController extends Controller
         return $message;
     }
 
-    public function send($message_id)
-    {
+    public function send($message_id) {
         //FIXME: send notification to device that there is a pending messages
         return $this->dispatch(new \App\Jobs\sendSMSMessages($message_id));
     }
@@ -414,15 +397,12 @@ class MessageController extends Controller
      * Notifies client with client Id, there is new sms
      * @param $client_id
      */
-    public function sendPullRequest($client_id)
-    {
+    public function sendPullRequest($client_id) {
         $client = DB::table('client')->where('client_id', $client_id)->first();
-        \Gcm::sendAction("PULL_SMS_TO_SEND",null,$client->gcm_id);
+        \Gcm::sendAction("PULL_SMS_TO_SEND", null, $client->gcm_id);
     }
 
-
-    public function checkSmsStatus($phone_numbers_count = null)
-    {
+    public function checkSmsStatus($phone_numbers_count = null) {
 
         $sms_info = DB::table('sms_status')->where('client_id', $this->client_id)->first();
         if (!empty($sms_info)) {
@@ -444,8 +424,7 @@ class MessageController extends Controller
         }
     }
 
-    private function filter_phone_numbers($phone_numbers)
-    {
+    private function filter_phone_numbers($phone_numbers) {
         $numbers = explode(',', trim(rtrim($phone_numbers, ','), ','));
         $valid_numbers = array();
         foreach ($numbers as $number) {
@@ -463,8 +442,7 @@ class MessageController extends Controller
         return $valid_numbers;
     }
 
-    public function mail()
-    {
+    public function mail() {
         $mail = DB::table('request_mail')->where("client_id", $this->client_id)->first();
         if (empty($mail)) {
             return view('message.mail');
@@ -473,7 +451,7 @@ class MessageController extends Controller
                 echo '<div class="alert alert-info"> <button type="button" class="close" data-dismiss="alert">×</button> <i class="fa fa-info-sign"></i><strong>Hello!</strong> This <a href="#" class="alert-link">Your request is in process now</a>, we will contact you soon. </div>';
             } else if ($mail->status == 2) {
                 echo '<div class="alert alert-info"> <button type="button" class="close" data-dismiss="alert">×</button> <i class="fa fa-info-sign"></i><strong>Hello!</strong> This <a href="#" class="alert-link">You have reject to use karibuSMS to send emails to your clients. If you want to easily send emails to your clients, click here to appy </a>. <br/>'
-                    . '<a href="#email_request" onclick="call_page(\'email_request\')" class="btn btn-default btn-xs"><i class="fa fa-mail-reply text-muted"></i>Click Request Email account</a> </div>';
+                . '<a href="#email_request" onclick="call_page(\'email_request\')" class="btn btn-default btn-xs"><i class="fa fa-mail-reply text-muted"></i>Click Request Email account</a> </div>';
             } else if ($mail->status == 3) {
                 return view('message.email');
             } else {
@@ -481,7 +459,7 @@ class MessageController extends Controller
                 $offset = 0;
                 $skip = $offset * 10;
                 $sms = DB::select("SELECT * from message WHERE "
-                    . "client_id='" . $this->client_id . "' ORDER BY time DESC OFFSET {$skip} LIMIT 10");
+                                . "client_id='" . $this->client_id . "' ORDER BY time DESC OFFSET {$skip} LIMIT 10");
                 if ($offset == 0) {
                     $return = view('message.mail_account')->with(array('sms' => $sms, 'gcm_id' => $this->gcmId()));
                 } else {
@@ -492,51 +470,45 @@ class MessageController extends Controller
         }
     }
 
-    public function send_email_view()
-    {
+    public function send_email_view() {
         $username = DB::table('client')->where('client_id', $this->client_id)->value('username');
         return view('message.send_email')->with(array('gcm_id' => $this->gcmId(), 'username' => $username));
     }
 
-    public function request_mail()
-    {
+    public function request_mail() {
         DB::table('request_mail')->insert(
-            [
-                'client_id' => $this->client_id,
-                'status' => 0
-            ]
+                [
+                    'client_id' => $this->client_id,
+                    'status' => 0
+                ]
         );
         echo '<div class="alert alert-success"> <button type="button" class="close" data-dismiss="alert">×</button> <i class="fa fa-ok-sign"></i><strong>Well done!</strong> You application has been received.<a href="#" class="alert-link"> You will be contacted soon</a>. </div>';
     }
 
-    public function reject_mail()
-    {
+    public function reject_mail() {
         DB::table('request_mail')->insert(
-            [
-                'client_id' => $this->client_id,
-                'status' => 2
-            ]
+                [
+                    'client_id' => $this->client_id,
+                    'status' => 2
+                ]
         );
         echo '<div class="alert alert-warning alert-block"> <button type="button" class="close" data-dismiss="alert">×</button> <h4><i class="fa fa-bell-alt"></i>Thanks !</h4> <p>We have received your feedback</p> </div>';
     }
 
-    public function deleteMessage($message_id)
-    {
+    public function deleteMessage($message_id) {
         return DB::table('message')
-            ->where('message_id', $message_id)
-            ->where('client_id', $this->client_id)->delete();
+                        ->where('message_id', $message_id)
+                        ->where('client_id', $this->client_id)->delete();
     }
 
-    public function resendSms($message_id)
-    {
+    public function resendSms($message_id) {
         $numbers = DB::select("SELECT phone_number FROM pending_sms WHERE message_id='{$message_id}'");
         $message_content = DB::table('message')->where('message_id', $message_id)->first();
         $this->saveSms($message_content->content, $numbers, $message_content->messaging_type);
         return 1;
     }
 
-    public function receivedSms($sms_id = NULL)
-    {
+    public function receivedSms($sms_id = NULL) {
         return view('message.received_sms');
     }
 

@@ -132,8 +132,9 @@ class ApiController extends Controller {
                 return $this->getReport($this->developer->name, $this->developer->client_id);
             } else if (request('tag') == 'get_phone_status') {
                 return $this->checkPhoneStatus();
+            } if (request('tag') == 'push_sms') {
+                return $this->pushSms();
             } else {
-
                 return $this->start();
             }
         } else {
@@ -220,6 +221,11 @@ class ApiController extends Controller {
             'sms_remain' => $message_left,
             'message' => 'message sent successfully'
         ));
+    }
+
+    public function pushSms() {
+        $message = new MessageController($this->developer->client_id);
+        $message->sendPullRequest($this->developer->client_id);
     }
 
     private function getNumbers() {
@@ -353,7 +359,11 @@ class ApiController extends Controller {
         \Gcm::sendAction("REPORT_ONLINE_PRESENCE", null, $this->business->gcm_id);
         sleep(5);
         $client = \DB::table('client')->where('client_id', $this->developer->client_id)->first();
-        return json_encode(['gcm_id'=>$this->business->gcm_id,'last_online'=>$client->last_reported_online]);
+        return json_encode(['gcm_id' => $this->business->gcm_id, 'last_online' => $client->last_reported_online]);
+    }
+
+    public function setSmsTimeInterval() {
+        
     }
 
 }
