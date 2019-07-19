@@ -195,8 +195,7 @@ class ApiController extends Controller {
         foreach ($numbers as $phone_number) {
             $this->addNewNumber($phone_number);
         }
- echo $this->message;
-        echo json_encode($this);
+return $this->developer->developer_id; 
 
         if ($this->business->gcm_id == '' && $this->karibusmspro == FALSE) {
             die(json_encode(array(
@@ -250,7 +249,7 @@ class ApiController extends Controller {
         $developer_info = DB::table('developer_app')
                         ->where('api_key', $this->api_key)
                         ->where('api_secret', $this->api_secret)->first();
-        if (!empty($developer_info)) {
+        if (count($developer_info)==1) {
             $this->developer = $developer_info;
             $this->business = DB::table('client')->where('client_id', $this->developer->client_id)->first();
             return TRUE;
