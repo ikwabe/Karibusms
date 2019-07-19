@@ -195,7 +195,8 @@ class ApiController extends Controller {
         foreach ($numbers as $phone_number) {
             $this->addNewNumber($phone_number);
         }
-
+ echo $this->message;
+        echo json_encode($this);
 
         if ($this->business->gcm_id == '' && $this->karibusmspro == FALSE) {
             die(json_encode(array(
