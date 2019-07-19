@@ -338,11 +338,11 @@ class MessageController extends Controller {
 
         //request('tag') == 'sendMessage' ? sleep(5) :'';
         //new: sends a pull request to the mobile
-        if (request('tag') == 'store') {
-            
-        } else {
+//        if (request('tag') == 'store') {
+//            
+//        } else {
             $this->sendPullRequest($this->client_id);
-        }
+      //  }
         echo request('tag') == 'sendMessage' ?
                 json_encode(array(
                     'message' => 'Message Sent Successfully',
