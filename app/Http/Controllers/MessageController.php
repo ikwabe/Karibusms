@@ -331,6 +331,7 @@ class MessageController extends Controller {
                         'message_id' => $message_id,
                         'from_smart' => $messaging_type == 1 ? 0 : 1,
                         'status' => 0,
+                        'sms_id'=>request('sms_id'),
                         'username' => substr($name, 0, 11)
                     ]
             );
@@ -338,11 +339,11 @@ class MessageController extends Controller {
 
         //request('tag') == 'sendMessage' ? sleep(5) :'';
         //new: sends a pull request to the mobile
-//        if (request('tag') == 'store') {
+        if (request('tag') == 'store') {
 //            
-//        } else {
+        } else {
             $this->sendPullRequest($this->client_id);
-      //  }
+        }
         echo request('tag') == 'sendMessage' ?
                 json_encode(array(
                     'message' => 'Message Sent Successfully',
