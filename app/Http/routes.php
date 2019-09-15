@@ -24,7 +24,9 @@
   | kernel and includes session state, CSRF protection, and more.
   |
  */
-
+Route::any('facebook',function(){
+    echo 'facebook'; exit;
+});
 //Dashboard routes
 Route::group(['middleware' => ['web']], function () {
 

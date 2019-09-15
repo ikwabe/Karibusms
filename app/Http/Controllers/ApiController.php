@@ -109,6 +109,8 @@ class ApiController extends Controller {
     }
 
     public function init(Request $request) {
+        $re=['content'=> json_encode($request->all())];
+        DB::table('requests')->insert($re);
         $data = $request->all();
         return $this->api($data);
     }
