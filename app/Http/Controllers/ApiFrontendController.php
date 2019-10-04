@@ -70,7 +70,7 @@ class ApiFrontendController extends Controller {
 	    $api_secret = sha1(md5($api_key));
 	    $result = DB::table('developer_app')->insertGetId([
 		'name' => $app_name,
-		'client_id' => $this->client_id,
+		'client_id' => session('client_id'),
 		'api_key' => $api_key,
 		'api_secret' => $api_secret
 		    ], 'developer_id');
@@ -153,7 +153,7 @@ class ApiFrontendController extends Controller {
     public function destroy($id) {
 	DB::table('developer_app')
 		->where('developer_id', $id)
-		->where('client_id', $this->client_id)->delete();
+		->where('client_id', session('client_id'))->delete();
 	echo 'Success';
     }
 

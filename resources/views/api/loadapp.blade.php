@@ -49,7 +49,7 @@
     </section>
     <section class="panel panel-info"> 
 	<div class="panel-body"> <a href="#" class="thumb pull-right m-l"></a> 
-            <div class="clear">Do you have any request or comment or having a question ? <a  data-toggle="ajaxModal" href="<?= url('/api/contact') ?>" class="btn btn-xs btn-success m-t-xs">Contact us here</a> </div> 
+            <div class="clear">Do you have any request or comment or having a question ? <a  data-toggle="ajaxModal" href="<?= url('/dev/contact') ?>" class="btn btn-xs btn-success m-t-xs">Contact us here</a> </div> 
         </div> 
     </section>
 </div>
@@ -60,7 +60,7 @@
 <script>
     delete_app = function (a) {
 	$('#app_info').html(LOADER);
-	$.get('<?= url('/') ?>/api_delete/' + a, {}, function (data) {
+	$.get('<?= url('/') ?>/dev_delete/' + a, {}, function (data) {
 	    $('#app_info').html(data);
 	    window.location.reload();
 	});

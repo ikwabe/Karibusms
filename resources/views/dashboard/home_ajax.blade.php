@@ -24,6 +24,7 @@ $path = file_exists($link) ? $link : 'media/images/business/0/default.png';
 	<div class="m-b-md"> 
 	    <h3 class="m-b-none">Hello</h3> 
 	    <small>Welcome, <b style="font-size: 17px;"><?= ucwords($user->name) ?></b></small>
+            <p align="right"><a class="btn btn-success btn-sm" href="<?=url('/')?>storage/app/karibusms.apk"><i class="fa fa-download"></i> Download Android APP</a></p>
 	</div>
 
 	<section class="panel panel-default">
@@ -79,7 +80,7 @@ $path = file_exists($link) ? $link : 'media/images/business/0/default.png';
 	     
 	    <div class="col-md-4"> 
 		
-		
+	
 	
 	    </div>
 	</div> 

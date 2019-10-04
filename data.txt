@@ -1,1 +1,0 @@
-{"bulkId":"1491683019079147424","messages":[{"to":"255714825469","status":{"groupId":1,"groupName":"PENDING","id":7,"name":"PENDING_ENROUTE","description":"Message sent to next instance"},"smsCount":1,"messageId":"61897"}]}

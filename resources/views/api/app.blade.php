@@ -24,8 +24,8 @@ if (session('client_id') != NULL) {
 	<div class="container"> 
 	    <ul class="breadcrumb no-border bg-empty m-b-none m-l-n-sm"> 
 		<li><a href="<?= url('/') ?>">Home</a></li> 
-		<li><a href="<?= url('/api') ?>">api</a></li>
-		<li><a href="<?= url('/api/app') ?>">app</a></li> 
+		<li><a href="<?= url('/dev') ?>">dev</a></li>
+		<li><a href="<?= url('/dev/app') ?>">app</a></li> 
 	    </ul>
 	</div>
     </div>
@@ -35,9 +35,9 @@ if (session('client_id') != NULL) {
 		<div class="panel-body text-right">
 		    <button class="btn btn-sm btn-success" data-toggle="ajaxModal" 
 		    <?php if (session('client_id') != NULL) { ?>
-    			    href="<?= url('/api_create_app') ?>"
+    			    href="<?= url('/dev_create_app') ?>"
 			    <?php } else { ?> 
-    			    href="<?= url('/api_login') ?>" <?php } ?> >Create New App</button>
+    			    href="<?= url('/dev_login') ?>" <?php } ?> >Create New App</button>
 		</div> 
 	    </section>
 	</div>
@@ -47,7 +47,7 @@ if (session('client_id') != NULL) {
 		<div class="panel-body">
 		    <nav class="nav-primary hidden-xs">
 			<ul class="nav">
-			    <li> <a href="<?= url('/api/app') ?>">
+			    <li> <a href="<?= url('/dev/app') ?>">
 				    <i class="fa fa-dashboard icon"> <b class="bg-danger"></b> </i> 
 				    <span>Dashboard</span> </a>
 			    </li>
@@ -68,7 +68,7 @@ if (session('client_id') != NULL) {
 					foreach ($developer as $app) {
 					    ?>
 					    <li>
-						<a href="#<?= ucfirst($app->name) ?> " onclick="call_page('<?=url('/')?>/api_show/<?= $app->developer_id ?>','#api_content')"> 
+						<a href="#<?= ucfirst($app->name) ?> " onclick="call_page('<?=url('/')?>/dev_show/<?= $app->developer_id ?>','#dev_content')"> 
 						    <i class="fa fa-angle-right"></i> 
 						    <span><?= ucfirst($app->name) ?> </span>
 						</a> 
@@ -80,14 +80,14 @@ if (session('client_id') != NULL) {
 			    </li>
 
 			    <li> 
-				<a href="<?= url('/api/doc') ?>"> <i class="fa fa-pencil-square-o icon"> 
+				<a href="<?= url('/dev/doc') ?>"> <i class="fa fa-pencil-square-o icon"> 
 					<b class="bg-info"></b>
 				    </i>
 				    <span>Documentation</span> 
 				</a> 
 			    </li>
 			     <li> 
-				<a href="<?= url('/api/sample') ?>"> 
+				<a href="<?= url('/dev/sample') ?>"> 
 				    <i class="fa fa-code icon"> 
 					<b class="bg-info"></b>
 				    </i>
@@ -101,7 +101,7 @@ if (session('client_id') != NULL) {
 	</div>
 	<div class="col-lg-8">
 	    <section class="panel panel-default"> 
-		<div class="panel-body" id="api_content">
+		<div class="panel-body" id="dev_content">
 
 		    <?php
 		    if (!empty($developer)) {
@@ -114,15 +114,15 @@ if (session('client_id') != NULL) {
 			    <div class="col-lg-6">
 				<section class="panel panel-info"> 
 				    <div class="panel-body"> 
-					<a href="#api_show/<?= $app->developer_id ?>" class="thumb pull-right m-l" onclick="call_page('<?=url('/')?>/api_show/<?= $app->developer_id ?>', '#api_content')"> 
+					<a href="#dev_show/<?= $app->developer_id ?>" class="thumb pull-right m-l" onclick="call_page('<?=url('/')?>/dev_show/<?= $app->developer_id ?>', '#dev_content')"> 
 					    
 					    <img src="<?= url('/') ?>/media/images/avatar.jpg" class="img-circle"> 
 					</a> 
 					<div class="clear"> 
-					    <a href="#api_show/<?= $app->developer_id ?>" class="text-info" onclick="call_page('<?=url('/')?>/api_show/<?= $app->developer_id ?>', '#api_content')">@<?= ucfirst($app->name) ?> <i class="icon-twitter"></i></a>
+					    <a href="#dev_show/<?= $app->developer_id ?>" class="text-info" onclick="call_page('<?=url('/')?>/dev_show/<?= $app->developer_id ?>', '#dev_content')">@<?= ucfirst($app->name) ?> <i class="icon-twitter"></i></a>
 					    <small class="block text-muted">
 				    <?= $total_bulk_sms ?> Internet SMS / <?=$total_phone_sms?> Phone SMS sent</small> 
-					    <a href="#" onclick="call_page('<?=url('/')?>/api_show/<?= $app->developer_id ?>','#api_content')" class="btn btn-xs btn-success m-t-xs">Open</a> 
+					    <a href="#" onclick="call_page('<?=url('/')?>/dev_show/<?= $app->developer_id ?>','#dev_content')" class="btn btn-xs btn-success m-t-xs">Open</a> 
 					</div>
 				    </div>
 				</section>
@@ -135,16 +135,16 @@ if (session('client_id') != NULL) {
 		    
 			Click <button class="btn btn-sm btn-success" data-toggle="ajaxModal" 
 		    <?php if (session('client_id') != NULL) { ?>
-    			    href="<?= url('/api_create_app') ?>"
+    			    href="<?= url('/dev_create_app') ?>"
 			    <?php } else { ?> 
-    			    href="<?= url('/api_login') ?>" <?php } ?> >here</button> to Login First and view your Apps			
+    			    href="<?= url('/dev_login') ?>" <?php } ?> >here</button> to Login First and view your Apps to get API KEY and API SECRET			
 <?php }
 		    ?>
 
 		</div> 
 		
 	    </section>
-	    <p>NB; You can create more than one APP to integrate in different software that you have. Each software can have a separate APP name for easy management</p>
+	    <p>NB; You can create more than one APP and get different API KEY and API SECRET to integrate in different software that you have. Each software can have a separate APP name for easy management</p>
 	</div>
     </div>
 </section>			

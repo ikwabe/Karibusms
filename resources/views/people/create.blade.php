@@ -63,7 +63,7 @@
 				<label class="col-sm-2 control-label">Other Phone Number(s)</label> 
 				<div class="col-sm-10">
 				   
-				    <input type="text" name="other_phone_number"  required="true" class="form-control rounded" placeholder="Phone number"> </div>
+				    <input type="text" name="other_phone_number"  class="form-control rounded" placeholder="Phone number"> </div>
 				<span style="margin-left: 5%">Separete by comma if more than on. <a href="#" title="Start with country code">Use international format only</a></span>
 				    
 			    </div>

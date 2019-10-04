@@ -60,7 +60,7 @@ class LandingController extends Controller {
 	define('COUNTRTY_CODE', 'TZ');
 	//$this->logUser();
 	if (view()->exists('landing.' . $page)) {
-	    $data = $page == 'faq' ? $this->faq() : '';
+	    $data =  '';
 	    $view = view('landing.' . $page, compact('data'));
 	} else if ($page == 'signup') {
 	    $view = view('signup.signup');
@@ -73,8 +73,8 @@ class LandingController extends Controller {
     public function showProfile($name) {
 	//check if this page exists
 	$tag=  strtolower($name);
-	$client = DB::select("select client_id from client where lower(username) = '{$tag}' OR lower(name)='{$tag}'" );
-	$client_id=  array_shift($client)->client_id;
+	$client = \collect(DB::select("select client_id from client where lower(username) = '{$tag}' OR lower(name)='{$tag}'" ))->first();
+	$client_id= count($client)==1 ?   $client->client_id : null;
 	if (empty($client_id)) {
 	    return view('landing.404');
 	} else {

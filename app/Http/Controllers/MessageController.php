@@ -29,13 +29,19 @@ class MessageController extends Controller {
      * @return type
      */
     public function __construct($client_id = NULL) {
-        parent::__construct();
+
+
+        if (session('client_id') != NULL) {
+            $this->client_id = session('client_id');
+            $this->gcm_id = $this->gcmId();
+        }
         $this->client_id = $client_id == NULL ? $this->client_id : $client_id;
 
         $this->username = DB::table('client')->where('client_id', $this->client_id)->value('username');
     }
 
     public function sms($offset = 0) {
+        $this->client_id = session('client_id');
         $skip = $offset * 10;
         $sms = DB::select("SELECT * from message WHERE "
                         . "client_id='" . $this->client_id . "' ORDER BY time DESC OFFSET {$skip} LIMIT 10");
@@ -48,6 +54,7 @@ class MessageController extends Controller {
     }
 
     public function pendingSms() {
+        $this->client_id = session('client_id');
         $sms = DB::select("SELECT * from pending_sms WHERE "
                         . "client_id='" . $this->client_id . "' AND status='0' ORDER BY reg_time DESC");
 
@@ -56,6 +63,7 @@ class MessageController extends Controller {
     }
 
     public function loadMoreSms($sms) {
+        $this->client_id = session('client_id');
         $user = self::user_info();
         $link = 'media/images/business/' . $user->client_id . '/' . $user->profile_pic;
         $path = file_exists($link) ? $link : 'media/images/business/0/default.png';
@@ -79,6 +87,7 @@ class MessageController extends Controller {
      * @return type View: SMS content
      */
     public function show($message_id) {
+        $this->client_id = session('client_id');
         $message = DB::table('message')->where('message_id', decryptApp($message_id))
                 ->where('message.client_id', $this->client_id)
                 ->leftJoin('category', 'message.category_id', '=', 'category.category_id')
@@ -92,6 +101,7 @@ class MessageController extends Controller {
      * @return HTML : view to send SMS
      */
     public function send_sms() {
+        $this->client_id = session('client_id');
         $username = DB::table('client')->where('client_id', $this->client_id)->value('username');
         return view('message.send_sms')->with(array('gcm_id' => $this->gcmId(), 'username' => $username));
     }
@@ -101,6 +111,7 @@ class MessageController extends Controller {
      * @return HTML : view to send Email
      */
     public function send_email() {
+        $this->client_id = session('client_id');
         $username = DB::table('client')->where('client_id', $this->client_id)->value('username');
         return view('message.send_email')->with(array('gcm_id' => $this->gcmId(), 'username' => $username));
     }
@@ -123,6 +134,7 @@ class MessageController extends Controller {
      * @uses Send SMS function by category
      */
     public function sendSmsByCategory() {
+        $this->client_id = session('client_id');
         $category_id = request('category') == NULL ? $this->getCategoryId() : request('category');
         $content = htmlspecialchars(request('content'));
         $this->sms_count_per_sms = ceil(strlen($content) / 160);
@@ -159,6 +171,7 @@ class MessageController extends Controller {
      *                   while calling saveSms directly does not
      */
     public function sendSmsByNumbers($sms_content = NULL, $phone_number = NULL, $sms_type = 1) {
+
         $content = $sms_content == NULL ? htmlspecialchars(request('content')) : $sms_content;
         $phone = $phone_number == NULL ? request('phone_numbers') : $phone_number;
 
@@ -202,6 +215,7 @@ class MessageController extends Controller {
     }
 
     public function sendEmailByCategory() {
+        $this->client_id = session('client_id');
         $category_id = request('category') == NULL ? $this->getCategoryId() : request('category');
         $content = nl2br(request('content'));
         $subject = request('subject');
@@ -227,6 +241,7 @@ class MessageController extends Controller {
     }
 
     public function sendEmailByList($email = NULL, $subject = NULL, $content = null) {
+        $this->client_id = session('client_id');
         $email_body = $content == NULL ? nl2br(request('content')) : $content;
         $emails = $email == NULL ? request('emails') : $email;
         $email_subject = $subject == NULL ? request('subject') : $subject;
@@ -262,6 +277,7 @@ class MessageController extends Controller {
     }
 
     private function sendAndroid($numbers, $messaging_type) {
+        $this->client_id = session('client_id');
         if (request('tag') == 'sendMessage' && $messaging_type == 0) {
             $res = array();
             foreach ($numbers as $number) {
@@ -297,7 +313,7 @@ class MessageController extends Controller {
      * @param int $developer_id Mandatory only for API sms
      */
     public function saveSms($content, $numbers, $messaging_type, $category_id = NULL, $username = NULL, $developer_id = NULL) {
-
+        $this->client_id = session('client_id');
         $name = $username == NULL ? $this->username : $username;
         $sms_count_per_sms = ceil(strlen($content) / 160);
         $message_id = DB::table('message')->insertGetId(
@@ -331,7 +347,7 @@ class MessageController extends Controller {
                         'message_id' => $message_id,
                         'from_smart' => $messaging_type == 1 ? 0 : 1,
                         'status' => 0,
-                        'sms_id'=>request('sms_id'),
+                        'sms_id' => request('sms_id'),
                         'username' => substr($name, 0, 11)
                     ]
             );
@@ -362,7 +378,7 @@ class MessageController extends Controller {
      * $organization_position
      */
     public function customizeContent($content, $phone_number, $client_id) {
-
+        $this->client_id = session('client_id');
         $user = DB::table('subscriber_info')
                         ->where('client_id', $client_id)
                         ->where('phone_number', $phone_number)->first();
@@ -398,13 +414,13 @@ class MessageController extends Controller {
      * Notifies client with client Id, there is new sms
      * @param $client_id
      */
-    public function sendPullRequest($client_id) { 
+    public function sendPullRequest($client_id) {
         $client = DB::table('client')->where('client_id', $client_id)->first();
         return response()->json(\Gcm::sendAction("PULL_SMS_TO_SEND", null, $client->gcm_id));
     }
 
     public function checkSmsStatus($phone_numbers_count = null) {
-
+        $this->client_id = session('client_id');
         $sms_info = DB::table('sms_status')->where('client_id', $this->client_id)->first();
         if (!empty($sms_info)) {
             //not empty, so check available SMS
@@ -444,6 +460,7 @@ class MessageController extends Controller {
     }
 
     public function mail() {
+        $this->client_id = session('client_id');
         $mail = DB::table('request_mail')->where("client_id", $this->client_id)->first();
         if (empty($mail)) {
             return view('message.mail');
@@ -472,11 +489,13 @@ class MessageController extends Controller {
     }
 
     public function send_email_view() {
+        $this->client_id = session('client_id');
         $username = DB::table('client')->where('client_id', $this->client_id)->value('username');
         return view('message.send_email')->with(array('gcm_id' => $this->gcmId(), 'username' => $username));
     }
 
     public function request_mail() {
+        $this->client_id = session('client_id');
         DB::table('request_mail')->insert(
                 [
                     'client_id' => $this->client_id,
@@ -509,8 +528,10 @@ class MessageController extends Controller {
         return 1;
     }
 
-    public function receivedSms($sms_id = NULL) {
-        return view('message.received_sms');
+    public function incoming() {
+        $this->client_id = session('client_id');
+        $data['messages'] = DB::table('incoming_message')->where('client_id', $this->client_id)->get();
+        return view('message.received_sms', $data);
     }
 
 }

@@ -33,8 +33,8 @@ $sender_name_description = 'This is your username and is the name which people w
     		    <div class="col-md-6"> 
 
     			<select name="category" id="category" class="form-control m-b">
-    			    <option value="0">All</option>
-    			    <option value="-1">Enter manually</option>
+    			    <option value="0">All Contacts</option>
+    			    <option value="-1">Enter Numbers</option>
 				<?php
 				/**
 				 * -------------------------------
@@ -64,6 +64,11 @@ $sender_name_description = 'This is your username and is the name which people w
 		<div class="col-lg-10"> 
 		    <textarea class="form-control" placeholder="Type your message" id="content_area"></textarea>
 		    <span>chars/SMS count <b id="word_counts">0</b>/<b id="sms_count">1</b></span>
+                    <blockquote>
+                        <b>use these hashtags to customize your SMS</b> <BR/>
+                        #name (It will pick contact firstname + lastname), #organization_name (It will pick contact organization name)
+                        
+                    </blockquote>
 		</div>
 
 	    </div> 

@@ -33,7 +33,7 @@
 		    @endif
 		</div>
 		<div class="form-group"> 
-		    <label class="control-label">Phone number</label> 
+		    <label class="control-label">Email Or Phone number</label> 
 		    <input type="text" name="phone_number" id="phone" required="required" placeholder="0XXX XYZ XYZ" class="form-control input-lg"> 
 		</div> 
 		<div class="form-group">
@@ -84,5 +84,5 @@
     function dismis() {
 	window.location.reload();
     }
-    $(document).ready(create_app);
+   // $(document).ready(create_app);
 </script>

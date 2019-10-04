@@ -61,12 +61,21 @@
 	<script src="<?= url('/') ?>/media/js/validator.js"></script>
 	<script src="<?= url('/') ?>/media/js/jquery.jcryption.3.0.1.js"></script>
 	<meta name="csrf-token" content="{{ csrf_token()}}" />
-        <script type="text/javascript">
-	    $.ajaxSetup({
-		headers: {
-		    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-		}
-	    });
+       
+         <script type="text/javascript">
+
+
+            ajax_setup = function () {
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    async: true,
+                    cache: false
+                });
+            }
+            $(document).ready(ajax_setup);
+
         </script>
 	<script src="<?= url('/') ?>/media/js/sweet-alert/sweetalert.min.js"></script>
 	<?php
@@ -84,7 +93,7 @@
 //    js_media('custom');
 //  js_media('jquery.jcryption.3.0.1');
 	?>
-	<!--<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>-->
+	<!--<script src="https://ajax.googledevs.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>-->
 	<title>karibuSMS</title> 
 	<style type="text/css">
 	    .ajax_loader{
@@ -192,7 +201,7 @@
 	$page = request()->route()->uri();
 	?>
 	<?php
-	if (preg_match('/api/i', $page)) {
+	if (preg_match('/dev/i', $page)) {
 	    ?>
     	<ul class="nav navbar-nav hidden-xs" id="developer_subscriber">
     	    <li class="dropdown">
@@ -240,9 +249,9 @@
 		<div class="container wrapper"> 
 		    <div class="m-t-xl m-b"> Karibu, a way to be connected with contacts and share via SMS. 
 			<?php
-			if (!preg_match('/api/i', $page)) {
+			if (!preg_match('/dev/i', $page)) {
 			    ?>
-    			<a href="<?= HOME ?>api" target="_blank" class=" b-white bg-empty m-sm">Get Our Developer API</a>
+    			<a href="<?= HOME ?>dev" target="_blank" class=" b-white bg-empty m-sm">Get Our Developer API</a>
 			<?php } ?>
 			<!--               <a href="index.html" target="_blank" class="btn btn-lg btn-warning b-white bg-empty m-sm">Live Preview</a> -->
 		    </div> 
@@ -290,45 +299,50 @@
 	@yield('footer')
     </body>
 <!--  Widget Code -->
-<script type="text/javascript">((function(){
-                var load=function(){
-                    var script="https://s.acquire.io/a-0e8be/init.js?full";
-                    var x=document.createElement('script');
-                    x.src=script;x.async=true;
-                    var sx=document.getElementsByTagName('script')[0];
-                    sx.parentNode.insertBefore(x, sx);
-                    
-};
-                if(document.readyState === "complete")
-                    load();
-                else if (window.addEventListener)  
-                    window.addEventListener('load',load,false);
-                else if (window.attachEvent) {
-                    window.attachEvent("onload", load);
-                }
-            })())</script>
+<script type="text/javascript">
+//            ((function(){
+//                var load=function(){
+//                    var script="https://s.acquire.io/a-0e8be/init.js?full";
+//                    var x=document.createElement('script');
+//                    x.src=script;x.async=true;
+//                    var sx=document.getElementsByTagName('script')[0];
+//                    sx.parentNode.insertBefore(x, sx);
+//                    
+//};
+//                if(document.readyState === "complete")
+//                    load();
+//                else if (window.addEventListener)  
+//                    window.addEventListener('load',load,false);
+//                else if (window.attachEvent) {
+//                    window.attachEvent("onload", load);
+//                }
+//            })())
+</script>
  <noscript><a href="https://www.acquire.io?welcome" title="live chat software">Acquire</a></noscript>
 <!-- / Widget Code -->
     <script type="text/javascript">
 	$('.ajax_loader').html(LOADER);
     </script>
     <div id="fb-root"></div>
-    <script>(function (d, s, id) {
-	    var js, fjs = d.getElementsByTagName(s)[0];
-	    if (d.getElementById(id))
-		return;
-	    js = d.createElement(s);
-	    js.id = id;
-	    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=526011487520671&version=v2.0";
-	    fjs.parentNode.insertBefore(js, fjs);
-	}(document, 'script', 'facebook-jssdk'));</script>
-    <script>!function (d, s, id) {
-	    var js, fjs = d.getElementsByTagName(s)[0];
-	    if (!d.getElementById(id)) {
-		js = d.createElement(s);
-		js.id = id;
-		js.src = "//platform.twitter.com/widgets.js";
-		fjs.parentNode.insertBefore(js, fjs);
-	    }
-	}(document, "script", "twitter-wjs");</script>
+    <script>
+//            (function (d, s, id) {
+//	    var js, fjs = d.getElementsByTagName(s)[0];
+//	    if (d.getElementById(id))
+//		return;
+//	    js = d.createElement(s);
+//	    js.id = id;
+//	    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=526011487520671&version=v2.0";
+//	    fjs.parentNode.insertBefore(js, fjs);
+//	}(document, 'script', 'facebook-jssdk'));
+            </script>
+    <script>
+//            !function (d, s, id) {
+//	    var js, fjs = d.getElementsByTagName(s)[0];
+//	    if (!d.getElementById(id)) {
+//		js = d.createElement(s);
+//		js.id = id;
+//		js.src = "//platform.twitter.com/widgets.js";
+//		fjs.parentNode.insertBefore(js, fjs);
+//	    }
+//	}(document, "script", "twitter-wjs");</script>
 </html>

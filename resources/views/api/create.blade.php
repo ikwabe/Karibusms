@@ -35,7 +35,7 @@
 	$('#next').click(function() {
 	    $('#ajax_status_result').html(LOADER);
 	    var app_name= $('#app_name').val();
-	    $.getJSON('<?= url('/') ?>/api_store/'+app_name, {}, function(data) {
+	    $.getJSON('<?= url('/') ?>/dev_store/'+app_name, {}, function(data) {
 		if (data.success == 1) {
 		    $('#app_area').html(data.status);
 		    $('#next').html('Finish').attr("data-dismiss","modal").attr('onclick','dismis()');;

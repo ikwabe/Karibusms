@@ -18,8 +18,8 @@ $page = request()->route()->parameters()['page'];
 	<div class="container">
 	    <ul class="breadcrumb no-border bg-empty m-b-none m-l-n-sm">
 		<li><a href="<?= url('/') ?>">Home</a></li> 
-		<li><a href="<?= url('/api') ?>">api</a></li>
-		<li><a href="<?= url('/api/' . $page) ?>"><?= $page ?></a></li> 
+		<li><a href="<?= url('/dev') ?>">dev</a></li>
+		<li><a href="<?= url('/dev/' . $page) ?>"><?= $page ?></a></li> 
 	    </ul> 
 
 	</div>
@@ -54,7 +54,7 @@ $page = request()->route()->parameters()['page'];
 			</div> 
 		    </div> 
 		    <div class="col-sm-7">
-			<div class="text-right"><a href="<?= url('/api/app') ?>" class="btn btn-sm btn-success">Go to App Page</a></div>
+			<div class="text-right"><a href="<?= url('/dev/app') ?>" class="btn btn-sm btn-success">Go to App Page</a></div>
 			<h2 class="font-thin m-b-lg lang_name">PHP</h2> 
 			<p class="h4 m-b-lg l-h-1x">karibuSMS <span class="lang_name">PHP</span> API sample codes can be accessed in the following URI </p>
 			<p class="m-b-xl">

@@ -38,8 +38,8 @@
 			
 			?>
 			
-			<p>Do you want to pay by Bank Card (Visa, MasterCard, Discover etc) ? 
-			    <a  onmousedown="call_page('pay_by_card')" class="btn btn-s-md btn-warning">Click here</a></p>
+<!--			<p>Do you want to pay by Bank Card (Visa, MasterCard, Discover etc) ? 
+			    <a  onmousedown="call_page('pay_by_card')" class="btn btn-s-md btn-warning">Click here</a></p>-->
 			
 			<?php
 			/**
@@ -98,10 +98,10 @@
 				<div class="form-group" id="bank" style="display: none">
 				    <p>We accept BANK Direct Payments, please use the following details</p>
 				    <ul>
-					<li>Bank Name: <b>KCB Bank</b></li>
+					<li>Bank Name: <b>NMB Bank</b></li>
 					<li>Account Name: <b>Inets Company Limited</b></li>
 					<li>Account  Number:  <b>3301107206</b> </li>
-					<li>After Deposit, please send to us your deposit slip to <b><a href="mailto:sales@karibusms.com">sales@karibusms.com</a></b> and we will process your order as soon as possible</li>
+					<li>After Deposit, please CALL us via<b><a href="#">+255655406004</a></b> and we will process your order as soon as possible</li>
 				    </ul>
 
 

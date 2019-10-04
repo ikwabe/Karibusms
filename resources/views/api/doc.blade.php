@@ -19,8 +19,8 @@ $page = request()->route()->parameters()['page'];
 	<div class="container"> 
 	    <ul class="breadcrumb no-border bg-empty m-b-none m-l-n-sm"> 
 		<li><a href="<?= url('/') ?>">Home</a></li> 
-		<li><a href="<?= url('/api') ?>">api</a></li>
-		<li><a href="<?= url('/api/' . $page) ?>"><?= $page ?></a></li> 
+		<li><a href="<?= url('/dev') ?>">api</a></li>
+		<li><a href="<?= url('/dev/' . $page) ?>"><?= $page ?></a></li> 
 	    </ul>
 	</div>
     </div>
@@ -72,7 +72,7 @@ $page = request()->route()->parameters()['page'];
 				</ul>
 			    </li>
 
-			    <li> <a href="<?= url('/api/faq') ?>"> 
+			    <li> <a href="<?= url('/dev/faq') ?>"> 
 				    <b class="badge bg-danger pull-right">3</b>
 				    <i class="fa fa-question icon">
 					<b class="bg-primary dker"></b>
@@ -82,7 +82,7 @@ $page = request()->route()->parameters()['page'];
 			    </li>
 
 			    <li> 
-				<a href="<?= url('/api/sample') ?>"> <i class="fa fa-code icon"> 
+				<a href="<?= url('/dev/sample') ?>"> <i class="fa fa-code icon"> 
 					<b class="bg-info"></b>
 				    </i>
 				    <span>Code Samples</span> 

@@ -18,8 +18,8 @@ $page = request()->route()->parameters()['page'];
 	<div class="container"> 
 	    <ul class="breadcrumb no-border bg-empty m-b-none m-l-n-sm"> 
 		<li><a href="<?= url('/') ?>">Home</a></li> 
-		<li><a href="<?= url('/api') ?>">api</a></li>
-		<li><a href="<?= url('/api/' . $page) ?>"><?= $page ?></a></li> 
+		<li><a href="<?= url('/dev') ?>">dev</a></li>
+		<li><a href="<?= url('/dev/' . $page) ?>"><?= $page ?></a></li> 
 		
 	    </ul>
 	</div>
@@ -30,47 +30,47 @@ $page = request()->route()->parameters()['page'];
 		<div class="panel-body">
 		    <nav class="nav-primary hidden-xs">
 			<ul class="nav">
-			    <li class=""> <a href="<?= url('/api/doc') ?>" class=""> <i class="fa fa-flask icon"> <b class="bg-success"></b> </i> <span class="pull-right"> <i class="fa fa-angle-down text"></i> <i class="fa fa-angle-up text-active"></i> </span> <span>Documentation</span> </a> 
+			    <li class=""> <a href="<?= url('/dev/doc') ?>" class=""> <i class="fa fa-flask icon"> <b class="bg-success"></b> </i> <span class="pull-right"> <i class="fa fa-angle-down text"></i> <i class="fa fa-angle-up text-active"></i> </span> <span>Documentation</span> </a> 
 				<ul class="nav lt" style="display: none;"> 
 				    <li> 
-					<a href="<?= url('/api/doc') ?>#introduction">
+					<a href="<?= url('/dev/doc') ?>#introduction">
 					    <i class="fa fa-angle-right"></i>
 					    <span>Introduction</span> 
 					</a>
 				    </li>
 				    <li> 
-					<a href="<?= url('/api/doc') ?>#lang">
+					<a href="<?= url('/dev/doc') ?>#lang">
 					    <i class="fa fa-angle-right"></i>
 					    <span>Languages Supported</span> 
 					</a>
 				    </li>
 				    <li>
-					<a href="<?= url('/api/doc') ?>#keys">
+					<a href="<?= url('/dev/doc') ?>#keys">
 					    <b class="badge bg-info pull-right">369</b>
 					    <i class="fa fa-angle-right"></i>
 					    <span>Define KEYS</span> 
 					</a>
 				    </li> 
 				    <li> 
-					<a href="<?= url('/api/doc') ?>#send"> 
+					<a href="<?= url('/dev/doc') ?>#send"> 
 					    <i class="fa fa-angle-right"></i> 
 					    <span>Send SMS</span> 
 					</a> 
 				    </li> 
 				    <li>
-					<a href="<?= url('/api/doc') ?>#statistics">
+					<a href="<?= url('/dev/doc') ?>#statistics">
 					    <b class="badge pull-right">8</b>
 					    <i class="fa fa-angle-right"></i> 
 					    <span>Get Statistics</span> </a>
 				    </li> 
 				    <li>
-					<a href="<?= url('/api/doc') ?>#reports">
+					<a href="<?= url('/dev/doc') ?>#reports">
 					    <b class="badge pull-right">8</b>
 					    <i class="fa fa-angle-right"></i> 
 					    <span>Get Reports</span> </a>
 				    </li> 
 				    <li>
-					<a href="<?= url('/api/doc') ?>#reports">
+					<a href="<?= url('/dev/doc') ?>#reports">
 					    <b class="badge pull-right">8</b>
 					    <i class="fa fa-angle-right"></i> 
 					    <span>Best Practices</span> </a>
@@ -78,7 +78,7 @@ $page = request()->route()->parameters()['page'];
 				</ul>
 			    </li>
 
-			    <li> <a href="<?= url('/api/faq') ?>"> 
+			    <li> <a href="<?= url('/dev/faq') ?>"> 
 				    <b class="badge bg-danger pull-right">3</b>
 				    <i class="fa fa-question icon">
 					<b class="bg-primary dker"></b>
@@ -88,7 +88,7 @@ $page = request()->route()->parameters()['page'];
 			    </li>
 
 			    <li> 
-				<a href="<?= url('/api/sample') ?>"> <i class="fa fa-pencil icon"> 
+				<a href="<?= url('/dev/sample') ?>"> <i class="fa fa-pencil icon"> 
 					<b class="bg-info"></b>
 				    </i>
 				    <span>Code Samples</span> 
@@ -106,7 +106,7 @@ $page = request()->route()->parameters()['page'];
 		     
 			<div class="caption wrapper-lg"> 
 			      
-			<div class="text-right"><a href="<?= url('/api/app') ?>" class="btn btn-sm btn-success">Go to App Page</a></div>
+			<div class="text-right"><a href="<?= url('/dev/app') ?>" class="btn btn-sm btn-success">Go to App Page</a></div>
 			    <h2 class="post-title">
 				<a href="#introduction">FAQ</a>
 			    </h2> 
@@ -131,7 +131,7 @@ $page = request()->route()->parameters()['page'];
 			    <div class="text-muted"> 
 			
 				<i class="fa fa-clock-o icon-muted"></i>Last Update: July 15, 2016 
-				<a data-toggle="ajaxModal" href="<?= url('/api/contact') ?>"  class="m-l-sm"><i class="fa fa-comment-o icon-muted"></i>
+				<a data-toggle="ajaxModal" href="<?= url('/dev/contact') ?>"  class="m-l-sm"><i class="fa fa-comment-o icon-muted"></i>
 				    Add comment</a>
 			    </div>
 			</div> 

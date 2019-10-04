@@ -30,9 +30,20 @@
 		<div class="h4 text-muted m-t-sm">
 		    Integrate SMS in your software now to attract more people to use your application </div> </div>
 	    <p class="text-center m-b-xl"> 
-		<a href="<?= url('/api/doc') ?>" class="btn btn-lg btn-dark m-sm">Get Started Now</a>
-		<a href="<?= url('/api/sample') ?>" class="btn btn-lg btn-warning b-white bg-empty m-sm">View Sample Codes</a> </p>
+		<a href="<?= url('/dev/doc') ?>" class="btn btn-lg btn-dark m-sm">Get Started Now</a>
+		<a href="<?= url('/dev/sample') ?>" class="btn btn-lg btn-warning b-white bg-empty m-sm">View Sample Codes</a> </p>
 	</div> 
+        <blockquote style="width: 50%;
+    margin: 0 auto;">
+            <p>Its here: (<b><a href="http://localhost/karibusms/dev/app"> Get your API key and API secret to send SMS</a></b>)</p>
+            <section class="panel panel-info"> 
+					<div class="panel-body"> 
+					    <a href="#" class="thumb pull-right m-l"></a>
+					    <div class="clear">
+						<pre> http://karibusms.com/api_call?message=YOUR_MESSAGE&amp;phone_number=255748XXXXXX&amp;messaging_type=1&amp;api_key=API_KEY&amp;api_secret=API_SECRET</pre>
+					    </div>
+					</div> </section>
+        </blockquote>
 	<div class="dker pos-rlt"> 
 	    <div class="container wrapper">
 		<div class="m-t-lg m-b-lg text-center"> Make your application faster and easier in sending SMS by using karibuSMS API. </div> 
@@ -50,10 +61,10 @@
 		    <p class="h3 m-b-lg"> <i class="fa fa-power-off fa-3x text-info"></i></p>
 		    <div class="">
 			<h4 class="m-t-none">
-			    <a href="<?=url('/api/doc')?>">Get Started</a>
+			    <a href="<?=url('/dev/doc')?>">Get Started</a>
 			</h4> 
 			<p class="text-muted m-t-lg">
-			    <a href="<?=url('/api/doc')?>" ><span class="label label-info">Read</span>  our simple documentation page here</a></p>
+			    <a href="<?=url('/dev/doc')?>" ><span class="label label-info">Read</span>  our simple documentation page here</a></p>
 		    </div>
 		</div> 
 		<div class="col-sm-4" data-ride="animated" data-animation="fadeInLeft" data-delay="600">
@@ -61,10 +72,10 @@
 			<i class="fa fa-code fa-3x text-info"></i> </p> 
 		    <div class=""> 
 			<h4 class="m-t-none">
-			    <a href="<?=url('/api/sample')?>">View Sample Codes</a>
+			    <a href="<?=url('/dev/sample')?>">View Sample Codes</a>
 			</h4> 
 			<p class="text-muted m-t-lg">
-			    <a href="<?=url('/api/sample')?>">Currently <span class="label label-info"> PHP, JAVA, JAVASCRIPT & PYTHON.</span></a>
+			    <a href="<?=url('/dev/sample')?>">Currently <span class="label label-info"> PHP, JAVA, JAVASCRIPT & PYTHON.</span></a>
 			</p> 
 		    </div>
 		</div> 
@@ -72,10 +83,10 @@
 		    <p class="h3 m-b-lg"> <i class="fa fa-edit fa-3x text-info"></i> </p> 
 		    <div class=""> 
 			<h4 class="m-t-none">
-			    <a href="<?=url('/api/app')?>">Manage Your Apps</a>
+			    <a href="<?=url('/dev/app')?>">Manage Your Apps</a>
 			</h4>
 			<p class="text-muted m-t-lg">
-			    <a href="<?=url('/api/app')?>"><span class="label label-info">Create your New App</span> or View your Apps for SMS integration.</a></p>
+			    <a href="<?=url('/dev/app')?>"><span class="label label-info">Create your New App</span> or View your Apps for SMS integration.</a></p>
 		    </div>
 		</div>
 	    </div> 

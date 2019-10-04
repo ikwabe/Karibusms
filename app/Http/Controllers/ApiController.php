@@ -108,10 +108,11 @@ class ApiController extends Controller {
         }
     }
 
-    public function init(Request $request) {
-        $re=['content'=> json_encode($request->all())];
+    public function init() {
+        $data = request()->all();
+        $re = ['content' => json_encode(request()->all())];
         DB::table('requests')->insert($re);
-        $data = $request->all();
+
         return $this->api($data);
     }
 
@@ -148,7 +149,7 @@ class ApiController extends Controller {
     }
 
     private function getStatistics($name, $client_id = NULL) {
-        $id = $client_id == NULL ? $this->client_id : $client_id;
+        $id = $client_id == NULL ? session('client_id') : $client_id;
         $statistics = DB::table('pending_sms')->where('username', $name)->get();
         $sms_status = DB::table('sms_status')->where('client_id', $id)->first();
         $sms_used = count($statistics);
@@ -160,7 +161,7 @@ class ApiController extends Controller {
     }
 
     private function getReport($name, $client_id = NULL) {
-        $id = $client_id == NULL ? $this->client_id : $client_id;
+        $id = $client_id == NULL ? session('client_id') : $client_id;
         $range = " and (reg_time::date >= '" . request('start_date') . "' AND reg_time::date <= '" . request('end_date') . "')";
         $date = (request('start_date') !== null ) ?
                 $range :
@@ -215,7 +216,7 @@ class ApiController extends Controller {
         $message_left = DB::table('sms_status')
                 ->where('client_id', $this->developer->client_id)
                 ->value('message_left');
-       // return $this->pushSms();
+        // return $this->pushSms();
         return json_encode(array(
             'success' => 1,
             'phone' => $this->phone_number,
@@ -250,7 +251,7 @@ class ApiController extends Controller {
         $developer_info = DB::table('developer_app')
                         ->where('api_key', $this->api_key)
                         ->where('api_secret', $this->api_secret)->first();
-        if (count($developer_info)==1) {
+        if (count($developer_info) == 1) {
             $this->developer = $developer_info;
             $this->business = DB::table('client')->where('client_id', $this->developer->client_id)->first();
             return TRUE;
