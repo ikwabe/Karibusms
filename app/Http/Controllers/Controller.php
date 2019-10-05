@@ -32,7 +32,7 @@ class Controller extends BaseController
 	     * only for android request
 	     */
 	    $this->client_id = request('business_id');
-	    $this->sendEmail('info@inetstz.com', 'User request made to karibusms', 'Hello karibusms will start to send email notifications soon. Soon karibusms will start to generate at least 2m per month. By Ephraim');
+	   /// $this->sendEmail('info@inetstz.com', 'User request made to karibusms', 'Hello karibusms will start to send email notifications soon. Soon karibusms will start to generate at least 2m per month. By Ephraim');
 	}
 	if (request('business_id') == NULL && request('API_KEY') == NULL && request()->ajax() == FALSE) {
 	    //$this->logUser();
