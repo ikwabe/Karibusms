@@ -185,12 +185,12 @@ class AndroidTestController extends Controller {
     }
 
     public function sendMessage() {
-        $message = new MessageController();
+        $message = new MessageController(request('business_id'));
         return $message->sendSmsByCategory();
     }
 
     public function sendByNumber() {
-        $message = new MessageController();
+        $message = new MessageController(request('business_id'));
         return $message->sendSmsByNumbers();
     }
 
