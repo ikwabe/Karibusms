@@ -41,7 +41,8 @@
         ],
         "files":
         [
-            "app/helper.php"
+            "app/helper.php",
+            "app/library/Gcm.php"
       ]
     },
     "autoload-dev": {
