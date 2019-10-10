@@ -240,11 +240,11 @@ class Controller extends BaseController
     }
 
     public function log() {
-	$data = json_encode($_REQUEST, JSON_PRETTY_PRINT);
-	$file = 'request_log.html';
-	$handle = fopen($file, 'a+');
-	fwrite($handle, $data);
-	fclose($handle);
+//	$data = json_encode($_REQUEST, JSON_PRETTY_PRINT);
+//	$file = 'request_log.html';
+//	$handle = fopen($file, 'a+');
+//	fwrite($handle, $data);
+//	fclose($handle);
     }
 
 }
