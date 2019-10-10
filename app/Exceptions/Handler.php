@@ -14,7 +14,6 @@ use Closure;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
-
 class Handler extends ExceptionHandler {
 
     /**
@@ -36,22 +35,20 @@ class Handler extends ExceptionHandler {
         'password_confirmation',
     ];
 
-    function createLog($e, $notify_admins = FALSE) {
+    function createLog($e) {
         //if (!preg_match('/Router.php/',$e->getTrace()[0]['file'])) {
         if (!preg_match('/pipeline/i', @$e->getTrace()[0]['file'])) {
             $line = @$e->getTrace()[0]['line'];
             $err = "<br/><hr/><ul>\n";
             $err .= "\t<li>date time " . date('Y-M-d H:m', time()) . "</li>\n";
             $err .= "\t<li>Made By: " . session('id') . "</li>\n";
-            $err .= "\t<li>usertype " . session('usertype') . "</li>\n";
             $err .= "\t<li>error msg: [" . $e->getCode() . '] ' . $e->getMessage() . ' on line ' . $line . ' of file ' . @$e->getTrace()[0]['file'] . "</li>\n";
             $err .= "\t<li>url: " . url()->current() . "</li>\n";
             $err .= "\t<li>Controller route: " . createRoute() . "</li>\n";
-            $err .= "\t<li>Error from which host: " . gethostname() . "</li>\n";
             $err .= "\t<li>Error from username: " . session('username') . "</li>\n";
             $err .= "</ul>\n\n";
 
-            $filename = set_schema_name() . '_' . str_replace('-', '_', date('Y-M-d')) . '.html';
+            $filename = str_replace('-', '_', date('Y-M-d')) . '.html';
             (isset($line) && $line == 546) ? '' : error_log($err, 3, dirname(__FILE__) . "/../../storage/logs/" . $filename);
         }
         // }
@@ -90,7 +87,7 @@ class Handler extends ExceptionHandler {
      * @return \Illuminate\Http\Response
      */
     public function render($request, Exception $exception) {
-
+        $this->createLog($exception);
         if ($exception instanceof \Illuminate\Session\TokenMismatchException) {
             return redirect()->back()->with('warning', 'Token has expired, please reload this page');
         }
