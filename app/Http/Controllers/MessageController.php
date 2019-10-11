@@ -380,7 +380,7 @@ class MessageController extends Controller {
                     ]
             );
         }
-        if ($messaging_type == 0) {
+        if ($messaging_type == 1) {
             $this->send($message_id);
         }
 
