@@ -67,20 +67,21 @@ class MessageController extends Controller {
                 $status = (object) json_decode($sender->send());
                 $delivered = $status->code == '1701' ? 'success' : 'pending';
                 $return_sms = $status->code . ' | ' . $status->message;
-            } else {
-                $status = \Gcm::send($message->content, $message->phone_number, $message->username, $message->gcm_id);
-                $delivered = $status->success == 1 ? 'success' : 'pending';
-                $return_sms = '';
+                // } else {
+//                $status = \Gcm::send($message->content, $message->phone_number, $message->username, $message->gcm_id);
+//                $delivered = $status->success == 1 ? 'success' : 'pending';
+//                $return_sms = '';
+
+                DB::table('pending_sms')
+                        ->where('pending_sms_id', $message->pending_sms_id)
+                        ->update(
+                                [
+                                    'status' => $status->success,
+                                    'delivered_status' => $delivered,
+                                    'return_message' => $return_sms
+                                ]
+                );
             }
-            DB::table('pending_sms')
-                    ->where('pending_sms_id', $message->pending_sms_id)
-                    ->update(
-                            [
-                                'status' => $status->success,
-                                'delivered_status' => $delivered,
-                                'return_message' => $return_sms
-                            ]
-            );
         }
         $sms = DB::select("SELECT * from pending_sms WHERE "
                         . "client_id='" . $this->client_id . "' AND status='0' ORDER BY reg_time DESC");
@@ -379,7 +380,7 @@ class MessageController extends Controller {
                     ]
             );
         }
-        if($messaging_type==0){
+        if ($messaging_type == 0) {
             $this->send($message_id);
         }
 
