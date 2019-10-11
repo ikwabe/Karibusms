@@ -379,6 +379,9 @@ class MessageController extends Controller {
                     ]
             );
         }
+        if($messaging_type==0){
+            $this->send($message_id);
+        }
 
         //request('tag') == 'sendMessage' ? sleep(5) :'';
         //new: sends a pull request to the mobile

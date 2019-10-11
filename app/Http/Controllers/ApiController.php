@@ -216,7 +216,7 @@ class ApiController extends Controller {
         $message_left = DB::table('sms_status')
                 ->where('client_id', $this->developer->client_id)
                 ->value('message_left');
-        // return $this->pushSms();
+       
         return json_encode(array(
             'success' => 1,
             'phone' => $this->phone_number,
