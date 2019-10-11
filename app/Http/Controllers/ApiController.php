@@ -298,14 +298,14 @@ class ApiController extends Controller {
 
     public function proCheckPaymentStatus() {
 
-        $record = DB::table('client_message')->where('client_id', $this->developer->client_id)->first();
+        $record = DB::table('sms_status')->where('client_id', $this->developer->client_id)->first();
         if (!empty($record)) {
             //this user has some SMS remain
 
             $phone_numbers = explode(',', $this->phone_number);
             $sms_count_per_sms = ceil(strlen($this->message) / 160);
             $total_sms = $sms_count_per_sms * count($phone_numbers);
-            if ((int) $record->messages < (int) $total_sms || (int) $record->messages <= 0) {
+            if ((int) $record->message_left < (int) $total_sms || (int) $record->message_left <= 0) {
                 die(json_encode(array(
                     'message' => 'Insufficient credit, send your payments to us or contact us via info@karibusms.com',
                     'success' => 0)));
