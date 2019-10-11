@@ -200,9 +200,9 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/mail', 'CronJobController@mail');
     Route::get('/{page?}', 'LandingController@show');
 });
-define('HOME', url('/') . '/');
-define('SMS_PRICE', 20);
-define('EXCHANGE_RATE', 2300);
+!defined('HOME') ? define('HOME', url('/') . '/') : '';
+!defined('HOME') ? define('SMS_PRICE', 20) : '';
+!defined('HOME') ? define('EXCHANGE_RATE', 2300) : '';
 
 Route::auth();
 
