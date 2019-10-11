@@ -230,8 +230,8 @@ $path = is_file($link) ? url('/') . '/' . $link : url('/') . '/media/images/busi
         </section>
         <footer id="footer" class="footer bg-white b-t b-light fixed">
             <div class="text-center padder">  
-                <span><a href="<?= url('/dev') ?>" target="_blank" class="badge">Developers Api</a></span> |
-                <span><a data-toggle="ajaxModal" href="<?= url('/dev/contact') ?>" class="m-l-sm "><i class="fa fa-comment-o icon-muted"></i> Give us Feedback</a></span>
+                <span><a href="<?= url('/') ?>/dev" target="_blank" class="badge">Developers Api</a></span> |
+                <span><a data-toggle="ajaxModal" href="<?= url('/') ?>/dev/contact" class="m-l-sm "><i class="fa fa-comment-o icon-muted"></i> Give us Feedback</a></span>
             </div>
             <div class="text-center padder"> 
                 <p> <small>KaribuSMS web application<br>&copy; <?= date('Y') ?></small> </p> 

@@ -251,7 +251,7 @@
 			<?php
 			if (!preg_match('/dev/i', $page)) {
 			    ?>
-    			<a href="<?= HOME ?>dev" target="_blank" class=" b-white bg-empty m-sm">Get Our Developer API</a>
+    			<a href="<?= HOME ?>/dev" target="_blank" class=" b-white bg-empty m-sm">Get Our Developer API</a>
 			<?php } ?>
 			<!--               <a href="index.html" target="_blank" class="btn btn-lg btn-warning b-white bg-empty m-sm">Live Preview</a> -->
 		    </div> 

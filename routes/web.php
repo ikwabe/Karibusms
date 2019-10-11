@@ -33,7 +33,10 @@ Auth::routes();
   | kernel and includes session state, CSRF protection, and more.
   |
  */
-
+Route::any('/api_call',function(){
+    $controller = new \App\Http\Controllers\ApiController();
+    die($controller->init());
+});
 Route::any('facebook', function() {
     $appsecret = 'YOUR APP SECRET';
     $raw_post_data = file_get_contents('php://input');
