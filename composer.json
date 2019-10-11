@@ -42,7 +42,8 @@
         "files":
         [
             "app/helper.php",
-            "app/library/Gcm.php"
+            "app/library/Gcm.php",
+            "app/library/SmsSender.php"
       ]
     },
     "autoload-dev": {
