@@ -5,7 +5,6 @@ namespace App\Exceptions;
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use DB;
-use Exception;
 use Illuminate\Database\QueryException;
 use Symfony\Component\Debug\Exception\FatalErrorException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
