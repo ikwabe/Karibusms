@@ -21,7 +21,7 @@ use DB;
 
 class MessageController extends Controller {
 
-    public $username=1;
+    public $username = 1;
     private $sms_count_per_sms;
     public $client_id;
 
@@ -40,7 +40,6 @@ class MessageController extends Controller {
         $this->username = DB::table('client')->where('client_id', $this->client_id)->value('username');
     }
 
-
     public function sms($offset = 0) {
 
         $skip = $offset * 10;
@@ -56,6 +55,33 @@ class MessageController extends Controller {
 
     public function pendingSms() {
 
+
+        $messages = DB::select("SELECT a.content, a.phone_number,a.from_smart, a.pending_sms_id, a.username,b.gcm_id FROM pending_sms a JOIN client b ON a.client_id=b.client_id WHERE a.status='0'");
+
+        foreach ($messages as $message) {
+            if ($message->from_smart == 0) {
+                $sender = new \SmsSender();
+                $sender->set_phone_number($message->phone_number);
+                $sender->set_message($message->content);
+                $sender->set_from_name($message->username);
+                $status = (object) json_decode($sender->send());
+                $delivered = $status->code == '1701' ? 'success' : 'pending';
+                $return_sms = $status->code . ' | ' . $status->message;
+            } else {
+                $status = \Gcm::send($message->content, $message->phone_number, $message->username, $message->gcm_id);
+                $delivered = $status->success == 1 ? 'success' : 'pending';
+                $return_sms = '';
+            }
+            DB::table('pending_sms')
+                    ->where('pending_sms_id', $message->pending_sms_id)
+                    ->update(
+                            [
+                                'status' => $status->success,
+                                'delivered_status' => $delivered,
+                                'return_message' => $return_sms
+                            ]
+            );
+        }
         $sms = DB::select("SELECT * from pending_sms WHERE "
                         . "client_id='" . $this->client_id . "' AND status='0' ORDER BY reg_time DESC");
 
