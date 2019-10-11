@@ -367,22 +367,38 @@ class MessageController extends Controller {
             }
             $number = validate_phone_number($phone_number);
 
-            DB::table('pending_sms')->insert(
+            $pending_sms_id = DB::table('pending_sms')->insertGetId(
                     [
-                        'phone_number' => $number[1],
-                        'content' => $this->customizeContent($content, $number[1], $this->client_id),
-                        'client_id' => $this->client_id,
-                        'message_id' => $message_id,
-                        'from_smart' => $messaging_type == 1 ? 0 : 1,
-                        'status' => 0,
-                        'sms_id' => request('sms_id'),
-                        'username' => substr($name, 0, 11)
-                    ]
+                'phone_number' => $number[1],
+                'content' => $this->customizeContent($content, $number[1], $this->client_id),
+                'client_id' => $this->client_id,
+                'message_id' => $message_id,
+                'from_smart' => $messaging_type == 1 ? 0 : 1,
+                'status' => 0,
+                'sms_id' => request('sms_id'),
+                'username' => substr($name, 0, 11)
+                    ], 'pending_sms_id'
             );
+            if ($messaging_type == 1) {
+                $sender = new \SmsSender();
+                $sender->set_phone_number($number[1]);
+                $sender->set_message($this->customizeContent($content, $number[1], $this->client_id));
+                $sender->set_from_name(substr($name, 0, 11));
+                $status = (object) json_decode($sender->send());
+                $delivered = $status->code == '1701' ? 'success' : 'pending';
+                $return_sms = $status->code . ' | ' . $status->message;
+                DB::table('pending_sms')
+                        ->where('pending_sms_id', $pending_sms_id)
+                        ->update(
+                                [
+                                    'status' => $status->success,
+                                    'delivered_status' => $delivered,
+                                    'return_message' => $return_sms
+                                ]
+                );
+            }
         }
-        if ($messaging_type == 1) {
-            $this->send($message_id);
-        }
+
 
         //request('tag') == 'sendMessage' ? sleep(5) :'';
         //new: sends a pull request to the mobile
