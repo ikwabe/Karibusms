@@ -83,11 +83,15 @@ class MessageController extends Controller {
                 );
             }
         }
-        $sms = DB::select("SELECT * from pending_sms WHERE "
-                        . "client_id='" . $this->client_id . "' AND status='0' ORDER BY reg_time DESC");
+        if ((int) $this->client_id > 0) {
+            $sms = DB::select("SELECT * from pending_sms WHERE "
+                            . "client_id='" . $this->client_id . "' AND status='0' ORDER BY reg_time DESC");
 
-        $return = view('message.pending_sms')->with(array('sms' => $sms, 'gcm_id' => $this->gcmId()));
-        return $return;
+            $return = view('message.pending_sms')->with(array('sms' => $sms, 'gcm_id' => $this->gcmId()));
+            return $return;
+        } else {
+            return true;
+        }
     }
 
     public function loadMoreSms($sms) {
