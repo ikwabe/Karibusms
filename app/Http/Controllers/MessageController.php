@@ -90,7 +90,7 @@ class MessageController extends Controller {
             $return = view('message.pending_sms')->with(array('sms' => $sms, 'gcm_id' => $this->gcmId()));
             return $return;
         } else {
-            return true;
+           echo 1;
         }
     }
 
