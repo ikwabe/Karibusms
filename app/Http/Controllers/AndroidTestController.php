@@ -233,7 +233,7 @@ class AndroidTestController extends Controller {
         echo json_encode(['status' => 'success', 'data' => ['message_id' => $incoming_message_id]]);
     }
 
-    private function curl($fields) {
+    public function curl($fields) {
         // Open connection
         $ch = curl_init();
         // Set the url, number of POST vars, POST data
