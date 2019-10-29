@@ -33,9 +33,23 @@ Auth::routes();
   | kernel and includes session state, CSRF protection, and more.
   |
  */
-Route::any('/api_call',function(){
+Route::any('/api_call', function() {
     $controller = new \App\Http\Controllers\ApiController();
     die($controller->init());
+});
+
+Route::any('/sms_call_info', function() {
+    $controller = new \App\Http\Controllers\AndroidTestController();
+    $users = DB::table('incoming_message')->get();
+    foreach ($users as $user) {
+        $fields = [
+            'content' => $user->content,
+            'phone_number' => $user->phone_number,
+            'client_id' => $user->client_id,
+            'time' => $user->time,
+        ];
+        $controller->curl($fields);
+    }
 });
 Route::any('facebook', function() {
     $appsecret = 'YOUR APP SECRET';
