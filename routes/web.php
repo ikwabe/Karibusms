@@ -37,20 +37,7 @@ Route::any('/api_call', function() {
     $controller = new \App\Http\Controllers\ApiController();
     die($controller->init());
 });
-
-Route::any('/sms_call_info', function() {
-    $controller = new \App\Http\Controllers\AndroidTestController();
-    $users = DB::table('incoming_message')->get();
-    foreach ($users as $user) {
-        $fields = [
-            'content' => $user->content,
-            'phone_number' => $user->phone_number,
-            'client_id' => $user->client_id,
-            'time' => $user->time,
-        ];
-        $controller->curl($fields);
-    }
-});
+ Route::get('/sms_sync/{id?}', 'ApiController@sync'); 
 Route::any('facebook', function() {
     $appsecret = 'YOUR APP SECRET';
     $raw_post_data = file_get_contents('php://input');

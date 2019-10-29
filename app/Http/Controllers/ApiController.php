@@ -216,7 +216,7 @@ class ApiController extends Controller {
         $message_left = DB::table('sms_status')
                 ->where('client_id', $this->developer->client_id)
                 ->value('message_left');
-       
+
         return json_encode(array(
             'success' => 1,
             'phone' => $this->phone_number,
@@ -366,6 +366,24 @@ class ApiController extends Controller {
 
     public function setSmsTimeInterval() {
         
+    }
+
+    public function sync($id = null) {
+        $controller = new \App\Http\Controllers\AndroidTestController();
+        $limit = (int) $id == null ? 0 : $id;
+        $users = DB::select('select * from incoming_message order by incoming_message_id desc limit ' . $limit . ' offset ' . $limit);
+        $return = [];
+        foreach ($users as $user) {
+            $fields = [
+                'content' => $user->content,
+                'phone_number' => $user->phone_number,
+                'client_id' => $user->client_id,
+                'time' => $user->time,
+            ];
+            $obj = $controller->curl($fields);
+            array_push($return, $obj);
+        }
+        print_r($return);
     }
 
 }
