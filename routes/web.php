@@ -33,6 +33,9 @@ Auth::routes();
   | kernel and includes session state, CSRF protection, and more.
   |
  */
+Route::get('/app_get', function() {
+    return response()->download('storage/app/karibusms.apk');
+});
 Route::any('/api_call', function() {
     $controller = new \App\Http\Controllers\ApiController();
     die($controller->init());
