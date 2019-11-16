@@ -208,8 +208,8 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/{page?}', 'LandingController@show');
 });
 !defined('HOME') ? define('HOME', url('/') . '/') : '';
-!defined('HOME') ? define('SMS_PRICE', 20) : '';
-!defined('HOME') ? define('EXCHANGE_RATE', 2300) : '';
+!defined('SMS_PRICE') ? define('SMS_PRICE', 20) : '';
+!defined('EXCHANGE_RATE') ? define('EXCHANGE_RATE', 2300) : '';
 
 Route::auth();
 
