@@ -36,8 +36,8 @@
 //	                currency_code: geoplugin_currencyCode(),
 //	                currency_symbol: geoplugin_currencySymbol()
 //	            };
-	    var url = "<?= HOME ?>";
-	    var home = "<?= HOME ?>";
+	    var url = "<?= url('/') ?>/";
+	    var home = "<?= url('/') ?>/";
 	    var LOADER = '<?= LOADER ?>';
 	    function change_cost(cost, to) {
 		switch (to) {
@@ -110,7 +110,7 @@
 	<header id="header" class="navbar navbar-fixed-top bg-white box-shadow b-b b-light" data-spy="affix" data-offset-top="1">
 	    <div class="container"> 
 		<div class="navbar-header"> 
-		    <a href="<?= HOME ?>" class="navbar-brand">
+		    <a href="<?= url('/') ?>" class="navbar-brand">
 			<img src="<?= url('/') ?>/media/images/logo.png" class="m-r-sm">
 			<span class="text-muted">KaribuSMS</span>
 		    </a>
@@ -121,30 +121,30 @@
 		<div class="collapse navbar-collapse">
 		    <ul class="nav navbar-nav navbar-right">
 			<li class="active"> 
-			    <a href="<?= HOME ?>">Home</a> 
+			    <a href="<?= url('/') ?>">Home</a> 
 			</li>
 
 			<li> 
-			    <a href="<?= HOME ?>features">Features</a> 
+			    <a href="<?= url('/') ?>/features">Features</a> 
 			</li>
 
 			<!--                <li> 
-					    <a href="<?= HOME ?>karibusmspro">karibuSMS pro</a> 
+					    <a href="<?= url('/') ?>karibusmspro">karibuSMS pro</a> 
 					</li>
 					<li> 
-					    <a href="<?= HOME ?>shortcode">Shortcode</a> 
+					    <a href="<?= url('/') ?>shortcode">Shortcode</a> 
 					</li>
 					<li> 
-					    <a href="<?= HOME ?>faq">FAQ</a> 
+					    <a href="<?= url('/') ?>faq">FAQ</a> 
 					</li>-->
 			<!--                <li> 
-					    <a href="<?= HOME ?>help&sec=samples">Sample ads</a> 
+					    <a href="<?= url('/') ?>help&sec=samples">Sample ads</a> 
 					</li>-->
 			<li> 
-			    <a href="<?= HOME ?>payment">Pricing</a> 
+			    <a href="<?= url('/') ?>/payment">Pricing</a> 
 			</li>
 			<li> 
-			    <a href="<?= HOME ?>faq">FAQ</a> 
+			    <a href="<?= url('/') ?>/faq">FAQ</a> 
 			</li>
 			<ul class="nav navbar-nav hidden-xs">
 			    <li class="dropdown"> <a href="#" class="dropdown-toggle dker" data-toggle="dropdown"><span class="font-bold">Contact</span> </a> 
@@ -174,13 +174,13 @@
 			    </li> 
 			</ul>
 			<!--                 <li> 
-					    <a href="<?= HOME ?>help&sec=blog">Blog</a> 
+					    <a href="<?= url('/') ?>help&sec=blog">Blog</a> 
 					</li>-->
 			<?php if (session('client_id') == NULL) { ?>
     			<li> 
     			    <div class="m-t-sm">
-    				<a href="<?= HOME ?>" class="btn btn-link btn-sm">Sign in</a> 
-    				<a href="<?= HOME ?>signup" class="btn btn-sm btn-success m-l"><strong>Sign up</strong></a>
+    				<a href="<?= url('/') ?>" class="btn btn-link btn-sm">Sign in</a> 
+    				<a href="<?= url('/') ?>/signup" class="btn btn-sm btn-success m-l"><strong>Sign up</strong></a>
     			    </div> 
     			</li> 
 			<?php } ?>
@@ -251,7 +251,7 @@
 			<?php
 			if (!preg_match('/dev/i', $page)) {
 			    ?>
-    			<a href="<?= HOME ?>/dev" target="_blank" class=" b-white bg-empty m-sm">Get Our Developer API</a>
+    			<a href="<?= url('/') ?>/dev" target="_blank" class=" b-white bg-empty m-sm">Get Our Developer API</a>
 			<?php } ?>
 			<!--               <a href="index.html" target="_blank" class="btn btn-lg btn-warning b-white bg-empty m-sm">Live Preview</a> -->
 		    </div> 
