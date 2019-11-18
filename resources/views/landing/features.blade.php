@@ -13,7 +13,7 @@
     <div class="bg-white b-b b-light">
         <div class="container">
             <ul class="breadcrumb no-border bg-empty m-b-none m-l-n-sm">
-                <li><a href="<?= HOME ?>">Home</a></li> <li class="active">Features</li>
+                <li><a href="<?= url('/').'/' ?>">Home</a></li> <li class="active">Features</li>
             </ul>
         </div> 
     </div> 
@@ -118,14 +118,14 @@
                     <ul>
                         <li>Open the karibuSMS application in your phone and send a message</li>
                         <ul>OR</ul>
-                        <li>Login in your account on <a href="<? HOME ?>">www.karibusms.com</a> and compose SMS to send to all</li>
+                        <li>Login in your account on <a href="<? url('/').'/' ?>">www.karibusms.com</a> and compose SMS to send to all</li>
                         <ul>OR</ul>
                         <li>Use the phone number you register your business with here, start with keyword KARIBU followed by 
                             SMS you would like your customers to read and send it to <? $SUBSCRIPTION_NUMBER ?></li>
                     </ul>
                     </p> -->
                     <p class="m-t-xl m-b-xl h4"><i class="fa fa-quote-left fa-fw fa-1x icon-muted"></i> We make very simple for you</p>
-                    <p><a href="<?= HOME ?>register">Do you need to integrate SMS in your system /software ? <a href="<?= HOME ?>api" class="label label-success">click here</a> (if you are a software developer) or contact us via <a href="mail: info@karibusms.com" class="label label-info">Email</a> (free integration). karibuSMS can be simply integrated with banks, hospital systems, radio stations and any application to send SMS to people</p>
+                    <p><a href="<?= url('/').'/' ?>register">Do you need to integrate SMS in your system /software ? <a href="<?= url('/').'/' ?>api" class="label label-success">click here</a> (if you are a software developer) or contact us via <a href="mail: info@karibusms.com" class="label label-info">Email</a> (free integration). karibuSMS can be simply integrated with banks, hospital systems, radio stations and any application to send SMS to people</p>
                 </div>
 
             </div> 

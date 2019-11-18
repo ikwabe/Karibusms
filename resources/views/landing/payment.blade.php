@@ -19,7 +19,7 @@
     <div class="bg-white b-b b-light">
 	<div class="container"> 
 	    <ul class="breadcrumb no-border bg-empty m-b-none m-l-n-sm">
-		<li><a href="<?= HOME ?>">Home</a></li> 
+		<li><a href="<?= url('/').'/' ?>">Home</a></li> 
 		<li class="active">Price</li> 
 	    </ul>
 	</div> 

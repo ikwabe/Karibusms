@@ -5,7 +5,7 @@ require_once 'modules/landing/banner/feature_banner.php';
 ?>  
 <header id="header" class="navbar navbar-fixed-top bg-white box-shadow b-b b-light" data-spy="affix" data-offset-top="1"> <div class="container">
 	<div class="navbar-header"> 
-	    <a href="<?=HOME?>" class="navbar-brand">
+	    <a href="<?=url('/').'/'?>" class="navbar-brand">
 		<img src="media/images/logo.png" class="m-r-sm"><span class="text-muted">KaribuSMS</span></a> 
 	</div> 
 	<div class="collapse navbar-collapse"> 
@@ -20,10 +20,10 @@ require_once 'modules/landing/banner/feature_banner.php';
 		    <?php if (isset($ses_user)) { ?>
     		    <ul class="dropdown-menu animated fadeInRight"> 
     			<span class="arrow top"></span> 
-    			<li> <a href="<?= HOME ?>">profile</a> </li>
-    			<li> <a href="<?= HOME ?>help">Help</a> </li>
+    			<li> <a href="<?= url('/').'/' ?>">profile</a> </li>
+    			<li> <a href="<?= url('/').'/' ?>help">Help</a> </li>
     			<li class="divider"></li>
-    			<li> <a href="<?= HOME ?>logout">Sign out</a> </li> 
+    			<li> <a href="<?= url('/').'/' ?>logout">Sign out</a> </li> 
     		    </ul>
 		    <?php } ?>
 		</li> 

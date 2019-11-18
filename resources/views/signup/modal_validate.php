@@ -1,7 +1,7 @@
 <?php ?>
 <div class="modal in" id="ajaxModal" aria-hidden="false" style="display: block;">
     <div class="modal-over"> 
-        <a class="navbar-brand block" href="<?= HOME ?>">Karibu..!</a>
+        <a class="navbar-brand block" href="<?= url('/').'/' ?>">Karibu..!</a>
         <div class="modal-center animated fadeInUp text-center" style="width:200px;margin:-80px 0 0 -100px;">
             <div class="thumb-md"><img src="media/images/avatar_default.jpg" class="img-circle b-a b-light b-3x"></div> 
             <p class="text-white h4 m-t m-b"><?= $data['business_name'] ?></p>

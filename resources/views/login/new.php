@@ -1,16 +1,16 @@
 <!-- header --> 
 <header id="header" class="navbar navbar-fixed-top bg-white box-shadow b-b b-light" data-spy="affix" data-offset-top="1"> <div class="container">
         <div class="navbar-header">
-            <a href="<?= HOME ?>" class="navbar-brand">
+            <a href="<?= url('/').'/' ?>" class="navbar-brand">
                 <img src="media/images/logo.png" class="m-r-sm">
                 <span class="text-muted">karibuSMS</span></a> 
             <button class="btn btn-link visible-xs" type="button" data-toggle="collapse" data-target=".navbar-collapse"> <i class="fa fa-bars"></i> </button>
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li> <a href="<?= HOME ?>features">Features</a> </li> 
+                <li> <a href="<?= url('/').'/' ?>features">Features</a> </li> 
                 <li> 
-                    <a href="<?= HOME ?>payment">Pricing</a> 
+                    <a href="<?= url('/').'/' ?>payment">Pricing</a> 
                 </li>
 		<ul class="nav navbar-nav hidden-xs">
 		    <li class="dropdown"> <a href="#" class="dropdown-toggle dker" data-toggle="dropdown"><span class="font-bold">Contact</span> </a> 
@@ -41,7 +41,7 @@
 		</ul>
                 <li> <div class="m-t-sm">
                         <a href="#" class="btn btn-link btn-sm">Sign in</a>
-                        <a href="<?= HOME ?>register" class="btn btn-link btn-sm"><strong>Sign up</strong></a></div> </li>
+                        <a href="<?= url('/').'/' ?>register" class="btn btn-link btn-sm"><strong>Sign up</strong></a></div> </li>
             </ul> </div> </div>
 </header> <!-- / header -->
 
@@ -52,7 +52,7 @@
         <div class="text-center wrapper"> 
             <div class="h4 text-muted m-t-sm">
 		Easy and effective Customer  Management tool </div>
-            <a href="<?= HOME ?>register" class="btn btn-lg btn-primary b-primary  m-sm">Sign Up</a><br/>
+            <a href="<?= url('/').'/' ?>register" class="btn btn-lg btn-primary b-primary  m-sm">Sign Up</a><br/>
             OR
         </div> 
 
@@ -81,7 +81,7 @@
                                 <div class="checkbox"> 
                                     <label> <input type="checkbox" name="checkbox" checked="checked"> Keep me signed in </label>
                                 </div> 
-                                <a href="<?= HOME ?>login&sec=forget_pw" class="pull-right m-t-xs"><small>Forgot password?</small></a> 
+                                <a href="<?= url('/').'/' ?>login&sec=forget_pw" class="pull-right m-t-xs"><small>Forgot password?</small></a> 
                                 <button type="button" class="btn btn-primary" onclick="javascript: signin();">Sign in</button> 
                                 <div id="login_ajax_request"></div>
                                 <div class="line line-dashed"></div>	  
@@ -119,12 +119,12 @@
                     </p> 
                     <div class="">
                         <h4 class="m-t-none">Android Mobile Application</h4>
-                        <p class="text-muted m-t-lg">Download <a href="http://goo.gl/msamgD" target="_blank" class="label label-info"> here</a> our Mobile app (OPTION) or just use <a class="label label-success" href="<?= HOME ?>karibusmspro">internet messages</a>  to send SMS  to your customers.</p> </div> 
+                        <p class="text-muted m-t-lg">Download <a href="http://goo.gl/msamgD" target="_blank" class="label label-info"> here</a> our Mobile app (OPTION) or just use <a class="label label-success" href="<?= url('/').'/' ?>karibusmspro">internet messages</a>  to send SMS  to your customers.</p> </div> 
                 </div>
                 <div class="col-sm-4" data-ride="animated" data-animation="fadeInLeft" data-delay="600"> <p class="h3 m-b-lg"> <i class="fa fa-user fa-3x text-info"></i> </p> <div class=""> <h4 class="m-t-none">Cloud Based or Inhouse installation</h4> <p class="text-muted m-t-lg">You can just access this application anywhere via the internet or you decide to install it in your premises. We also provide custom development to suite your needs as you wish.</p> </div> </div> 
                 <div class="col-sm-4" data-ride="animated" data-animation="fadeInLeft" data-delay="900"> <p class="h3 m-b-lg"> <i class="fa fa-gears fa-3x text-info"></i> </p> <div class=""> 
                         <h4 class="m-t-none">Developer API</h4> 
-                        <p class="text-muted m-t-lg">karibuSMS <a href="<?= HOME ?>api" class="label label-info" title="PHP and jQuery APIs">Developer APIs</a> allows any of your software application to be integrated with karibuSMS and access all powerful features of karibuSMS in your application.</p> </div> </div> 
+                        <p class="text-muted m-t-lg">karibuSMS <a href="<?= url('/').'/' ?>api" class="label label-info" title="PHP and jQuery APIs">Developer APIs</a> allows any of your software application to be integrated with karibuSMS and access all powerful features of karibuSMS in your application.</p> </div> </div> 
             </div> 
         </div> </div>
 
@@ -167,7 +167,7 @@
     </div>
 </section> <!-- footer --> 
 
-<footer id="footer"> <div class="bg-primary text-center"> <div class="container wrapper"> <div class="m-t-xl m-b"> For reliable customer management solution <a href="<?= HOME ?>register"  class="btn btn-lg btn-dark b-white bg-empty m-sm">Sign Up</a> or <a href="#" class="btn btn-lg btn-info b-white bg-empty m-sm">Sign in</a> </div> </div> <i class="fa fa-caret-down fa-4x text-primary m-b-n-lg block"></i> </div> <div class="bg-dark dker wrapper"> 
+<footer id="footer"> <div class="bg-primary text-center"> <div class="container wrapper"> <div class="m-t-xl m-b"> For reliable customer management solution <a href="<?= url('/').'/' ?>register"  class="btn btn-lg btn-dark b-white bg-empty m-sm">Sign Up</a> or <a href="#" class="btn btn-lg btn-info b-white bg-empty m-sm">Sign in</a> </div> </div> <i class="fa fa-caret-down fa-4x text-primary m-b-n-lg block"></i> </div> <div class="bg-dark dker wrapper"> 
     </div> </footer> <!-- / footer -->
 <?php
 css_media('landing');

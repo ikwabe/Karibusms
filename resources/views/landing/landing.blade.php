@@ -9,7 +9,7 @@
         <div class="text-center wrapper"> 
             <div class="h4 text-muted m-t-sm">
                 A Way to SMS to your phone numbers easily</div>
-            <a href="<?= HOME ?>signup" class="btn btn-lg btn-primary b-primary  m-sm">Sign Up</a><br/>
+            <a href="<?= url('/').'/' ?>signup" class="btn btn-lg btn-primary b-primary  m-sm">Sign Up</a><br/>
             OR
         </div> 
 
@@ -159,12 +159,12 @@
                 </p> 
                 <div class="">
                     <h4 class="m-t-none">Android Mobile Application</h4>
-                    <p class="text-muted m-t-lg">Download <a href="https://goo.gl/APJaej" target="_blank" class="label label-info"> here</a> our Mobile app to send Free SMS from our platform to all your contacts  or just use <a class="label label-success" href="<?= HOME ?>/dev">internet messages</a>  to send SMS  to your contacts.</p> </div> 
+                    <p class="text-muted m-t-lg">Download <a href="https://goo.gl/APJaej" target="_blank" class="label label-info"> here</a> our Mobile app to send Free SMS from our platform to all your contacts  or just use <a class="label label-success" href="<?= url('/').'/' ?>/dev">internet messages</a>  to send SMS  to your contacts.</p> </div> 
             </div>
             <div class="col-sm-4" data-ride="animated" data-animation="fadeInLeft" data-delay="600"> <p class="h3 m-b-lg"> <i class="fa fa-user fa-3x text-info"></i> </p> <div class=""> <h4 class="m-t-none">Login Anywhere with any Browser</h4> <p class="text-muted m-t-lg">You can easily access karibuSMS  application anywhere via your browser or android phone to share information via SMS. Your contacts will receive SMS by any kind of mobile phone. We also provide custom development to suite your needs as you wish.</p> </div> </div> 
             <div class="col-sm-4" data-ride="animated" data-animation="fadeInLeft" data-delay="900"> <p class="h3 m-b-lg"> <i class="fa fa-gears fa-3x text-info"></i> </p> <div class=""> 
                     <h4 class="m-t-none">Developer API</h4> 
-                    <p class="text-muted m-t-lg">karibuSMS <a href="<?= HOME ?>/dev" class="label label-info" title="PHP, JAVA and jQuery APIs">Developer APIs</a> allows any of your system/software application to be integrated with karibuSMS and access all powerful features of karibuSMS in your application.</p> </div> </div> 
+                    <p class="text-muted m-t-lg">karibuSMS <a href="<?= url('/').'/' ?>/dev" class="label label-info" title="PHP, JAVA and jQuery APIs">Developer APIs</a> allows any of your system/software application to be integrated with karibuSMS and access all powerful features of karibuSMS in your application.</p> </div> </div> 
         </div> 
     </div> </div>
 

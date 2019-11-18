@@ -23,7 +23,7 @@ if (!isset($_GET['isajax'])) {
         <section id="content" class="m-t-lg wrapper-md animated fadeInUp">
 
             <div class="container aside-xxl"> 
-                <a class="navbar-brand block text-success" href="<?= HOME ?>" >KaribuSMS</a> 
+                <a class="navbar-brand block text-success" href="<?= url('/').'/' ?>" >KaribuSMS</a> 
                 <section class="panel panel-default bg-white m-t-lg"> 
                     <header class="panel-heading text-center">
                         <strong>Sign in</strong> 
@@ -39,13 +39,13 @@ if (!isset($_GET['isajax'])) {
                         </div> 
                         <div class="checkbox"> 
                             <label> <input type="checkbox" name="checkbox" checked="checked"> Keep me signed in </label>   </div>
-                        <a href="<?= HOME ?>login&sec=forget_pw" class="pull-right m-t-xs"><small>Forgot password?</small></a> 
+                        <a href="<?= url('/').'/' ?>login&sec=forget_pw" class="pull-right m-t-xs"><small>Forgot password?</small></a> 
                         <button type="button" class="btn btn-primary" onclick="javascript: signin();">Sign in</button> 
                         <div id="login_ajax_request"></div>
                         <div class="line line-dashed"></div>
                         <p class="text-muted text-center"><small>Do not have an account?</small></p> 
-                        <a href="<?= HOME ?>register" class="btn btn-default btn-block">Sign up</a>
-                        <p align="center" class="text-success"><br/><a style="color: #8ec165" href="<?= HOME ?>features" >Learn about karibuSMS here</a></p>
+                        <a href="<?= url('/').'/' ?>register" class="btn btn-default btn-block">Sign up</a>
+                        <p align="center" class="text-success"><br/><a style="color: #8ec165" href="<?= url('/').'/' ?>features" >Learn about karibuSMS here</a></p>
                                 <?php include_once 'modules/login/section/sample_features.php'; ?>
                     </form> 
                 </section> 

@@ -120,7 +120,7 @@
 <span class="pun">    &quest;&gt;</span>
 						    </pre>
 
-						    <h5>By default, SMS will be sent using a messaging type you choose in your profile as either <a href="<?= HOME ?>features" class="label">karibuSMS</a> or <a href="<?= HOME ?>karibusmspro" class="label">karibuSMSpro.</a></h5><br>
+						    <h5>By default, SMS will be sent using a messaging type you choose in your profile as either <a href="<?= url('/').'/' ?>features" class="label">karibuSMS</a> or <a href="<?= url('/').'/' ?>karibusmspro" class="label">karibuSMSpro.</a></h5><br>
 						    <p>You can also change the messaging type by setting variable <a class="label">public $karibuSMSpro </a>into TRUE or FALSE. The boolean TRUE will allow you to use karibuSMSpro while FALSE is the default that will use your smart phone</p>
 
 						</li>

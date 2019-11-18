@@ -100,7 +100,7 @@
 
 
         <b>Security:</b><br/>
-        <a href="<?= url('/')  ?>" target="_blank">KaribuSMS</a> has security measures in place to protect and prevent the loss, misuse, and alteration of the information under our control. <a href="<?= HOME ?>" target="_blank">KaribuSMS</a> uses industry standard efforts to safeguard the confidentiality of your personal identifiable information such as firewall and encryptions. While "perfect security" does not exist on the Internet, our technical experts at <a href="<?= url('/')  ?>" target="_blank">KaribuSMS</a> work hard to ensure your secure use of our services.<br/><br/> 
+        <a href="<?= url('/')  ?>" target="_blank">KaribuSMS</a> has security measures in place to protect and prevent the loss, misuse, and alteration of the information under our control. <a href="<?= url('/').'/' ?>" target="_blank">KaribuSMS</a> uses industry standard efforts to safeguard the confidentiality of your personal identifiable information such as firewall and encryptions. While "perfect security" does not exist on the Internet, our technical experts at <a href="<?= url('/')  ?>" target="_blank">KaribuSMS</a> work hard to ensure your secure use of our services.<br/><br/> 
 	
  <b>Payment terms:</b><br/>
   If you make a payment on karibuSMS or use our payment gateway or API, you agree to our <a href="<?= url('/')  ?>/payment_terms">Payments Terms</a>.<br/>

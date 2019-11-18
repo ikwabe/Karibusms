@@ -175,7 +175,7 @@ $sender_name_description = 'This is your username and is the name which people w
 		 * disable number input
 		 */
 
-		$('#smart_sms_label').html('<div class="alert alert-info">Turned On. Message will be sent from your smart phone. <a href="<?= HOME ?>karibusmspro" class="badge badge-success" target="_blank">Learn More</a> </div>');
+		$('#smart_sms_label').html('<div class="alert alert-info">Turned On. Message will be sent from your smart phone. <a href="<?= url('/').'/' ?>karibusmspro" class="badge badge-success" target="_blank">Learn More</a> </div>');
 		$.get(url, {pg: 'profile', process: 'profile', method: 'smartphone_status', messaging_type: 0}, function (data)
 		{
 

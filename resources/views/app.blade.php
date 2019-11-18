@@ -52,7 +52,7 @@ $path = is_file($link) ? url('/') . '/' . $link : url('/') . '/media/images/busi
             //            currency_symbol: geoplugin_currencySymbol()
             //        };
             var url = "<?php // $AJAX                         ?>";
-            var home = "<?= HOME ?>";
+            var home = "<?= url('/').'/' ?>";
             var LOADER = '<?= LOADER ?>';
             function change_cost(cost, to) {
                 switch (to) {
@@ -100,7 +100,7 @@ $path = is_file($link) ? url('/') . '/' . $link : url('/') . '/media/images/busi
                 <div class="navbar-header aside-md"> 
                     <a class="btn btn-link visible-xs" data-toggle="class:nav-off-screen,open" data-target="#nav,html">
                         <i class="fa fa-bars"></i> </a>
-                    <a href="<?= HOME ?>" class="navbar-brand">
+                    <a href="<?= url('/').'/' ?>" class="navbar-brand">
                         <img src="<?= url('/') ?>/media/images/logo.png" class="m-r-sm">KaribuSMS</a>
                     <a class="btn btn-link visible-xs" data-toggle="dropdown" data-target=".nav-user"> 
                         <i class="fa fa-cog"></i> </a> 
@@ -176,7 +176,7 @@ $path = is_file($link) ? url('/') . '/' . $link : url('/') . '/media/images/busi
                             <li> <a href="#profile">profile</a> </li>
                             <li class="divider"></li>
                             <!--<li> <a href="http://support.karibusms.com" target="_blank">Tickets</a> </li>-->
-                            <li> <a href="<?= HOME ?>help">Help</a> </li>
+                            <li> <a href="<?= url('/').'/' ?>help">Help</a> </li>
                             <li class="divider"></li>
                             <li> <a href="#" onclick="signout()">Sign out</a> </li> 
                         </ul>

@@ -100,7 +100,7 @@
 				</li>
                                 <li>After successful payment, you will receive SMS from TigoPesa or Mpesa having verification code (reference number) to ensure you that you have sent money successfully</li>
                                 <li>After short time, your payment will be approved and you will get your receipt in your email indicating you that we have received payment successfully </li>
-                                <!--<li>If you are in home page of web application, Click an arrow icon appear in top banner with this icon <a href="<?= HOME ?>payment" class="dropdown-toggle btn btn-xs btn-primary" title="Upgrade"><i class="fa fa-long-arrow-up"></i></a></li>-->
+                                <!--<li>If you are in home page of web application, Click an arrow icon appear in top banner with this icon <a href="<?= url('/').'/' ?>payment" class="dropdown-toggle btn btn-xs btn-primary" title="Upgrade"><i class="fa fa-long-arrow-up"></i></a></li>-->
                                 <!--<li>If you are in karibuSMS mobile application, click payment tab</li>-->
                                 <!--<li>Enter those verification code in payment tab (for karibuSMS mobile application) or if you are in web based in payment tab, choose either tigopesa or mpesa and enter those codes</li>-->
                             </ol>
