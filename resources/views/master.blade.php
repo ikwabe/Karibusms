@@ -38,7 +38,7 @@
 //	            };
 	    var url = "<?= url('/') ?>/";
 	    var home = "<?= url('/') ?>/";
-	    var LOADER = '<?= LOADER ?>';
+	    var LOADER = '<p>Loading.........</p>';
 	    function change_cost(cost, to) {
 		switch (to) {
 		    case 'usd':
