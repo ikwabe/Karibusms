@@ -143,7 +143,7 @@ submitForm = function (form_id) {
         var options = {
             target: output, // target element(s) to be updated with server response 
             beforeSubmit: function () {
-                $('#loader').html(LOADER);
+                $('#loader').html('loading.............');
             },
             // pre-submit callback 
             dataType: 'JSON', // 'xml', 'script', or 'json' (expected server response type) 
@@ -151,6 +151,7 @@ submitForm = function (form_id) {
             resetForm: true, // reset the form after successful submit 
 
             success: function (output) {
+                console.log(output);
                 var res = isJson(output);
                 if (res === false) {
                     var obj = output;

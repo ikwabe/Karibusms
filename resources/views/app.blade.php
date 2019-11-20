@@ -23,6 +23,7 @@ $path = is_file($link) ? url('/') . '/' . $link : url('/') . '/media/images/busi
         <!--    
             <meta name="google-site-verification" content="+nxGUDJ4QpAZ5l9Bsjdi102tLVC21AIh5d1Nl23908vVuFHs34="/>-->
            <!--<script language="JavaScript" src="http://www.geoplugin.net/javascript.gp" type="text/javascript"></script>--> 
+         <script src="<?= url('/') ?>/media/js/jquery-1.11.0.min.js"></script>
         <script type="text/javascript">
 
 
@@ -71,7 +72,7 @@ $path = is_file($link) ? url('/') . '/' . $link : url('/') . '/media/images/busi
         <link href="<?= url('/') ?>/media/css/landing.css" rel="stylesheet">
         <script src="<?= url('/') ?>/media/js/app.v2.js"></script>
         <script src="<?= url('/') ?>/media/js/hashchange.js"></script>
-        <script src="<?= url('/') ?>/media/js/custom.js?v=3"></script>
+        <script src="<?= url('/') ?>/media/js/custom.js?v=8"></script>
         <script src="<?= url('/') ?>/media/js/jquery.form.js"></script>
         <script src="<?= url('/') ?>/media/js/jquery.jcryption.3.0.1.js"></script>
         <link rel='stylesheet' href="media/css/sweet-alerts/sweetalert.css">

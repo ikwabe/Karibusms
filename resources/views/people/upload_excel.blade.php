@@ -17,14 +17,15 @@
         </div> 
         <div class="modal-body" id="app_area"> 
 	    <div id="ajax_status_result"></div>
-	    <form action="<?= url('/upload_excel_submit') ?>" id="upload_excel_file" onsubmit="return false">
+            <form action="<?= url('/upload_excel_submit') ?>" id="upload_excel_file" method="post" enctype="multipart/form-data">
 		<div class="form-group">
 		    <label class="col-sm-2 control-label">File</label>
 		    <div class="col-sm-8">
 			<input type="file" accept=".xls,.xlsx,.csv,.ods,.xlsm,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel"  name="excel_file" id="filestyle-0" class="filestyle" data-icon="false" data-classbutton="btn btn-default">
 
 			<div class="modal-footer"> 
-			    <input type="submit" class="btn btn-success" onmousedown="submitForm('upload_excel_file')" value="upload now"/>
+                            <?=csrf_field()?>
+			    <input type="submit" class="btn btn-success" value="upload now"/>
 			</div>
 		    </div> 
 		</div>

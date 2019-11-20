@@ -102,7 +102,7 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('/add_people', 'PeopleController@create');
     Route::get('/add_by_excel', 'PeopleController@uploadByExcel');
-    Route::post('/upload_excel_submit', 'PeopleController@submitExcel');
+    Route::any('/upload_excel_submit', 'PeopleController@submitExcel');
     Route::get('/add_people_submit', 'PeopleController@store');
     Route::get('/people/{type}', 'PeopleController@index');
     Route::get('/edit_person/{id}', 'PeopleController@update');
