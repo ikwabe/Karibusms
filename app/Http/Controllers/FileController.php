@@ -80,7 +80,7 @@ class FileController extends Controller {
      */
     private $excel_array = [];
     private $accepted_keys = array(
-	'phone_number', 'email', 'title', 'firstname', 'lastname', 'country', 'location', 'category', 'organization_name', 'organization_description'
+        'phone_number', 'email', 'title', 'firstname', 'lastname', 'country', 'location', 'category', 'organization_name', 'organization_description'
     );
 
     /**
@@ -92,20 +92,20 @@ class FileController extends Controller {
      */
     public function upload($key) {
 
-	$file = Request::file($key);
-	//$name=  str_replace('.'.$file->guessClientExtension(), '', $file->getClientOriginalName());
-	$this->name = time() . '.' . $file->guessClientExtension();
-	$file->move($this->storage_path, $this->name);
-	chmod($this->storage_path . $this->name, 0755);
+        $file = Request::file($key);
+        //$name=  str_replace('.'.$file->guessClientExtension(), '', $file->getClientOriginalName());
+        $this->name = time() . '.' . $file->guessClientExtension();
+        $file->move($this->storage_path, $this->name);
+        chmod($this->storage_path . $this->name, 0755);
     }
 
     /**
      * CHECK empty mandatory fields
      */
     private function check_empty_key() {
-	if (empty($this->location) || empty($this->filetype_id)) {
-	    die("Location/filetype_id MUST be Specified first");
-	}
+        if (empty($this->location) || empty($this->filetype_id)) {
+            die("Location/filetype_id MUST be Specified first");
+        }
     }
 
     /**
@@ -115,52 +115,69 @@ class FileController extends Controller {
      * @return Object
      */
     private function accessProtected($obj, $name) {
-	$array = (array) $obj;
-	$prefix = chr(0) . '*' . chr(0);
-	return (object) $array[$prefix . $name];
+        $array = (array) $obj;
+        $prefix = chr(0) . '*' . chr(0);
+        return (object) $array[$prefix . $name];
     }
 
 //xlsb ,
     function loadExcel($filename) {
+return $this->fileload($filename);
+        Excel::load($filename, function($reader) {
+            // Getting all results
 
-	Excel::load($filename, function($reader) {
-	    // Getting all results
+            $reader->each(function($sheet) {
+                // Loop through all rows
+                $sheet->each(function($row) {
 
-	    $reader->each(function($sheet) {
-		// Loop through all rows
-		$sheet->each(function($row) {
+                    $data = $row->all();
+                    array_push($this->excel_array, $data);
+                });
+            });
+        });
+        return $this->excel_array;
+    }
 
-		    $data = $row->all();
-		    array_push($this->excel_array, $data);
-		});
-	    });
-	});
-	return $this->excel_array;
+    public function fileload($filename) {
+
+        $objPHPExcel = \PHPExcel_IOFactory::load($filename);
+
+        $sheets = $objPHPExcel->getSheetNames();
+
+        $data = [];
+        foreach ($sheets as $key => $value) {
+            $data[$value] = [];
+        }
+        foreach ($sheets as $key => $value) {
+            $excel_data = $this->getDataBySheet($objPHPExcel, $key);
+            count($excel_data) > 0 ? array_push($data[$value], $excel_data) : '';
+        }
+        return $data;
     }
 
     public function getUserFiles($client_id = null) {
-	$id = $client_id == NULL ? $this->client_id : $client_id;
+        $id = $client_id == NULL ? $this->client_id : $client_id;
 
-	$handle = opendir('media/images/business/' . $id);
-	$files = array();
-	if ($handle) {
+        $handle = opendir('media/images/business/' . $id);
+        $files = array();
+        if ($handle) {
 
-	    /* This is the correct way to loop over the directory. */
-	    while (false !== ($entry = readdir($handle))) {
-		if ($entry != "." && $entry != "..") {
-		    array_push($files, $entry);
-		}
-	    }
+            /* This is the correct way to loop over the directory. */
+            while (false !== ($entry = readdir($handle))) {
+                if ($entry != "." && $entry != "..") {
+                    array_push($files, $entry);
+                }
+            }
 
-	    closedir($handle);
-	}
-	return $files;
+            closedir($handle);
+        }
+        return $files;
     }
 
     public function deleteFile() {
-	$filename = request('file');
-	unlink('media/images/business/' . $this->client_id . '/' . $filename);
-	echo '1';
+        $filename = request('file');
+        unlink('media/images/business/' . $this->client_id . '/' . $filename);
+        echo '1';
     }
 
     /**
@@ -170,15 +187,15 @@ class FileController extends Controller {
 
      */
     public function generateInvoiceFile($payment_id) {
-	$payment = DB::table('payment')
-			->where('payment_id', $payment_id)->first();
-	$paymentController = new PaymentController();
-	$quantity = $payment->amount / $payment->cost_per_sms;
-	return $paymentController->getInvoice($quantity, $payment_id);
+        $payment = DB::table('payment')
+                        ->where('payment_id', $payment_id)->first();
+        $paymentController = new PaymentController();
+        $quantity = $payment->amount / $payment->cost_per_sms;
+        return $paymentController->getInvoice($quantity, $payment_id);
     }
 
     public function generateReceiptFile($payment_id) {
-	
+        
     }
 
     /**
@@ -187,23 +204,23 @@ class FileController extends Controller {
      * @return File Response
      */
     public function downloadFile($file = null) {
-	if (request('tag') != NULL && request('tag') == 'invoice') {
+        if (request('tag') != NULL && request('tag') == 'invoice') {
 
-	    $data = $this->generateInvoiceFile($file);
-	    $filelink = json_decode($data)->file;
-	} else if (request('tag') != NULL && request('tag') == 'receipt') {
-	    $data = $this->generateReceiptFile($file);
-	    $filelink = json_decode($data)->file;
-	} else {
-	    $filelink = $file;
-	}
-	$filepath = __DIR__ . '/../../../media/images/business/' . $this->client_id . '/' . $filelink;
-	return response()->download($filepath);
+            $data = $this->generateInvoiceFile($file);
+            $filelink = json_decode($data)->file;
+        } else if (request('tag') != NULL && request('tag') == 'receipt') {
+            $data = $this->generateReceiptFile($file);
+            $filelink = json_decode($data)->file;
+        } else {
+            $filelink = $file;
+        }
+        $filepath = __DIR__ . '/../../../media/images/business/' . $this->client_id . '/' . $filelink;
+        return response()->download($filepath);
     }
 
     public static function showFile($file, $client_id) {
-	$filepath = __DIR__ . '/../../../media/images/business/' . $client_id . '/' . $file;
-	return $filepath;
+        $filepath = __DIR__ . '/../../../media/images/business/' . $client_id . '/' . $file;
+        return $filepath;
     }
 
 }
