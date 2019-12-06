@@ -215,3 +215,8 @@ Route::auth();
 
 //Route::get('/home', 'HomeController@index');
 
+  Route::get('/auth/redirect/{provider}', 'SocialController@redirect');
+  Route::get('/callback/{provider}', 'SocialController@callback');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

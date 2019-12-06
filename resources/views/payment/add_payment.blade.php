@@ -87,7 +87,7 @@
 				    <p>To pay by <b class="mobile_type">M-PESA</b>, please follow the following simple steps</p>
 				    <ol>
 					<li>Open your <b class="mobile_type">M-PESA</b></li>
-					<li>Send money to TigoPesa number 0655406004</li>
+					<li>Send money to M-pesa number 0754406004 (INETS COMPANY LIMITED)</li>
 					<li>You will receive SMS confirmation from <b class="mobile_type">M-PESA</b>. </li>
 					<li>Click the button below "Add payment" and enter transaction codes your receive from <b class="mobile_type">M-PESA</b></li>
 					<li>Wait for few seconds and your payments will be accepted and receipt will be in your payment report page</li>
@@ -100,7 +100,7 @@
 				    <ul>
 					<li>Bank Name: <b>NMB Bank</b></li>
 					<li>Account Name: <b>Inets Company Limited</b></li>
-					<li>Account  Number:  <b>3301107206</b> </li>
+					<li>Account  Number:  <b>22510028669</b> </li>
 					<li>After Deposit, please CALL us via<b><a href="#">+255655406004</a></b> and we will process your order as soon as possible</li>
 				    </ul>
 

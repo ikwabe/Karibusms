@@ -38,8 +38,37 @@ class PaymentController extends Controller {
      */
     public function store(Request $request) {
         $input = $request->all();
-        $id = DB::table('payment')->insertGetId($input, "payment_id");
+        if (request()->ajax()) {
+            $payment = DB::table('payment')->where('payment_id', $request->payment_id);
+            if ($request->status == 1) {
+                $payment->update(['approved' => 1, 'confirmed_time' => 'now()', 'confirmed' => 1, 'sms_provided' => $request->number]);
+                $client_id = $payment->first()->client_id;
+                $client = DB::table('client')->where('client_id', $client_id)->first();
+                $subject = 'karibuSMS Payment Accepted';
+                $message = 'Hello ' . $client->email . ' ,<br/>'
+                        . ' Your payment has been accepted and ' . $request->number . ' SMS provided into your account.';
+                $this->sendEmail($client->email, $subject, $message);
+                echo 1;
+                exit;
+            } else {
+                $payment->delete();
+                echo 0;
+                exit;
+            }
+        } else {
+            DB::table('payment')->insertGetId($input, "payment_id");
+            $subject = 'karibuSMS Payment Accepted';
+            $client = DB::table('client')->where('client_id', $request->client_id)->first();
+            $message = 'Hello ' . $client->email . ' ,<br/>'
+                    . ' Your payment has been accepted and ' . $request->number . ' SMS provided into your account.';
+            $this->sendEmail($client->email, $subject, $message);
+        }
+
         echo ' <div class="alert alert-success">Payment added successfully  </div>';
+    }
+
+    public function notifyAcceptedPayments() {
+        
     }
 
     /**
@@ -95,7 +124,7 @@ class PaymentController extends Controller {
         $total_sms_remain = DB::table('sms_remain')->first()->total;
         $total_sms = DB::select("SELECT sum(message_count) as total_sms FROM message");
         $sms = array_shift($total_sms);
-        $users_payment = DB::select('select a.name,a.price_per_sms, a.phone_number, a.email, b.time, b.invoice, b.payment_id, b.transaction_code, b.method, b.amount, b.currency, b.sms_provided, b.receipt FROM client a JOIN payment b ON a.client_id=b.client_id');
+        $users_payment = DB::select('select a.name,a.price_per_sms, a.phone_number, a.email, b.time, b.invoice, b.payment_id, b.transaction_code, b.method, b.amount, b.currency, b.sms_provided, b.receipt FROM client a JOIN payment b ON a.client_id=b.client_id where b.approved <>1');
         return view('payment.report')->with(array(
                     'payment' => array_shift($total),
                     'total_sms_remain' => $total_sms_remain,
@@ -167,7 +196,7 @@ class PaymentController extends Controller {
 
         $file = 'invoice_' . time() . '.doc';
         $folder = 'media/images/business/' . session('client_id');
-        !is_dir($folder) ? mkdir($folder,0777,TRUE) : ''; 
+        !is_dir($folder) ? mkdir($folder, 0777, TRUE) : '';
         $file_path = 'media/images/business/' . session('client_id') . '/' . $file;
 
         $handle = fopen($file_path, 'wr+');
@@ -203,6 +232,15 @@ class PaymentController extends Controller {
                 'payment_per_sms' => 1
                     ], 'payment_id');
             $this->cost_per_sms = SMS_PRICE;
+            $subject = 'karibuSMS Payment Request';
+            $client = DB::table('client')->where('client_id', $id)->first();
+            $message = 'Hello karibuSMS ,<br/>'
+                    . ' Your client ' . $client->firstname . ' has placed an order to buy SMS . These are details'
+                    . '<p>Amount: ' . self::getSmsPrice($quantity) . ' </p>'
+                    . '<p>cost per SMS ' . SMS_PRICE . '</p>'
+                    . 'Kindly login into karibusms.com to approve payments <br/>'
+                    . 'Thank you';
+            $this->sendEmail('swillae1@gmail.com,amani@shulesoft.com', $subject, $message);
         } else {
             $invoice = $check->invoice;
             $this->currency = $check->currency;

@@ -85,7 +85,7 @@ class Controller extends BaseController
     }
 
     public function sendEmail($email, $subject, $message, $attachment = null) {
-	return Mail::queue('admin.email_template', ['message' => $message], function ($m) use ($email, $subject, $attachment) {
+	return Mail::send('admin.email_template', ['content' => $message], function ($m) use ($email, $subject, $attachment) {
 		    $m->from('info@karibusms.com', 'karibuSMS');
 		    $m->to($email)->subject($subject);
 		    $attachment == null ? '' : $m->attach($attachment);

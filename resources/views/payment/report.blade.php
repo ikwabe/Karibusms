@@ -68,7 +68,10 @@
                                         <i class="fa fa-download text-success text-active"></i>
                                         <i class="fa fa-download text-success text"></i></a> </td>
                                 <td><?= $client->receipt ?></td>
-                                <td><a href="#" class="btn btn-sm btn-success">Approve</a></td>
+                                <td>
+                                    <p><a href="#" onmousedown="accept_payment(<?= $client->payment_id ?>,1,<?= ceil($client->amount/$client->price_per_sms) ?>)" class="btn btn-sm btn-success">Approve</a>
+                                        &nbsp;  <a href="#" onmousedown="accept_payment(<?= $client->payment_id ?>,0,0)" class="btn btn-sm btn-danger">Reject</a></p>
+                                </td>
                             </tr> 
                         <?php } ?>
                     </tbody> 
@@ -161,4 +164,14 @@
                                     $('#mytable').dataTable();
                                 };
                                 mydatatable();
+                                accept_payment=function(a,b,c){
+                                    $.ajax({
+                                        method:'GET',
+                                        url:'<?=url('store_payment')?>',
+                                        data:{payment_id:a,status:b,number:c},
+                                        success:function(data){
+                                            alert(data);
+                                        }
+                                    })
+                                }
 </script>

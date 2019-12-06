@@ -128,10 +128,10 @@
 			    <a href="<?= url('/') ?>/features">Features</a> 
 			</li>
 
-			<!--                <li> 
-					    <a href="<?= url('/') ?>karibusmspro">karibuSMS pro</a> 
+			               <li> 
+					    <a href="<?= url('/') ?>/dev"> API</a> 
 					</li>
-					<li> 
+				<!-- 	<li> 
 					    <a href="<?= url('/') ?>shortcode">Shortcode</a> 
 					</li>
 					<li> 
@@ -154,7 +154,7 @@
 					    <img src="<?= url('/') ?>/media/images/avatar_default.jpg" class="img-circle"> </a> 
 					<div class="clear"> 
 					    <a href="#"><span class="text-dark font-bold">@Sales & Support</span></a> 
-					    <small class="block">Mobile: +255 655 406 004</small>
+					    <small class="block">Mobile: +255 689 353 642</small>
 					    <small class="block">Tel: +255 22 278 0228</small>
 					    <a href="#" class="btn btn-xs btn-success m-t-xs">6:00h to 15:00h (GMT)</a>
 					</div>

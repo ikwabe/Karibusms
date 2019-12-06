@@ -161,9 +161,9 @@ $path = file_exists($link) ? url('/') . '/' . $link : url('/') . '/media/images/
 						    <p></p>
 						    <b>PAYMENT METHODS</b>
 						    <p>To be paid via mobile payments, bank cheque, cash or direct bank deposits via </p>
-						    <p>BANK NAME: <b>KCB</b></p>
+						    <p>BANK NAME: <b>NMB BANK </b></p>
 						    <p>Account name: <b>INETS COMPANY LIMITED</b></p>
-						    <p>Account Number:  <b>3301107206</b></p>
+						    <p>Account Number:  <b>22510028669</b></p>
 						</ul>
 					    </section> 
 					</section> 

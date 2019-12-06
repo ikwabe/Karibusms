@@ -31,7 +31,7 @@
 			<div style="padding:24px 32px 24px 32px;background:#fff;border-right:1px solid #eaeaea;border-left:1px solid #eaeaea" dir="ltr">
 			    <div style="font-size:14px;line-height:18px;color:#444">
 				<div style="height:20px"></div>
-				{{$message}}
+				<?=$content ?>
 			    </div>
 			    <div style="height:20px"></div>
 			    <div>
@@ -78,7 +78,7 @@
 		    <table style="padding:14px 10px 0 10px" role="presentation" dir="ltr">
 			<tbody>
 			    <tr><td style="width:100%;font-size:11px;font-family:Roboto,Arial,Helvetica,sans-serif;color:#646464;line-height:20px;min-height:40px;vertical-align:middle">Sent By : karibuSMS Support
-				    <br>Copyright © 2017 : By <a href="http://karibusms.com" target="_blank" style="text-decoration: none;">KaribuSMS -Web application</a></td>
+				    <br>Copyright © <?=date('Y')?> : By <a href="http://karibusms.com" target="_blank" style="text-decoration: none;">KaribuSMS -Web application</a></td>
 				<td style="padding-left:20px;vertical-align:middle">
 				    <a href="http://karibusms.com" target="_blank">
 					<img src="http://www.karibusms.com/media/images/logo.png" width="46" alt="karibuSMS" border="0" class="CToWUd">

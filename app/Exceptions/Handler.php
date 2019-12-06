@@ -3,14 +3,18 @@
 namespace App\Exceptions;
 
 use Exception;
-use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use DB;
 use Illuminate\Database\QueryException;
 use Symfony\Component\Debug\Exception\FatalErrorException;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Auth\AuthenticationException;
+use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Support\Facades\Mail;
+use DB;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Illuminate\Validation\ValidationException;
 use Closure;
-use Illuminate\Auth\AuthenticationException;
+
 
 class Handler extends ExceptionHandler {
 
@@ -35,20 +39,20 @@ class Handler extends ExceptionHandler {
 
     function createLog($e) {
         //if (!preg_match('/Router.php/',$e->getTrace()[0]['file'])) {
-        if (!preg_match('/pipeline/i', @$e->getTrace()[0]['file'])) {
+       // if (!preg_match('/pipeline/i', @$e->getTrace()[0]['file'])) {
             $line = @$e->getTrace()[0]['line'];
             $err = "<br/><hr/><ul>\n";
             $err .= "\t<li>date time " . date('Y-M-d H:m', time()) . "</li>\n";
-            $err .= "\t<li>Made By: " . session('id') . "</li>\n";
+            $err .= "\t<li>Made By: </li>\n";
             $err .= "\t<li>error msg: [" . $e->getCode() . '] ' . $e->getMessage() . ' on line ' . $line . ' of file ' . @$e->getTrace()[0]['file'] . "</li>\n";
             $err .= "\t<li>url: " . url()->current() . "</li>\n";
-            $err .= "\t<li>Controller route: " . createRoute() . "</li>\n";
-            $err .= "\t<li>Error from username: " . session('username') . "</li>\n";
+            $err .= "\t<li>Controller route:</li>\n";
+            $err .= "\t<li>Error from username:</li>\n";
             $err .= "</ul>\n\n";
 
             $filename = str_replace('-', '_', date('Y-M-d')) . '.html';
-            (isset($line) && $line == 546) ? '' : error_log($err, 3, dirname(__FILE__) . "/../../storage/logs/" . $filename);
-        }
+            error_log($err, 3, dirname(__FILE__) . "/../../storage/logs/" . $filename);
+        //}
         // }
     }
 

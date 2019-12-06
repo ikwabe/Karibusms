@@ -8,11 +8,22 @@
 
         <div class="text-center wrapper"> 
             <div class="h4 text-muted m-t-sm">
-                A Way to SMS to your phone numbers easily</div>
-            <a href="<?= url('/').'/' ?>signup" class="btn btn-lg btn-primary b-primary  m-sm">Sign Up</a><br/>
-            OR
+                <?=DB::table('client')->count()?> Customers use it as a Way to send SMS & Emails easily</div>
+            <a href="<?= url('/') . '/' ?>signup" class="btn btn-lg btn-primary b-primary  m-sm">Sign Up</a><br/>
+            OR Login with
         </div> 
-
+        <div class="text-center wrapper"> 
+            <div class="h4 text-muted m-t-sm row">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <a href="{{ url('/auth/redirect/facebook') }}" class="btn btn-primary"><i class="fa fa-facebook"></i> Facebook</a>
+                    <a href="{{ url('/auth/redirect/google') }}" class="btn btn-primary"><i class="fa fa-google"></i> Google</a>
+                    <a href="{{ url('/auth/redirect/linkedin') }}" class="btn btn-primary"><i class="fa fa-linkedin"></i> LinkedIn</a>
+                       <a href="{{ url('/auth/redirect/github') }}" class="btn btn-primary"><i class="fa fa-github"></i> Github</a>
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+        </div>
         <div class="row">
 
             <!--	    <div class="col-sm-12 col-lg-8">
@@ -58,11 +69,11 @@
                             <div class="container aside-xxl"> 
                                 <section class="panel panel-default bg-white m-t-lg"> 
                                     <header class="panel-heading text-center">
-                                        <strong>Sign in</strong> 
+                                        <strong>Or Normal Sign in Below</strong> 
                                     </header> 
 
                                     <form class="panel-body wrapper-lg" id="signin_form" method="POST" action="{{ url('/login') }}"> 
-                                         {{ csrf_field() }}
+                                        {{ csrf_field() }}
 
                                         <div class="form-group"> 
                                             @if ($errors->has('email'))
@@ -104,11 +115,12 @@
                                            class="pull-right m-t-xs">
                                             <small>Forgot password?</small>
                                         </a>
-                                       <button type="button" class="btn btn-primary" onclick="signin();">Sign in
+                                        <button type="button" class="btn btn-primary" onclick="signin();">Sign in
                                         </button>
-<!-- <button type="submit" class="btn btn-primary">
-                                    <i class="fa fa-btn fa-sign-in"></i> Login
-                                </button>-->
+
+                                        <!-- <button type="submit" class="btn btn-primary">
+                                                                            <i class="fa fa-btn fa-sign-in"></i> Login
+                                                                        </button>-->
 
                                         <div id="login_ajax_request"></div>
                                         <div class="line line-dashed"></div>
@@ -126,7 +138,7 @@
         <div class="dker pos-rlt">
             <div class="container wrapper">
                 <div class="m-t-lg m-b-lg text-center">
-                  karibuSMS helps you to send SMS to many people fast and at once at very low cost 
+                    karibuSMS helps you to send SMS to many people fast and at once at very low cost 
                 </div>
             </div>
         </div>
@@ -159,12 +171,12 @@
                 </p> 
                 <div class="">
                     <h4 class="m-t-none">Android Mobile Application</h4>
-                    <p class="text-muted m-t-lg">Download <a href="https://goo.gl/APJaej" target="_blank" class="label label-info"> here</a> our Mobile app to send Free SMS from our platform to all your contacts  or just use <a class="label label-success" href="<?= url('/').'/' ?>/dev">internet messages</a>  to send SMS  to your contacts.</p> </div> 
+                    <p class="text-muted m-t-lg">Download <a href="https://goo.gl/APJaej" target="_blank" class="label label-info"> here</a> our Mobile app to send Free SMS from our platform to all your contacts  or just use <a class="label label-success" href="<?= url('/') . '/' ?>/dev">internet messages</a>  to send SMS  to your contacts.</p> </div> 
             </div>
             <div class="col-sm-4" data-ride="animated" data-animation="fadeInLeft" data-delay="600"> <p class="h3 m-b-lg"> <i class="fa fa-user fa-3x text-info"></i> </p> <div class=""> <h4 class="m-t-none">Login Anywhere with any Browser</h4> <p class="text-muted m-t-lg">You can easily access karibuSMS  application anywhere via your browser or android phone to share information via SMS. Your contacts will receive SMS by any kind of mobile phone. We also provide custom development to suite your needs as you wish.</p> </div> </div> 
             <div class="col-sm-4" data-ride="animated" data-animation="fadeInLeft" data-delay="900"> <p class="h3 m-b-lg"> <i class="fa fa-gears fa-3x text-info"></i> </p> <div class=""> 
                     <h4 class="m-t-none">Developer API</h4> 
-                    <p class="text-muted m-t-lg">karibuSMS <a href="<?= url('/').'/' ?>/dev" class="label label-info" title="PHP, JAVA and jQuery APIs">Developer APIs</a> allows any of your system/software application to be integrated with karibuSMS and access all powerful features of karibuSMS in your application.</p> </div> </div> 
+                    <p class="text-muted m-t-lg">karibuSMS <a href="<?= url('/') . '/' ?>/dev" class="label label-info" title="PHP, JAVA and jQuery APIs">Developer APIs</a> allows any of your system/software application to be integrated with karibuSMS and access all powerful features of karibuSMS in your application.</p> </div> </div> 
         </div> 
     </div> </div>
 
