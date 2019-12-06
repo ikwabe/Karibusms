@@ -8,7 +8,7 @@
 
         <div class="text-center wrapper"> 
             <div class="h4 text-muted m-t-sm">
-                <?=DB::table('client')->count()?> Customers use it as a Way to send SMS & Emails easily</div>
+                Many Customers Love it and use it as a Way to send SMS easily</div>
             <a href="<?= url('/') . '/' ?>signup" class="btn btn-lg btn-primary b-primary  m-sm">Sign Up</a><br/>
             OR Login with
         </div> 
