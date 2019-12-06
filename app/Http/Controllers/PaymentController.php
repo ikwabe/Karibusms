@@ -124,12 +124,14 @@ class PaymentController extends Controller {
         $total_sms_remain = DB::table('sms_remain')->first()->total;
         $total_sms = DB::select("SELECT sum(message_count) as total_sms FROM message");
         $sms = array_shift($total_sms);
+        $payments = DB::select("select a.name,a.price_per_sms, a.phone_number, a.email, b.time, b.invoice, b.payment_id, b.transaction_code, b.method, b.amount, b.currency, b.sms_provided, b.receipt FROM client a JOIN payment b ON a.client_id=b.client_id  where confirmed=1 and approved=1");
         $users_payment = DB::select('select a.name,a.price_per_sms, a.phone_number, a.email, b.time, b.invoice, b.payment_id, b.transaction_code, b.method, b.amount, b.currency, b.sms_provided, b.receipt FROM client a JOIN payment b ON a.client_id=b.client_id where b.approved <>1');
         return view('payment.report')->with(array(
                     'payment' => array_shift($total),
                     'total_sms_remain' => $total_sms_remain,
                     'sms_sent' => $sms->total_sms,
-                    'users_payment' => $users_payment
+                    'users_payment' => $users_payment,
+                    'payments' => $payments
         ));
     }
 

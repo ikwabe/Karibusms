@@ -29,7 +29,7 @@
                 <div class="block clearfix m-b"> 
                     <h3>Incoming SMS</h3>
                     <br/>
-                    <table class="table">
+                    <table class="table dataTable">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -59,6 +59,11 @@
                             ?>
                         </tbody>
                     </table>
+                    <script src="<?= url('/') ?>/media/js/datatables/jquery.dataTables.min.js"></script>
+<link href="<?= url('/') ?>/media/css/table.css" rel="stylesheet">
+                    <script type="text/javascript">
+                        $('.dataTable').dataTable();
+                        </script>
                 </div>
 
 

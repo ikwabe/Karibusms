@@ -90,7 +90,7 @@ class MessageController extends Controller {
             $return = view('message.pending_sms')->with(array('sms' => $sms, 'gcm_id' => $this->gcmId()));
             return $return;
         } else {
-           echo 1;
+            echo 1;
         }
     }
 
@@ -511,7 +511,7 @@ class MessageController extends Controller {
     }
 
     public function mail() {
-
+        return view('message.mail');
         $mail = DB::table('request_mail')->where("client_id", $this->client_id)->first();
         if (empty($mail)) {
             return view('message.mail');
@@ -582,7 +582,12 @@ class MessageController extends Controller {
     public function incoming() {
 
         $data['messages'] = DB::table('incoming_message')->where('client_id', $this->client_id)->get();
-        return view('message.received_sms', $data);
+        return view('message.incoming_sms', $data);
+    }
+
+    public function app_requests() {
+        $data['messages'] = DB::table('requests')->where('client_id',session('client_id'))->orderBy('id','desc')->get();
+        return view('message.api_requests', $data);
     }
 
 }

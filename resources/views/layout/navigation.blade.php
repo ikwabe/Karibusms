@@ -46,12 +46,20 @@
                                     <li > 
                                         <a href="#sms"> <i class="fa fa-angle-right"></i> <span>SMS</span> </a>
                                     </li>
-                                    <li > 
+<!--                                    <li > 
                                         <a href="#email"> <i class="fa fa-angle-right"></i> <span>Email</span> </a> 
-                                    </li> 
+                                    </li> -->
                                     <li > 
                                         <a href="#incoming_sms"> <i class="fa fa-angle-right"></i> <span>Incoming SMS</span> </a> 
                                     </li> 
+                                    <?php
+                                    $developer=DB::table('developer_app')->where('client_id',session('client_id'))->first();
+                                    if(count($developer)>0){
+                                    ?>
+                                    <li > 
+                                        <a href="#app_requests"> <i class="fa fa-angle-right"></i> <span>API SMS Request</span> </a> 
+                                    </li> 
+                                    <?php } ?>
                                 </ul>
                             </li>
 
@@ -140,12 +148,12 @@
                                     </a>
                                     <ul class="nav bg" style="display: none;"> 
                                         <li> <a href="#payment_report" ><i class="fa fa-angle-right"></i> 
-                                                <span>Payments Statistics</span> </a> 
+                                                <span>Payments</span> </a> 
                                         </li>
                                         <li> 
                                             <a href="#user/statistics"> 
                                                 <i class="fa fa-angle-right"></i>
-                                                <span>User Statistics</span> </a> </li> 
+                                                <span>Users</span> </a> </li> 
                                         <li> 
                                             <a href="#user/notification"> 
                                                 <i class="fa fa-angle-right"></i>
@@ -154,6 +162,10 @@
                                             <a href="#user/email"> 
                                                 <i class="fa fa-angle-right"></i>
                                                 <span>Send Email Notification</span> </a> </li>
+                                               <li> 
+                                            <a href="#user/logs"> 
+                                                <i class="fa fa-angle-right"></i>
+                                                <span>Log Report</span> </a> </li>
                                     </ul>
                                 </li>
                                 <?php

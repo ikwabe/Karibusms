@@ -148,6 +148,8 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/send_email_dialog', 'MessageController@send_email_view');
     Route::get('/email', 'MessageController@mail');
     Route::get('/incoming_sms', 'MessageController@incoming');
+    Route::get('/app_requests', 'MessageController@app_requests');
+    
     Route::get('/pending_sms', 'MessageController@pendingSms');
     Route::get('/email_request', 'MessageController@request_mail');
     Route::get('/delete_message/{message_id}', 'MessageController@deleteMessage');
@@ -219,4 +221,4 @@ Route::auth();
   Route::get('/callback/{provider}', 'SocialController@callback');
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/home', 'HomeController@index');
