@@ -20,7 +20,7 @@ class SocialController extends Controller {
         $getInfo = Socialite::driver($provider)->user();
         $this->createUser($getInfo, $provider);
         // auth()->login($user);
-        
+
         return redirect()->to('/');
     }
 
@@ -34,7 +34,7 @@ class SocialController extends Controller {
         }
         $this->createLoginUser($users);
 
-        return redirect('/')->with('success', 'success');
+        return request()->ajax() ? 1 : redirect('/')->with('success', 'success');
     }
 
     public function createLoginUser($user) {
@@ -72,10 +72,11 @@ class SocialController extends Controller {
     }
 
     public function new_login() {
-        $getInfo=(object) [
-            'email'=>request('email'),
-            'name'=>request('name')
+        $getInfo = (object) [
+                    'email' => request('email'),
+                    'name' => request('name')
         ];
         return $this->createUser($getInfo, 'google');
     }
+
 }

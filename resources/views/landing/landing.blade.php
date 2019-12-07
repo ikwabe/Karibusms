@@ -28,13 +28,9 @@
                                                                     data: {id: profile.getId(), name: profile.getName(), photo: profile.getImageUrl(), email: profile.getEmail(), action: 'google'},
                                                                     dataType: "html",
                                                                     success: function (data) {
-                                                                        if (data == '1') {
+                                                                       
                                                                             window.location.reload();
-                                                                        } else if (data == '2') {
-                                                                            $('#status_message').html('Sorry, Your ShuleSoft account has been disabled. Please contact your Administrator or call us for more information').show();
-                                                                        } else {
-                                                                            $('#status_message').html('Sorry: This Email Address (' + profile.getEmail() + ') is not registered in ShuleSoft').show();
-                                                                        }
+                                                                      
                                                                     }
                                                                 });
                                                             }
