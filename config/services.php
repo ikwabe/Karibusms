@@ -32,7 +32,7 @@ return [
     'facebook' => [
         'client_id' => '278267052336362',
         'client_secret' => 'ed0a7391dee53fc9e0bab865d7c6f41e',
-        'redirect' => 'https://www.karibusms.com',
+        'redirect' => 'https://www.karibusms.com/callback/facebook',
     ],
     'google' => [
         'client_id' => '688185075515-8n990kovtjtjvfcfbdt6m5320kh9m5un.apps.googleusercontent.com',
