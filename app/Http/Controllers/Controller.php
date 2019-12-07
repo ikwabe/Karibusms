@@ -52,18 +52,18 @@ class Controller extends BaseController
     public static function get_category($id = null) {
 	$controller = new Controller();
 	$and_where = $id == null ? '' : ' AND category_id=' . $id;
-	return DB::select("select * from category where client_id='" . $controller->client_id . "' {$and_where}");
+	return DB::select("select * from category where client_id='" . session('client_id') . "' {$and_where}");
     }
 
     public static function count_all_people() {
 	$controller = new Controller();
-	$result = DB::select("select count(*) as result from subscriber_info where client_id='" . $controller->client_id . "' ");
+	$result = DB::select("select count(*) as result from subscriber_info where client_id='" . session('client_id'). "' ");
 	return array_shift($result)->result;
     }
 
     public static function user_info($client_id = null) {
 	$controller = new Controller();
-	$id = $client_id == NULL ? $controller->client_id : $client_id;
+	$id = $client_id == NULL ? session('client_id') : $client_id;
 
 	$sql = "select a.name,a.username,a.client_id,a.profile_pic,a.firstname,a.lastname,b.message_left,c.message_count FROM client a LEFT JOIN sms_status b ON a.client_id=b.client_id LEFT JOIN client_sent_message c ON c.client_id=a.client_id WHERE a.client_id={$id}";
 	$user = DB::select($sql);
