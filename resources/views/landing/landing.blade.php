@@ -8,7 +8,7 @@
 
         <div class="text-center wrapper"> 
             <div class="h4 text-muted m-t-sm">
-                Many Customers Love it and use it as a Way to send SMS easily</div>
+                Simple and cost effective way to send Bulk SMS to your contacts </div>
             <a href="<?= url('/') . '/' ?>signup" class="btn btn-lg btn-primary b-primary  m-sm">Sign Up</a><br/>
            OR Login with
         </div> 
@@ -218,7 +218,7 @@
                 </p> 
                 <div class="">
                     <h4 class="m-t-none">Android Mobile Application</h4>
-                    <p class="text-muted m-t-lg">Download <a href="https://goo.gl/APJaej" target="_blank" class="label label-info"> here</a> our Mobile app to send Free SMS from our platform to all your contacts  or just use <a class="label label-success" href="<?= url('/') . '/' ?>/dev">internet messages</a>  to send SMS  to your contacts.</p> </div> 
+                    <p class="text-muted m-t-lg">Download our Mobile app to send Free SMS from our platform to all your contacts  or just use <a class="label label-success" href="<?= url('/') . '/' ?>/dev">internet messages</a>  to send SMS  to your contacts.</p> </div> 
             </div>
             <div class="col-sm-4" data-ride="animated" data-animation="fadeInLeft" data-delay="600"> <p class="h3 m-b-lg"> <i class="fa fa-user fa-3x text-info"></i> </p> <div class=""> <h4 class="m-t-none">Login Anywhere with any Browser</h4> <p class="text-muted m-t-lg">You can easily access karibuSMS  application anywhere via your browser or android phone to share information via SMS. Your contacts will receive SMS by any kind of mobile phone. We also provide custom development to suite your needs as you wish.</p> </div> </div> 
             <div class="col-sm-4" data-ride="animated" data-animation="fadeInLeft" data-delay="900"> <p class="h3 m-b-lg"> <i class="fa fa-gears fa-3x text-info"></i> </p> <div class=""> 
