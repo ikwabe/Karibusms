@@ -49,38 +49,25 @@
                         </span>
                         <small class="text-muted">Totat SMS Sent</small> </a>
                 </div>
-
-                <div class="col-sm-6 col-md-4 padder-v b-r b-light"> 
-                    <span class="fa-stack fa-2x pull-left m-r-sm">
-                        <i class="fa fa-circle fa-stack-2x text-info"></i>
-                        <i class="fa fa-arrow-up fa-stack-1x text-white"></i> 
-                        <span class="easypiechart pos-abt easyPieChart" data-percent="100" data-line-width="4" data-track-color="#f5f5f5" data-scale-color="false" data-size="50" data-line-cap="butt" data-animate="3000" data-target="#firers" data-update="5000" style="width: 50px; height: 50px; line-height: 50px;">
-                            <canvas width="50" height="50"></canvas>
-                        </span> 
-                    </span>
-                    <a class="clear" href="#load_payments"> 
-                        <span class="h3 block m-t-xs">
-                            <strong id="firers">  </strong>
+                <?php
+                foreach ($today as $tday) {
+                    ?>
+                    <div class="col-sm-6 col-md-4 padder-v b-r b-light"> 
+                        <span class="fa-stack fa-2x pull-left m-r-sm">
+                            <i class="fa fa-circle fa-stack-2x text-info"></i>
+                            <i class="fa fa-arrow-up fa-stack-1x text-white"></i> 
+                            <span class="easypiechart pos-abt easyPieChart" data-percent="100" data-line-width="4" data-track-color="#f5f5f5" data-scale-color="false" data-size="50" data-line-cap="butt" data-animate="3000" data-target="#firers" data-update="5000" style="width: 50px; height: 50px; line-height: 50px;">
+                                <canvas width="50" height="50"></canvas>
+                            </span> 
                         </span>
-                        <small class="text-muted">Estimated Profit</small>
-                    </a>
-                </div>
-                <div class="col-sm-6 col-md-4 padder-v b-r b-light"> 
-                    <span class="fa-stack fa-2x pull-left m-r-sm">
-                        <i class="fa fa-circle fa-stack-2x text-danger"></i>
-                        <i class="fa fa-comments-o fa-stack-1x text-white"></i> 
-                        <span class="easypiechart pos-abt easyPieChart" data-percent="100" data-line-width="4" data-track-color="#f5f5f5" data-scale-color="false" data-size="50" data-line-cap="butt" data-animate="3000" data-target="#firers" data-update="5000" style="width: 50px; height: 50px; line-height: 50px;">
-                            <canvas width="50" height="50"></canvas>
-                        </span> 
-                    </span>
-                    <a class="clear" href="#"> 
-                        <span class="h3 block m-t-xs">
-                            <strong id="firers"></strong>
-                        </span>
-                        <small class="text-muted text-uc">SMS Remain</small>
-                    </a>
-                </div>
-
+                        <a class="clear" href="#load_payments"> 
+                            <span class="h3 block m-t-xs">
+                                <strong id="firers"> <?=$tday->count?> </strong>
+                            </span>
+                            <small class="text-muted"><?=$tday->from_smart==1 ?'Android SMS sent today':'Internet SMS sent today'?></small>
+                        </a>
+                    </div>
+                <?php } ?>
             </div> 
         </section>
     </header>
@@ -148,7 +135,7 @@
                             data: [
 <?php
 for ($p = 1; $p <= 12; $p++) {
-    echo isset($logs[0][$p]) ? $logs[0][$p] . ',' : 0;
+    echo isset($internet[0][$p]) && (int) $internet[0][$p] > 0 ? $internet[0][$p] . ',' : 0;
 }
 ?>
                             ]
@@ -159,7 +146,7 @@ for ($p = 1; $p <= 12; $p++) {
                             name: 'Android SMS',
                             data: [<?php
 for ($p = 1; $p <= 12; $p++) {
-    echo isset($logs[1][$p]) ? $logs[1][$p] . ',' : 0;
+    echo isset($android[1][$p]) && (int) $android[1][$p] > 0 ? $android[1][$p] . ',' : 0;
 }
 ?>]
 

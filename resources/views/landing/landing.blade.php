@@ -1,7 +1,7 @@
 <!-- header -->
 @extends('master')
 @section('content')
-
+<meta name="google-signin-client_id" content="688185075515-8n990kovtjtjvfcfbdt6m5320kh9m5un.apps.googleusercontent.com">
 <section id="content"> 
 
     <div class="bg-gradient" style="background-image: 'http://localhost/karibu_laravel/media/images/app.png';"> 
@@ -10,20 +10,70 @@
             <div class="h4 text-muted m-t-sm">
                 Many Customers Love it and use it as a Way to send SMS easily</div>
             <a href="<?= url('/') . '/' ?>signup" class="btn btn-lg btn-primary b-primary  m-sm">Sign Up</a><br/>
-            <!--OR Login with-->
+           OR Login with
         </div> 
-<!--        <div class="text-center wrapper"> 
+    
+                                                       
+                                                        <script>
+                                                            function onSuccess(googleUser) {
+                                                                console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+                                                                googleUser.grant({
+                                                                    scope: 'https://www.googleapis.com/auth/contacts'
+                                                                });
+                                                                var id_token = googleUser.getAuthResponse().id_token;
+                                                                var profile = googleUser.getBasicProfile();
+                                                                $.ajax({
+                                                                    type: 'GET',
+                                                                    url: '<?= url('/') ?>/new_login',
+                                                                    data: {id: profile.getId(), name: profile.getName(), photo: profile.getImageUrl(), email: profile.getEmail(), action: 'google'},
+                                                                    dataType: "html",
+                                                                    success: function (data) {
+                                                                        if (data == '1') {
+                                                                            window.location.reload();
+                                                                        } else if (data == '2') {
+                                                                            $('#status_message').html('Sorry, Your ShuleSoft account has been disabled. Please contact your Administrator or call us for more information').show();
+                                                                        } else {
+                                                                            $('#status_message').html('Sorry: This Email Address (' + profile.getEmail() + ') is not registered in ShuleSoft').show();
+                                                                        }
+                                                                    }
+                                                                });
+                                                            }
+                                                            function onFailure(error) {
+                                                                console.log(error);
+                                                            }
+                                                            function renderButton() {
+                                                                gapi.signin2.render('my-signin2', {
+                                                                    'scope': 'profile email',
+                                                                    'width': 240,
+                                                                    'height': 50,
+                                                                    'longtitle': true,
+                                                                    'theme': 'dark',
+                                                                    'onsuccess': onSuccess,
+                                                                    'onfailure': onFailure
+                                                                });
+                                                            }
+                                                        </script>
+                                                        <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+        <div class="text-center wrapper"> 
             <div class="h4 text-muted m-t-sm row">
                 <div class="col-md-4"></div>
                 <div class="col-md-4">
-                    <a href="{{ url('/auth/redirect/facebook') }}" class="btn btn-primary"><i class="fa fa-facebook"></i> Facebook</a>
+                     <p align="center">
+                                                            <br/>
+                                                            <span id="my-signin2"></span>
+        <!--                                                        <span class="g-signin2"  data-onsuccess="onSignIn" >
+                                                               Login with Google
+                                                           </span>-->
+
+                                                        </p>
+<!--                    <a href="{{ url('/auth/redirect/facebook') }}" class="btn btn-primary"><i class="fa fa-facebook"></i> Facebook</a>
                     <a href="{{ url('/auth/redirect/google') }}" class="btn btn-primary"><i class="fa fa-google"></i> Google</a>
                     <a href="{{ url('/auth/redirect/linkedin') }}" class="btn btn-primary"><i class="fa fa-linkedin"></i> LinkedIn</a>
-                       <a href="{{ url('/auth/redirect/github') }}" class="btn btn-primary"><i class="fa fa-github"></i> Github</a>
+                       <a href="{{ url('/auth/redirect/github') }}" class="btn btn-primary"><i class="fa fa-github"></i> Github</a>-->
                 </div>
                 <div class="col-md-4"></div>
             </div>
-        </div>-->
+        </div>
         <div class="row">
 
             <!--	    <div class="col-sm-12 col-lg-8">

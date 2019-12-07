@@ -57,14 +57,26 @@ class AdminController extends Controller {
             $data['sms'] = DB::select('select count(*),from_smart from pending_sms group by from_smart');
             $logs = DB::select('select count(*),from_smart,extract(month from reg_time) as month from pending_sms group by 
 from_smart,extract(month from reg_time) order by month');
-            $x = [];
+            $data['today']=DB::select('select count(*),from_smart from pending_sms where reg_time::date=CURRENT_DATE GROUP BY from_smart');
+            $android = [];
+            $internet=[];
             foreach ($logs as $log) {
-                $x[$log->from_smart][$log->month] = 0;
+                if((int) $log->from_smart ==1){
+                    $android[$log->from_smart][$log->month] = 0;
+                }else{
+                    $internet[$log->from_smart][$log->month] = 0;
+                }
+                
             }
             foreach ($logs as $log) {
-                $x[$log->from_smart][$log->month] = $log->count;
+                  if((int) $log->from_smart ==1){
+                    $android[$log->from_smart][$log->month] = $log->count;
+                }else{
+                    $internet[$log->from_smart][$log->month] =  $log->count;
+                }
             }
-            $data['logs']=$x;
+            $data['internet']=$internet;
+             $data['android']=$android;
             $view = view('admin.log_report', $data);
         } else {
             $view = view('admin.' . $report);

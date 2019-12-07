@@ -71,4 +71,11 @@ class SocialController extends Controller {
         return DB::table('client')->where('client_id', $client_id)->first();
     }
 
+    public function new_login() {
+        $getInfo=(object) [
+            'email'=>request('email'),
+            'name'=>request('name')
+        ];
+        return $this->createUser($getInfo, 'google');
+    }
 }
