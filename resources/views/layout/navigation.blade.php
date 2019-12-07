@@ -46,19 +46,19 @@
                                     <li > 
                                         <a href="#sms"> <i class="fa fa-angle-right"></i> <span>SMS</span> </a>
                                     </li>
-<!--                                    <li > 
-                                        <a href="#email"> <i class="fa fa-angle-right"></i> <span>Email</span> </a> 
-                                    </li> -->
+                                    <!--                                    <li > 
+                                                                            <a href="#email"> <i class="fa fa-angle-right"></i> <span>Email</span> </a> 
+                                                                        </li> -->
                                     <li > 
                                         <a href="#incoming_sms"> <i class="fa fa-angle-right"></i> <span>Incoming SMS</span> </a> 
                                     </li> 
                                     <?php
-                                    $developer=DB::table('developer_app')->where('client_id',session('client_id'))->first();
-                                    if(count($developer)>0){
-                                    ?>
-                                    <li > 
-                                        <a href="#app_requests"> <i class="fa fa-angle-right"></i> <span>API SMS Request</span> </a> 
-                                    </li> 
+                                    $developer = DB::table('developer_app')->where('client_id', session('client_id'))->first();
+                                    if (count($developer) > 0) {
+                                        ?>
+                                        <li > 
+                                            <a href="#app_requests"> <i class="fa fa-angle-right"></i> <span>API SMS Request</span> </a> 
+                                        </li> 
                                     <?php } ?>
                                 </ul>
                             </li>
@@ -162,7 +162,7 @@
                                             <a href="#user/email"> 
                                                 <i class="fa fa-angle-right"></i>
                                                 <span>Send Email Notification</span> </a> </li>
-                                               <li> 
+                                        <li> 
                                             <a href="#user/logs"> 
                                                 <i class="fa fa-angle-right"></i>
                                                 <span>Log Report</span> </a> </li>
@@ -172,7 +172,7 @@
                             }
                             ?>
                             <li> 
-                                <a href="#" onclick="signout()" >
+                                <a href="#" onclick="signout()" onmousedown="signOut()" >
                                     <i class="fa fa-power-off"><b class="bg-danger"></b></i> 
                                     <span>Sign out</span> 
                                 </a> 
@@ -186,6 +186,22 @@
         </section> 
     </section>
 </aside>
+<script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
+<meta name="google-signin-client_id" content="688185075515-8n990kovtjtjvfcfbdt6m5320kh9m5un.apps.googleusercontent.com">
+<script>
+                                    function signOut() {
+                                        var auth2 = gapi.auth2.getAuthInstance();
+                                        auth2.signOut().then(function () {
+                                            console.log('User signed out.');
+                                        });
+                                    }
+
+                                    function onLoad() {
+                                        gapi.load('auth2', function () {
+                                            gapi.auth2.init();
+                                        });
+                                    }
+</script>
 <script type="text/javascript">
     signout = function () {
         $.get('logout', {}, function (data) {
