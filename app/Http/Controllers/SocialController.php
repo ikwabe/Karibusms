@@ -8,6 +8,7 @@ use Validator,
     Response,
     File;
 use Socialite;
+use DB;
 use App\User;
 
 class SocialController extends Controller {
