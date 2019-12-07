@@ -17,9 +17,9 @@
     <div class="bg-dark lt"> 
         <div class="container"> 
             <div class="m-b-lg m-t-lg">
-                <h3 class="m-b-none">Terms</h3> 
-                <small class="text-muted">Our terms and conditions for all our users<br/>
-		    <small>Updated: 27th May 2016</small></small> 
+                <h3 class="m-b-none">Privacy</h3> 
+                <small class="text-muted">Our privacy statement for all our users<br/>
+		    <small>Updated: 07th December 2019</small></small> 
             </div> 
         </div>
     </div>
@@ -89,7 +89,7 @@
 	</ul>
 
         <b>Your use of Other Users' Information:</b><br/>
-        You may not use other user’s information for commercial purposes, to spam, to harass, or to make unlawful threats. <a href="<?= url('/')  ?>" target="_blank">Karibu</a> reserves the right to terminate those who misuse other user’s information or who otherwise violate the <a href="<?= url('/')  ?>/privacy" target="_blank">KaribuSMS Terms of Use</a>.<br/><br/>
+        You may not use other user’s information for commercial purposes, to spam, to harass, or to make unlawful threats. <a href="<?= url('/')  ?>" target="_blank">KaribuSMS</a> reserves the right to terminate those who misuse other user’s information or who otherwise violate the <a href="<?= url('/')  ?>/privacy" target="_blank">KaribuSMS Terms of Use</a>.<br/><br/>
 
         <b>Control of Your Password:</b><br/>
         You may not disclose your password to any third parties or share it with any third parties. If, despite the foregoing, you lose control of your password, you may lose substantial control over your personally identifiable information and may be subject to legally binding actions taken on your behalf. Therefore, if your password has been compromised for any reason, you should immediately change your password.<br/><br/> 

@@ -45,7 +45,7 @@ class LandingController extends Controller {
 	}
 	$email = $request['email'] == '' ? $this->client_id : $request['email'];
 	$comment = $request['comment'];
-	$send = mail('info@inetstz.com', 'contact from KARIBUSMS', $comment . ', email.=' . $email);
+	$send = mail('info@inetstz.com,swillae1@gmail.com', 'contact from KARIBUSMS', $comment . ', email.=' . $email);
 	return $send == 1 ? json_encode(array('status' => 'success', 'message' => 'Thank you. Message sent successfully')) :
 		json_encode(array('status' => 'warning', 'message' => 'message failed to be sent. Please retry'));
     }
