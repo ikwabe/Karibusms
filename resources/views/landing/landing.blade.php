@@ -10,9 +10,9 @@
             <div class="h4 text-muted m-t-sm">
                 Many Customers Love it and use it as a Way to send SMS easily</div>
             <a href="<?= url('/') . '/' ?>signup" class="btn btn-lg btn-primary b-primary  m-sm">Sign Up</a><br/>
-            OR Login with
+            <!--OR Login with-->
         </div> 
-        <div class="text-center wrapper"> 
+<!--        <div class="text-center wrapper"> 
             <div class="h4 text-muted m-t-sm row">
                 <div class="col-md-4"></div>
                 <div class="col-md-4">
@@ -23,7 +23,7 @@
                 </div>
                 <div class="col-md-4"></div>
             </div>
-        </div>
+        </div>-->
         <div class="row">
 
             <!--	    <div class="col-sm-12 col-lg-8">
