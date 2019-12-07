@@ -20,6 +20,7 @@ class SocialController extends Controller {
         $getInfo = Socialite::driver($provider)->user();
         $this->createUser($getInfo, $provider);
         // auth()->login($user);
+        
         return redirect()->to('/');
     }
 
