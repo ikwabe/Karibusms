@@ -1,7 +1,7 @@
 <!-- header -->
 @extends('master')
 @section('content')
-<meta name="google-signin-client_id" content="688185075515-8n990kovtjtjvfcfbdt6m5320kh9m5un.apps.googleusercontent.com">
+
 <section id="content"> 
 
     <div class="bg-gradient" style="background-image: 'http://localhost/karibu_laravel/media/images/app.png';"> 
@@ -50,6 +50,7 @@
                                                             }
                                                         </script>
                                                         <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+                                                        
         <div class="text-center wrapper"> 
             <div class="h4 text-muted m-t-sm row">
                 <div class="col-md-4"></div>

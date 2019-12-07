@@ -16,6 +16,7 @@
         <link href="<?= url('/') ?>/media/images/logo.png" rel="shortcut icon" type="image/x-icon" />
         <!--    <meta name="google-translate-customization" content="f08fefcb14c1447d-a1f03246bc4214cf-gecf7d7142d3c86be-11"></meta>
         -->
+        <meta name="google-signin-client_id" content="688185075515-8n990kovtjtjvfcfbdt6m5320kh9m5un.apps.googleusercontent.com">
         <meta name="google-translate-customization" content="AIzaSyAEswiv76lGpmcCBQC7yAmyzZzvHOnve_Y"></meta>
         <!--    
             <meta name="google-site-verification" content="+nxGUDJ4QpAZ5l9Bsjdi102tLVC21AIh5d1Nl23908vVuFHs34="/>-->    <!--<script language="JavaScript" src="http://www.geoplugin.net/javascript.gp" type="text/javascript"></script>--> 
