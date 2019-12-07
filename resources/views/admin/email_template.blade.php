@@ -16,12 +16,12 @@
 	    <div style="width:100%;padding:24px 0 16px 0;background-color:#f5f5f5;text-align:center">
 		<div style="display:inline-block;width:90%;max-width:680px;min-width:280px;text-align:left;font-family:Roboto,Arial,Helvetica,sans-serif">
 		    <?php
-		    $user = App\Http\Controllers\Controller::user_info();
-		    $link = 'media/images/business/' . $user->client_id . '/' . $user->profile_pic;
+		  
+		    $link = 'media/images/business/' . $client->client_id . '/' . $client->profile_pic;
 		    $path = is_file($link) ? url('/') . '/' . $link : url('/') . '/media/images/business/0/default.png';
 		    ?>
 		    <p style="padding-left:20px;vertical-align:middle">
-			<b><?=  ucfirst($user->name)?></b>
+			<b><?=  ucfirst($client->name)?></b>
 		    </p>
 		    <div style="height:0px" dir="ltr" class="adM"></div>
 		    <div style="display:block;padding:0 2px" class="adM">
