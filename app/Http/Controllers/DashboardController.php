@@ -15,30 +15,32 @@ class DashboardController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-	//
-	return $this->statistics('home_ajax');
+        //
+        return $this->statistics('home_ajax');
     }
 
     public function show_page() {
-	if (session('client_id') == null) {
-	    return view('landing.landing');
-	} else {
-	    return $this->statistics('home');
-	}
+        if (session('client_id') == null) {
+            return view('landing.landing');
+        } else {
+            return $this->statistics('home');
+        }
     }
 
     public function statistics($page) {
-	$user = Controller::user_info();
-	$total_people = Controller::count_all_people();
+        if ((int) session('client_id') > 0) {
+            $user = Controller::user_info(session('client_id'));
+            $total_people = Controller::count_all_people();
 
-	$pending = DB::table('pending_sms')
-			->where('client_id', $this->client_id)
-			->where('status', 0)->get();
+            $pending = DB::table('pending_sms')
+                            ->where('client_id', $this->client_id)
+                            ->where('status', 0)->get();
 
-	$pending_sms = count($pending);
-	$sms_sent = DB::table('pending_sms')->where('client_id', $this->client_id)->count();
-	return view('dashboard.' . $page)->with(array
-		    ('user' => $user, 'total_people' => $total_people, 'pending_sms' => $pending_sms, 'sms_sent' => $sms_sent));
+            $pending_sms = count($pending);
+            $sms_sent = DB::table('pending_sms')->where('client_id', $this->client_id)->count();
+            return view('dashboard.' . $page)->with(array
+                        ('user' => $user, 'total_people' => $total_people, 'pending_sms' => $pending_sms, 'sms_sent' => $sms_sent));
+        }
     }
 
     /**
@@ -47,7 +49,7 @@ class DashboardController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function create() {
-	//
+        //
     }
 
     /**
@@ -57,7 +59,7 @@ class DashboardController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
-	//
+        //
     }
 
     /**
@@ -67,7 +69,7 @@ class DashboardController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function show($id) {
-	//
+        //
     }
 
     /**
@@ -77,7 +79,7 @@ class DashboardController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function edit($id) {
-	//
+        //
     }
 
     /**
@@ -88,7 +90,7 @@ class DashboardController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id) {
-	//
+        //
     }
 
     /**
@@ -98,7 +100,7 @@ class DashboardController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function destroy($id) {
-	//
+        //
     }
 
 }
