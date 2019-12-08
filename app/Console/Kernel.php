@@ -28,17 +28,18 @@ class Kernel extends ConsoleKernel {
         // $schedule->command('inspire')
         //          ->hourly();
         $schedule->call(function () {
-            $emails = DB::select(' select * from emails where status=0 limit 10');
+            $emails = DB::select(' select * from emails where status=0 offset 10 limit 10');
             foreach ($emails as $mail) {
-                $email=$mail->email;
-                $subject=$mail->subject;
-                $attachment=$mail->attachment;
+                $email = $mail->email;
+                $subject = $mail->subject;
+                $attachment = $mail->attachment;
                 $client = DB::table('client')->where('email', $mail->email)->first();
-                 Mail::send('admin.email_template', ['content' => $mail->content, 'client' => $client], function ($m) use ($email, $subject, $attachment) {
-                            $m->from('info@karibusms.com', 'karibuSMS');
-                            $m->to($email)->subject($subject);
-                            $attachment == null ? '' : $m->attach($attachment);
-                        });
+                Mail::send('admin.email_template', ['content' => $mail->content, 'client' => $client], function ($m) use ($email, $subject, $attachment) {
+                    $m->from('info@karibusms.com', 'karibuSMS');
+                    $m->to($email)->subject($subject);
+                    $attachment == null ? '' : $m->attach($attachment);
+                });
+                DB::table("update emails set status=1 where email='" . $mail->email . "'");
             }
         })->everyMinute();
     }
