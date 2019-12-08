@@ -31,7 +31,7 @@
 			<div style="padding:24px 32px 24px 32px;background:#fff;border-right:1px solid #eaeaea;border-left:1px solid #eaeaea" dir="ltr">
 			    <div style="font-size:14px;line-height:18px;color:#444">
 				<div style="height:20px"></div>
-				<?=$content ?>
+				<?= nl2br($content) ?>
 			    </div>
 			    <div style="height:20px"></div>
 			    <div>

@@ -63,12 +63,12 @@ $sender_name_description = 'This is your username and is the name which people w
 	    </div> 
 	    <div class="form-group"> <label class="col-lg-2 control-label">Subject</label>
 		<div class="col-lg-10"> 
-		    <input type="text" class="form-control" placeholder="Type your subject" id="subject_area"/>
+                    <input type="text" class="form-control" name="subject" placeholder="Type your subject" id="subject_area"/>
 		</div>
 	    </div>
 	    <div class="form-group"> <label class="col-lg-2 control-label">Message</label>
 		<div class="col-lg-10"> 
-		    <textarea class="form-control" placeholder="Type your message" id="editor"></textarea>
+                    <textarea class="form-control" name="content" placeholder="Type your message" id="content_area"></textarea>
 		</div>
 	    </div> 
 
@@ -115,7 +115,7 @@ $sender_name_description = 'This is your username and is the name which people w
 		{
 		    category: category_id,
 		    content: content,
-		    subject: $('#subject').val(),
+		    subject: $('#subject_area').val(),
 			    message_type: message_type
 		},
 	function (data) {
