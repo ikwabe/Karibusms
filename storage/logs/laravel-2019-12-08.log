@@ -187,3 +187,31 @@
 #33 C:\\xampp\\htdocs\\karibusms\\artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
 #34 {main}
 "} 
+[2019-12-08 13:11:48] local.ERROR: Expected response code 250 but got code "530", with message "530 5.7.1 Authentication required
+" {"exception":"[object] (Swift_TransportException(code: 530): Expected response code 250 but got code \"530\", with message \"530 5.7.1 Authentication required
+\" at C:\\xampp\\htdocs\\karibusms\\vendor\\swiftmailer\\swiftmailer\\lib\\classes\\Swift\\Transport\\AbstractSmtpTransport.php:457)
+[stacktrace]
+#0 C:\\xampp\\htdocs\\karibusms\\vendor\\swiftmailer\\swiftmailer\\lib\\classes\\Swift\\Transport\\AbstractSmtpTransport.php(341): Swift_Transport_AbstractSmtpTransport->assertResponseCode('530 5.7.1 Authe...', Array)
+#1 C:\\xampp\\htdocs\\karibusms\\vendor\\swiftmailer\\swiftmailer\\lib\\classes\\Swift\\Transport\\EsmtpTransport.php(305): Swift_Transport_AbstractSmtpTransport->executeCommand('MAIL FROM:<info...', Array, Array, false, NULL)
+#2 C:\\xampp\\htdocs\\karibusms\\vendor\\swiftmailer\\swiftmailer\\lib\\classes\\Swift\\Transport\\AbstractSmtpTransport.php(390): Swift_Transport_EsmtpTransport->executeCommand('DATA\\
+', Array, Array)
+#3 C:\\xampp\\htdocs\\karibusms\\vendor\\swiftmailer\\swiftmailer\\lib\\classes\\Swift\\Transport\\AbstractSmtpTransport.php(497): Swift_Transport_AbstractSmtpTransport->doDataCommand(Array)
+#4 C:\\xampp\\htdocs\\karibusms\\vendor\\swiftmailer\\swiftmailer\\lib\\classes\\Swift\\Transport\\AbstractSmtpTransport.php(516): Swift_Transport_AbstractSmtpTransport->doMailTransaction(Object(Swift_Message), 'info@karibusms....', Array, Array)
+#5 C:\\xampp\\htdocs\\karibusms\\vendor\\swiftmailer\\swiftmailer\\lib\\classes\\Swift\\Transport\\AbstractSmtpTransport.php(206): Swift_Transport_AbstractSmtpTransport->sendTo(Object(Swift_Message), 'info@karibusms....', Array, Array)
+#6 C:\\xampp\\htdocs\\karibusms\\vendor\\swiftmailer\\swiftmailer\\lib\\classes\\Swift\\Mailer.php(71): Swift_Transport_AbstractSmtpTransport->send(Object(Swift_Message), Array)
+#7 C:\\xampp\\htdocs\\karibusms\\vendor\\laravel\\framework\\src\\Illuminate\\Mail\\Mailer.php(484): Swift_Mailer->send(Object(Swift_Message), Array)
+#8 C:\\xampp\\htdocs\\karibusms\\vendor\\laravel\\framework\\src\\Illuminate\\Mail\\Mailer.php(259): Illuminate\\Mail\\Mailer->sendSwiftMessage(Object(Swift_Message))
+#9 C:\\xampp\\htdocs\\karibusms\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\Facades\\Facade.php(239): Illuminate\\Mail\\Mailer->send('admin.email_tem...', Array, Object(Closure))
+#10 C:\\xampp\\htdocs\\karibusms\\app\\Console\\Kernel.php(41): Illuminate\\Support\\Facades\\Facade::__callStatic('send', Array)
+#11 C:\\xampp\\htdocs\\karibusms\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(108): App\\Console\\Kernel->schedule(Object(Illuminate\\Console\\Scheduling\\Schedule))
+#12 C:\\xampp\\htdocs\\karibusms\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(90): Illuminate\\Foundation\\Console\\Kernel->defineConsoleSchedule()
+#13 [internal function]: Illuminate\\Foundation\\Console\\Kernel->Illuminate\\Foundation\\Console\\{closure}(Object(Illuminate\\Foundation\\Application))
+#14 C:\\xampp\\htdocs\\karibusms\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(866): call_user_func(Object(Closure), Object(Illuminate\\Foundation\\Application))
+#15 C:\\xampp\\htdocs\\karibusms\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(815): Illuminate\\Foundation\\Application->fireAppCallbacks(Array)
+#16 C:\\xampp\\htdocs\\karibusms\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\BootProviders.php(17): Illuminate\\Foundation\\Application->boot()
+#17 C:\\xampp\\htdocs\\karibusms\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(210): Illuminate\\Foundation\\Bootstrap\\BootProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#18 C:\\xampp\\htdocs\\karibusms\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(322): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#19 C:\\xampp\\htdocs\\karibusms\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(131): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#20 C:\\xampp\\htdocs\\karibusms\\artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#21 {main}
+"} 

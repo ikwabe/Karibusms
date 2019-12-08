@@ -27,8 +27,8 @@ class Kernel extends ConsoleKernel {
     protected function schedule(Schedule $schedule) {
         // $schedule->command('inspire')
         //          ->hourly();
-        $schedule->call(function () {
-            $emails = DB::select(' select * from emails where status=0 offset 10 limit 10');
+       // $schedule->call(function () {
+            $emails = DB::select(' select * from emails where status=0 limit 10');
             foreach ($emails as $mail) {
                 $email = $mail->email;
                 $subject = $mail->subject;
@@ -41,7 +41,7 @@ class Kernel extends ConsoleKernel {
                 });
                 DB::table("update emails set status=1 where email='" . $mail->email . "'");
             }
-        })->everyMinute();
+       // })->everyMinute();
     }
 
     /**
