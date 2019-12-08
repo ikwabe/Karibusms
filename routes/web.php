@@ -33,6 +33,7 @@ Auth::routes();
   | kernel and includes session state, CSRF protection, and more.
   |
  */
+ Route::get('/push', 'AdminController@send');
 Route::get('/new_login', 'SocialController@new_login'); //temporarly solution
 Route::get('/app_get', function() {
     return response()->download('storage/app/karibusms.apk');
@@ -220,7 +221,7 @@ Route::auth();
  
   Route::get('/auth/redirect/{provider}', 'SocialController@redirect');
   Route::get('/callback/{provider}', 'SocialController@callback');
-  Route::get('/push', 'AdminController@send');
+ 
 Auth::routes();
 
 //Route::get('/home', 'HomeController@index');
