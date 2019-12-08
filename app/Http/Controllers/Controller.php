@@ -87,12 +87,14 @@ class Controller extends BaseController {
     }
 
     public function sendEmail($email, $subject, $message, $attachment = null) {
-        $client = DB::table('client')->where('email', $email)->first();
-        return Mail::send('admin.email_template', ['content' => $message, 'client' => $client], function ($m) use ($email, $subject, $attachment) {
-                    $m->from('info@karibusms.com', 'karibuSMS');
-                    $m->to($email)->subject($subject);
-                    $attachment == null ? '' : $m->attach($attachment);
-                });
+       
+        return DB::table('emails')->insert([
+                    'subject' => $subject,
+                    'email' => $email,
+                    'content' => $message,
+                    'attachment' => $attachment
+        ]);
+  
     }
 
     public function sendSms($phone_number, $message, $message_type = NULL) {

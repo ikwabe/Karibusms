@@ -232,7 +232,7 @@ from_smart,extract(month from reg_time) order by month');
         if ($type == 1) {
             $clients = $this->getClients(request('category'));
             foreach ($clients as $client) {
-                $this->sendEmail($client->email, request('subject'), nl2br(request('content')));
+                $this->sendEmail($client->email, request('subject'),request('content'));
             }
             echo json_encode(array(
                 'message' => 'Email Sent Successfully',
