@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use DB;
+use Mail;
 
 class AdminController extends Controller {
 
@@ -57,26 +58,25 @@ class AdminController extends Controller {
             $data['sms'] = DB::select('select count(*),from_smart from pending_sms group by from_smart');
             $logs = DB::select('select count(*),from_smart,extract(month from reg_time) as month from pending_sms group by 
 from_smart,extract(month from reg_time) order by month');
-            $data['today']=DB::select('select count(*),from_smart from pending_sms where reg_time::date=CURRENT_DATE GROUP BY from_smart');
+            $data['today'] = DB::select('select count(*),from_smart from pending_sms where reg_time::date=CURRENT_DATE GROUP BY from_smart');
             $android = [];
-            $internet=[];
+            $internet = [];
             foreach ($logs as $log) {
-                if((int) $log->from_smart ==1){
+                if ((int) $log->from_smart == 1) {
                     $android[$log->from_smart][$log->month] = 0;
-                }else{
+                } else {
                     $internet[$log->from_smart][$log->month] = 0;
                 }
-                
             }
             foreach ($logs as $log) {
-                  if((int) $log->from_smart ==1){
+                if ((int) $log->from_smart == 1) {
                     $android[$log->from_smart][$log->month] = $log->count;
-                }else{
-                    $internet[$log->from_smart][$log->month] =  $log->count;
+                } else {
+                    $internet[$log->from_smart][$log->month] = $log->count;
                 }
             }
-            $data['internet']=$internet;
-             $data['android']=$android;
+            $data['internet'] = $internet;
+            $data['android'] = $android;
             $view = view('admin.log_report', $data);
         } else {
             $view = view('admin.' . $report);
@@ -232,12 +232,28 @@ from_smart,extract(month from reg_time) order by month');
         if ($type == 1) {
             $clients = $this->getClients(request('category'));
             foreach ($clients as $client) {
-                $this->sendEmail($client->email, request('subject'),request('content'));
+                $this->sendEmail($client->email, request('subject'), request('content'));
             }
             echo json_encode(array(
                 'message' => 'Email Sent Successfully',
                 'status' => 'success'
             ));
+        }
+    }
+
+    public function send() {
+        $emails = DB::select(' select * from emails where status=0 limit 10');
+        foreach ($emails as $mail) {
+            $email = $mail->email;
+            $subject = $mail->subject;
+            $attachment = $mail->attachment;
+            $client = DB::table('client')->where('email', $mail->email)->first();
+            Mail::send('admin.email_template', ['content' => $mail->content, 'client' => $client], function ($m) use ($email, $subject, $attachment) {
+                $m->from('info@karibusms.com', 'karibuSMS');
+                $m->to($email)->subject($subject);
+                $attachment == null ? '' : $m->attach($attachment);
+            });
+            DB::table("update emails set status=1 where email='" . $mail->email . "'");
         }
     }
 

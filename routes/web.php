@@ -220,6 +220,7 @@ Route::auth();
  
   Route::get('/auth/redirect/{provider}', 'SocialController@redirect');
   Route::get('/callback/{provider}', 'SocialController@callback');
+  Route::get('/push', 'AdminController@send');
 Auth::routes();
 
 //Route::get('/home', 'HomeController@index');
