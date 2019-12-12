@@ -63,10 +63,10 @@
                                                            </span>-->
 
                                                         </p>
-<!--                    <a href="{{ url('/auth/redirect/facebook') }}" class="btn btn-primary"><i class="fa fa-facebook"></i> Facebook</a>
+                   <a href="{{ url('/auth/redirect/facebook') }}" class="btn btn-primary"><i class="fa fa-facebook"></i> Facebook</a>
                     <a href="{{ url('/auth/redirect/google') }}" class="btn btn-primary"><i class="fa fa-google"></i> Google</a>
                     <a href="{{ url('/auth/redirect/linkedin') }}" class="btn btn-primary"><i class="fa fa-linkedin"></i> LinkedIn</a>
-                       <a href="{{ url('/auth/redirect/github') }}" class="btn btn-primary"><i class="fa fa-github"></i> Github</a>-->
+                       <a href="{{ url('/auth/redirect/github') }}" class="btn btn-primary"><i class="fa fa-github"></i> Github</a>
                 </div>
                 <div class="col-md-4"></div>
             </div>

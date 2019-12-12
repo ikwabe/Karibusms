@@ -242,7 +242,7 @@ from_smart,extract(month from reg_time) order by month');
     }
 
     public function send() {
-        $emails = DB::select(' select * from emails where status=0 limit 10');
+        $emails = DB::select('select * from emails where status=0 limit 10');
         foreach ($emails as $mail) {
             $email = $mail->email;
             $subject = $mail->subject;
