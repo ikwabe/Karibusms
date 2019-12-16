@@ -242,7 +242,7 @@ class PaymentController extends Controller {
                     . '<p>cost per SMS ' . SMS_PRICE . '</p>'
                     . 'Kindly login into karibusms.com to approve payments <br/>'
                     . 'Thank you';
-            $this->sendEmail('swillae1@gmail.com,amani@shulesoft.com', $subject, $message);
+            $this->sendEmail('swillae1@gmail.com', $subject, $message);
         } else {
             $invoice = $check->invoice;
             $this->currency = $check->currency;
