@@ -1,6 +1,7 @@
-@extends('layouts.app')
+@extends('master')
 
 @section('content')
+<h3 style="margin-top: 5em;"></h3>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
