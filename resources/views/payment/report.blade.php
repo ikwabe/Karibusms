@@ -63,7 +63,7 @@
                                 <td><?= $client->method ?></td>
                                 <td><?= $client->transaction_code ?></td>
                                 <td><?= number_format($client->amount) ?></td>
-                                <td><?= ceil($client->amount / (int) $client->price_per_sms >0 ? $client->price_per_sms: 1) ?></td> 
+                                <td><?php //ceil($client->amount / (int) $client->price_per_sms >0 ? $client->price_per_sms: 1) ?></td> 
                                 <td><a href="<?= url('/download_file') ?>/<?= $client->payment_id ?>?tag=invoice" target="_blank" title="Download Invoice">
                                         <i class="fa fa-download text-success text-active"></i>
                                         <i class="fa fa-download text-success text"></i></a> </td>
