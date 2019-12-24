@@ -56,7 +56,10 @@ class PaymentController extends Controller {
                 exit;
             }
         } else {
-            DB::table('payment')->insertGetId($input, "payment_id");
+            $array=[
+               "currency"=>request('currency'), "amount"=>request("amount"), "transaction_code"=>request("transaction_code"), "cost_per_sms"=>request("cost_per_sms"), "method"=>request("method"), "client_id"=>request("client_id"), "confirmed"=>request("confirmed"), "staff_id_approved"=>request("staff_id_approved"), "approved"=>request("approved"), "payment_per_sms"=>request("payment_per_sms"), "sms_provided"=>request("sms_provided")
+            ];
+            DB::table('payment')->insert($array);
             $subject = 'karibuSMS Payment Accepted';
             $client = DB::table('client')->where('client_id', $request->client_id)->first();
             $message = 'Hello ' . $client->email . ' ,<br/>'
