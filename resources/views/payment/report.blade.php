@@ -49,6 +49,40 @@
                             <th>Action</th>
                         </tr> 
                     </thead> 
+                    <tbody>
+                        <?php
+                        $total = 0;
+                        foreach ($users_payment as $client) {
+                            $total += $client->amount;
+                            $price=(int)  $client->price_per_sms > 0 ?  $client->price_per_sms : 1;
+                            ?>
+                            <tr>
+                                <td><?= $client->name ?></td>
+                                <td><?= $client->email ?></td>
+                                <td><?= $client->phone_number ?></td> 
+                                <td><?= date('d M Y', strtotime($client->time)) ?></td>
+                                <td><?= $client->method ?></td>
+                                <td><?= $client->transaction_code ?></td>
+                                <td><?= number_format($client->amount) ?></td>
+                                <td><?= ceil($client->amount / $price) ?></td> 
+                                <td><a href="<?= url('/download_file') ?>/<?= $client->payment_id ?>?tag=invoice" target="_blank" title="Download Invoice">
+                                        <i class="fa fa-download text-success text-active"></i>
+                                        <i class="fa fa-download text-success text"></i></a> </td>
+                                <td><?= $client->receipt ?></td>
+                                <td>
+                                    <p><a href="#" onmousedown="accept_payment(<?= $client->payment_id ?>, 1,<?= ceil($client->amount /$price) ?>)" class="btn btn-sm btn-success">Approve</a>
+                                        &nbsp;  <a href="#" onmousedown="accept_payment(<?= $client->payment_id ?>, 0, 0)" class="btn btn-sm btn-danger">Reject</a></p>
+                                </td>
+                            </tr> 
+                        <?php } ?>
+                    </tbody> 
+                    <tfoot>
+                        <tr>
+                            <td colspan="6">Total</td>
+                            <td><?= number_format($total) ?></td>
+                            <td colspan="4"></td>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
 
@@ -68,7 +102,9 @@
                             </span> 
                             <a class="clear" href="">
                                 <span class="h3 block m-t-xs">
-                                 
+                                    <strong id="bugs">
+                                        Tsh <?= number_format($payment->total_amount) ?>
+                                    </strong>
                                 </span>
                                 <small class="text-muted">Total Amount Collected</small> </a>
                         </div>
@@ -83,7 +119,7 @@
                             </span>
                             <a class="clear" href="#load_payments"> 
                                 <span class="h3 block m-t-xs">
-                             
+                                    <strong id="firers">  Tsh <?= number_format($payment->total_amount * 0.35) ?></strong>
                                 </span>
                                 <small class="text-muted">Estimated Profit</small>
                             </a>
@@ -97,7 +133,9 @@
                                 </span> 
                             </span>
                             <a class="clear" href="#"> 
-                              
+                                <span class="h3 block m-t-xs">
+                                    <strong id="firers"><?= $total_sms_remain ?></strong>
+                                </span>
                                 <small class="text-muted text-uc">SMS Remain</small>
                             </a>
                         </div>
@@ -120,7 +158,33 @@
                                
                             </tr> 
                         </thead> 
-                     
+                        <tbody>
+                            <?php
+                            $ptotal = 0;
+                            foreach ($payments as $client) {
+                                $ptotal += $client->amount;
+                                ?>
+                                <tr>
+                                    <td><?= $client->name ?></td>
+                                    <td><?= $client->email ?></td>
+                                    <td><?= $client->phone_number ?></td> 
+                                    <td><?= date('d M Y', strtotime($client->time)) ?></td>
+                                    <td><?= $client->method ?></td>
+                                    <td><?= $client->transaction_code ?></td>
+                                    <td><?= number_format($client->amount) ?></td>
+                                  
+                                    <td><?= $client->receipt ?></td>
+                                  
+                                </tr> 
+                            <?php } ?>
+                        </tbody>
+                         <tfoot>
+                        <tr>
+                            <td colspan="6">Total</td>
+                            <td><?= number_format($ptotal) ?></td>
+                            <td colspan="2"></td>
+                        </tr>
+                    </tfoot>
                     </table>
                 </section>
             </div> 
