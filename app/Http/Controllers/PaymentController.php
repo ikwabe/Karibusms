@@ -38,7 +38,7 @@ class PaymentController extends Controller {
      */
     public function store(Request $request) {
         $input = $request->all();
-        if (request()->ajax()) {
+        if (request()->ajax() && isset($request->status)) {
             $payment = DB::table('payment')->where('payment_id', $request->payment_id);
             if ($request->status == 1) {
                 $payment->update(['approved' => 1, 'confirmed_time' => 'now()', 'confirmed' => 1, 'sms_provided' => $request->number]);
