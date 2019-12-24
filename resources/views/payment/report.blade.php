@@ -53,7 +53,7 @@
                         <?php
                         $total = 0;
                         foreach ($users_payment as $client) {
-                            $total += $client->amount;
+                            $total = $total+$client->amount;
                             ?>
                             <tr>
                                 <td><?= $client->name ?></td>
@@ -63,13 +63,13 @@
                                 <td><?= $client->method ?></td>
                                 <td><?= $client->transaction_code ?></td>
                                 <td><?= number_format($client->amount) ?></td>
-                                <td><?php //ceil($client->amount / (int) $client->price_per_sms >0 ? $client->price_per_sms: 1) ?></td> 
+                                <td><?=ceil($client->amount / (int) $client->price_per_sms >0 ? $client->price_per_sms: 1) ?></td> 
                                 <td><a href="<?= url('/download_file') ?>/<?= $client->payment_id ?>?tag=invoice" target="_blank" title="Download Invoice">
                                         <i class="fa fa-download text-success text-active"></i>
                                         <i class="fa fa-download text-success text"></i></a> </td>
                                 <td><?= $client->receipt ?></td>
                                 <td>
-                                    <p><a href="#" onmousedown="accept_payment(<?= $client->payment_id ?>, 1,<?= ceil($client->amount / $client->price_per_sms) ?>)" class="btn btn-sm btn-success">Approve</a>
+                                    <p><a href="#" onmousedown="accept_payment(<?= $client->payment_id ?>, 1,<?=ceil($client->amount / (int) $client->price_per_sms >0 ? $client->price_per_sms: 1) ?>)" class="btn btn-sm btn-success">Approve</a>
                                         &nbsp;  <a href="#" onmousedown="accept_payment(<?= $client->payment_id ?>, 0, 0)" class="btn btn-sm btn-danger">Reject</a></p>
                                 </td>
                             </tr> 
