@@ -59,7 +59,7 @@ class Controller extends BaseController {
 
     public static function count_all_people() {
         $controller = new Controller();
-        $result = DB::select("select count(*) as result from subscriber_info where client_id='" . session('client_id') . "' ");
+        $result = DB::select("select count(*) as result from subscriber_info where client_id='" . $controller->client_id . "' ");
         return array_shift($result)->result;
     }
 
