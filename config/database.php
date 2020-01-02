@@ -70,7 +70,7 @@ return [
             'port' => '5432',
             'database' =>  'erb',
             'username' => 'postgres',
-            'password' => 'inets',
+            'password' => 'newpassword',
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,

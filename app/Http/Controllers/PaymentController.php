@@ -56,10 +56,17 @@ class PaymentController extends Controller {
                 exit;
             }
         } else {
-            $array=[
-               "currency"=>request('currency'), "amount"=>request("amount"), "transaction_code"=>request("transaction_code"), "cost_per_sms"=>request("cost_per_sms"), "method"=>request("method"), "client_id"=>request("client_id"), "confirmed"=>request("confirmed"), "staff_id_approved"=>request("staff_id_approved"), "approved"=>request("approved"), "payment_per_sms"=>request("payment_per_sms"), "sms_provided"=>request("sms_provided")
+
+            $array = [
+                "currency" => request('currency'), "amount" => request("amount"), "transaction_code" => request("transaction_code"), "cost_per_sms" => request("cost_per_sms"), "method" => request("method"), "client_id" => request("client_id"), "confirmed" => request("confirmed"), "staff_id_approved" => request("staff_id_approved"), "approved" => request("approved"), "payment_per_sms" => request("payment_per_sms")
             ];
-            DB::table('payment')->insert($array);
+            foreach ($array as $key => $value) {
+                if (empty($array[$key])) {
+                    die(ucfirst(str_replace('_', ' ', $key)) . ' is empty. Please write valid input');
+                }
+            }
+            $sms_provided = ceil(request("amount") / request("cost_per_sms"));
+            DB::table('payment')->insert(array_merge($array, ["sms_provided" => $sms_provided]));
             $subject = 'karibuSMS Payment Accepted';
             $client = DB::table('client')->where('client_id', $request->client_id)->first();
             $message = 'Hello ' . $client->email . ' ,<br/>'
@@ -67,7 +74,7 @@ class PaymentController extends Controller {
             $this->sendEmail($client->email, $subject, $message);
         }
 
-        echo ' <div class="alert alert-success">Payment added successfully  </div>';
+        echo 'Payment added successfully ';
     }
 
     public function notifyAcceptedPayments() {

@@ -19,13 +19,13 @@ $id = '';
 </div>
 <div class="modal-body">
 
-    <form class="form-horizontal" data-validate="parsley"> 
+    <form class="form-horizontal add_payment_form" data-validate="parsley"> 
 	<section class="panel panel-default"> <header class="panel-heading"> 
 	    </header> <div class="panel-body">
 		<?php if ($id == '') { ?>
     		<div class="form-group"> <label class="col-sm-3 control-label">Client Name</label> 
     		    <div class="col-sm-9">
-    			<select data-required="true" id="client_id" class="form-control m-t parsley-validated"> ;
+    			<select data-required="true" id="client_id" class="form-control m-t parsley-validated select2"> 
     			    <option value="">Choose client Name</option> 
 				<?php
 				$clients = \App\Http\Controllers\Controller::get_all_clients(); // this method will be changed later if the loading speed is small.  We will enable someone to fetch for the client name and do auto complete
@@ -79,7 +79,7 @@ $id = '';
 	    <footer class="panel-footer text-right bg-light lter"> 
 		<button type="button" class="btn btn-success btn-s-xs" onclick="add_payment()">Submit</button> </footer> 
 	    <?php if ($id != '') { ?>
-    	    <input type="hidden" id="client_id" value="<? $_GET['id'] ?>"/>
+    	    <input type="hidden" id="client_id" value="<?=$_GET['id'] ?>"/>
 	    <?php } ?>
 	</section>
     </form>
@@ -97,7 +97,8 @@ $id = '';
 	var sms_provided = amount / cost_per_sms;
 	$.get('store_payment',
 		{currency: currency, amount: amount, transaction_code: transaction_code, cost_per_sms: cost_per_sms, method: method, client_id: client_id, confirmed: '1', staff_id_approved: '1', approved: '1', payment_per_sms: '1', sms_provided: sms_provided}, function (data) {
-	    $('#status_results').html(data);
+	    $('#status_results').html(data).addClass('alert alert-success');
+            swal('success',data);
 	});
     }
 </script>
