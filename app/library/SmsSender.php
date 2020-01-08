@@ -152,7 +152,7 @@ class SmsSender {
 	    "to" => $this->phone_number);
 
 	 $this->name= ($this->name=='SUFA' || preg_match('/SUFA/i', $this->name))? 'SUFA SCHOOL': $this->name;
-	$message = array("from" =>in_array($this->name,['INETS','SHULESOFT','ERB','karibuSMS','SUFA SCHOOL','ACCLAVIA','MALEWOGROUP','MASEAA','WAT_SACCOS','MfukoPesa']) ? $this->name:'karibuSMS',
+	$message = array("from" =>in_array($this->name,['INETS','SHULESOFT','ERB','karibuSMS','SUFA SCHOOL','ACCLAVIA','MALEWOGROUP','MASEAA','WAT_SACCOS','MfukoPesa']) ? $this->name:'INETS',
 	    "destinations" => array($destination),
 	    "text" =>$this->message,
 	    "notifyUrl" => 'www.karibusms.com',
