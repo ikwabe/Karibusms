@@ -97,7 +97,7 @@ $page = request()->route()->parameters()['page'];
 	    <section class="panel panel-default"> 
 		<div class="panel-body">
 		    <div class="post-item">
-			<div class="text-right"><a href="<?= url('/api/app') ?>" class="btn btn-sm btn-success">Go to App Page</a></div>
+			<div class="text-right"><a href="<?= url('/dev/app') ?>" class="btn btn-sm btn-success">Go to App Page</a></div>
 			<div class="caption wrapper-lg"> 
 			    <h4 class="h2 header post-title" id="introduction">
 				Introduction
