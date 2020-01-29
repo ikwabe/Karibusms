@@ -40,7 +40,7 @@
 					<div class="panel-body"> 
 					    <a href="#" class="thumb pull-right m-l"></a>
 					    <div class="clear">
-						<pre> http://karibusms.com/api_call?message=YOUR_MESSAGE&amp;phone_number=255748XXXXXX&amp;messaging_type=1&amp;api_key=API_KEY&amp;api_secret=API_SECRET</pre>
+						<pre> http://karibusms.com/api_call?message=YOUR_MESSAGE&amp;phone_number=255748XXXXXX&amp;karibusmspro=1&amp;api_key=API_KEY&amp;api_secret=API_SECRET</pre>
 					    </div>
 					</div> </section>
         </blockquote>
