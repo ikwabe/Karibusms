@@ -33,7 +33,7 @@ Auth::routes();
   | kernel and includes session state, CSRF protection, and more.
   |
  */
- Route::get('/push', 'AdminController@send');
+Route::get('/push', 'AdminController@send');
 Route::get('/new_login', 'SocialController@new_login'); //temporarly solution
 Route::get('/app_get', function() {
     return response()->download('storage/app/karibusms.apk');
@@ -42,7 +42,7 @@ Route::any('/api_call', function() {
     $controller = new \App\Http\Controllers\ApiController();
     die($controller->init());
 });
- Route::get('/sms_sync/{id?}', 'ApiController@sync'); 
+Route::get('/sms_sync/{id?}', 'ApiController@sync');
 Route::any('facebook', function() {
     $appsecret = 'YOUR APP SECRET';
     $raw_post_data = file_get_contents('php://input');
@@ -151,7 +151,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/email', 'MessageController@mail');
     Route::get('/incoming_sms', 'MessageController@incoming');
     Route::get('/app_requests', 'MessageController@app_requests');
-    
+
     Route::get('/pending_sms', 'MessageController@pendingSms');
     Route::get('/email_request', 'MessageController@request_mail');
     Route::get('/delete_message/{message_id}', 'MessageController@deleteMessage');
@@ -181,6 +181,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/store_payment', 'PaymentController@store');
     Route::get('/user/{report}', 'AdminController@show');
     Route::get('/delete_user/{user_id}', 'AdminController@destroy');
+    Route::get('/reset_user/{user_id}', 'AdminController@resetPassword');
     Route::post('/create_ticket', 'AdminController@createTicket');
     Route::get('/getcron', 'AdminController@getTickets');
 
@@ -218,10 +219,10 @@ Route::group(['middleware' => ['web']], function () {
 Route::auth();
 
 //Route::get('/home', 'HomeController@index');
- 
-  Route::get('/auth/redirect/{provider}', 'SocialController@redirect');
-  Route::get('/callback/{provider}', 'SocialController@callback');
- 
+
+Route::get('/auth/redirect/{provider}', 'SocialController@redirect');
+Route::get('/callback/{provider}', 'SocialController@callback');
+
 Auth::routes();
 
 //Route::get('/home', 'HomeController@index');

@@ -77,6 +77,7 @@
     		    <td><?= $client->country ?></td> 
     		    <td>
     			<p id="social-buttons">
+                            <button class="btn btn-sm btn-icon btn-danger" onmousedown="reset_password('<?= $client->client_id ?>')">Reset Password</button>
     			    <!--			    <a href="#" class="btn btn-sm btn-icon btn-info">
     							    <i class="fa fa-folder-open"></i>
     							</a>-->
@@ -186,4 +187,11 @@
 				    });
 				}
 				mydatatable();
+                                
+                                reset_password=function(user_id){
+                                      $.getJSON('reset_user/' + user_id, {}, function (data) {
+					swal(data.status, data.message, data.status);
+					$('#user' + user_id).hide();
+				    });
+                                }
 </script>

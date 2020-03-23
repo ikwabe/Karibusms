@@ -344,4 +344,16 @@ from_smart,extract(month from reg_time) order by month');
         return preg_replace($patterns, $replacements, $content);
     }
 
+    public function resetPassword($id) {
+        $pass=rand(1, 999999);
+        $password = sha1(md5(sha1($pass)));
+        $user = DB::table('client')->where('id', $id)->first();
+        if (count($user) == 1) {
+            DB::table('client')->where('phone_number', $user->phone_number)->update(['password' => $password]);
+            $content='Hello, Your new temporarly password is '.$pass. ' : Kindly remember to change once login';
+            $this->sendEmail($user->email,'New Password',$content );
+            \Gcm::push_to_phoneid($this->customizeSms($content, $user), $user->gcm_id);
+        }
+    }
+
 }
