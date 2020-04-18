@@ -225,7 +225,7 @@ class PaymentController extends Controller {
             $controller = new \App\Http\Controllers\AndroidTestController();
             $controller->curl(json_encode($order), config('app.payment_api_url'));
             $check = DB::connection('admin')->table('admin.invoices')->where('order_id', $order_id);
-            if (count($check->first() == 1)) {
+            if (count($check->first()) == 1) {
                 $check->update(['sid' => session('client_id')]);
                 $booking = $check->first();
             }
