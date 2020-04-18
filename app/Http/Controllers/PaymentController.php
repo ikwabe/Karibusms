@@ -10,9 +10,9 @@ use DB;
 class PaymentController extends Controller {
 
     public $currency = 'TZS';
-    public $cost_per_sms=20;
-    public $exchange_rate=2300;
-    private static $sms_cost=20;
+    public $cost_per_sms = 20;
+    public $exchange_rate = 2300;
+    private static $sms_cost = 20;
 
     /**
      * Display a listing of the resource.
@@ -195,7 +195,7 @@ class PaymentController extends Controller {
         $order = array("order_id" => $order_id, 'action' => 'cancel', 'source' => 'karibusms');
         $controller = new \App\Http\Controllers\AndroidTestController();
         $controller->curl($order, 'http://localhost/shule/api/payment');
-         DB::connection('admin')->table('admin.invoices')->where('order_id', $order_id)->delete();
+        DB::connection('admin')->table('admin.invoices')->where('order_id', $order_id)->delete();
         return redirect(url('/'))->with('success', 'success');
     }
 
@@ -215,7 +215,7 @@ class PaymentController extends Controller {
             $sms_price = $this->cost_per_sms;
             $total_price = self::getSmsPrice($quantity);
         }
-        $booking = DB::connection('admin')->table('admin.invoices')->where('sid', session('client_id'))->where('status', 0)->whereNotNull('token')->where('source','karibusms')->first();
+        $booking = DB::connection('admin')->table('admin.invoices')->where('sid', session('client_id'))->where('status', 0)->whereNotNull('token')->where('source', 'karibusms')->first();
         if (count($booking) == 0) {
             $order_id = 'k' . time();
 
@@ -223,8 +223,12 @@ class PaymentController extends Controller {
             $order = array("order_id" => $order_id, "amount" => $total_price,
                 'buyer_name' => $client->name, 'buyer_phone' => $phone, 'end_point' => '/checkout/create-order', 'action' => 'createOrder', 'client_id' => $client->client_id, 'source' => 'karibusms');
             $controller = new \App\Http\Controllers\AndroidTestController();
-            $controller->curl(json_encode($order),config('app.payment_api_url'));
-            $booking = DB::connection('admin')->table('admin.invoices')->where('order_id', $order_id)->first();
+            $controller->curl(json_encode($order), config('app.payment_api_url'));
+            $check = DB::connection('admin')->table('admin.invoices')->where('order_id', $order_id);
+            if (count($check->first() == 1)) {
+                $check->update(['sid' => session('client_id')]);
+                $booking = $check->first();
+            }
         }
         return view('payment.invoice', compact('client', 'booking', 'quantity', 'invoice', 'currency', 'sms_price', 'total_price'));
     }
