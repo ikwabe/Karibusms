@@ -180,8 +180,8 @@
                         <?php if (session('client_id') == NULL) { ?>
                             <li> 
                                 <div class="m-t-sm">
-                                    <a href="<?= url('/') ?>" class="btn btn-link btn-sm">Sign in</a> 
-                                    <a href="<?= url('/') ?>/signup" class="btn btn-sm btn-success m-l"><strong>Sign up</strong></a>
+                                    <a href="<?= url('/') ?>" class="btn btn-link btn-sm">Login</a> 
+                                    <a href="<?= url('/') ?>/signup" class="btn btn-sm btn-success m-l"><strong>Register</strong></a>
                                 </div> 
                             </li> 
                         <?php } ?>

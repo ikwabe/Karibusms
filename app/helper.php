@@ -16,6 +16,17 @@ function assets() {
     return url('/');
 }
 
+function createRoute() {
+    $url = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '';
+    $url_param = explode('/', $url);
+
+    $controller = isset($url_param[2]) && !empty($url_param[2]) ? $url_param[2] : 'book';
+    $method = isset($url_param[3]) && !empty($url_param[3]) ? $url_param[3] : 'index';
+    $view = $method == 'view' ? 'show' : $method;
+
+    return in_array($controller, array('public', 'storage')) ? NULL : $controller . '@' . $view;
+}
+
 /**
  * 
  * @param type $phone_number

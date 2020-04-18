@@ -9,7 +9,8 @@
         <div class="text-center wrapper"> 
             <div class="h4 text-muted m-t-sm">
                 Simple and cost effective way to send Bulk SMS to your contacts </div>
-            <a href="<?= url('/') . '/' ?>signup" class="btn btn-lg btn-primary b-primary  m-sm">Sign Up</a><br/>
+            <a href="<?= url('/') . '/' ?>signup" class="btn btn-lg btn-primary b-primary  m-sm">
+            Register</a><br/>
            OR Login with
         </div> 
     
@@ -116,7 +117,7 @@
                             <div class="container aside-xxl"> 
                                 <section class="panel panel-default bg-white m-t-lg"> 
                                     <header class="panel-heading text-center">
-                                        <strong>Or Normal Sign in Below</strong> 
+                                        <strong>Or Normal Register Below</strong> 
                                     </header> 
 
                                     <form class="panel-body wrapper-lg" id="signin_form" method="POST" action="{{ url('/login') }}"> 
@@ -162,7 +163,7 @@
                                            class="pull-right m-t-xs">
                                             <small>Forgot password?</small>
                                         </a>
-                                        <button type="button" class="btn btn-primary" onclick="signin();">Sign in
+                                        <button type="button" class="btn btn-primary" onclick="signin();">Login
                                         </button>
 
                                         <!-- <button type="submit" class="btn btn-primary">
@@ -275,7 +276,7 @@
 </div>
 </section> <!-- footer --> 
 
-<footer id="footer"> <div class="bg-primary text-center"> <div class="container wrapper"> <div class="m-t-xl m-b"> For reliable SMS & contacts management solution <a href="<?= url('/') ?>/signup"  class="btn btn-lg btn-dark b-white bg-empty m-sm">Sign Up</a> or <a href="#" class="btn btn-lg btn-info b-white bg-empty m-sm">Sign in</a> </div> </div> <i class="fa fa-caret-down fa-4x text-primary m-b-n-lg block"></i> </div> <div class="bg-dark dker wrapper"> 
+<footer id="footer"> <div class="bg-primary text-center"> <div class="container wrapper"> <div class="m-t-xl m-b"> For reliable SMS & contacts management solution <a href="<?= url('/') ?>/signup"  class="btn btn-lg btn-dark b-white bg-empty m-sm">Register</a> or <a href="#" class="btn btn-lg btn-info b-white bg-empty m-sm">Login</a> </div> </div> <i class="fa fa-caret-down fa-4x text-primary m-b-n-lg block"></i> </div> <div class="bg-dark dker wrapper"> 
     </div> </footer> <!-- / footer -->
 
 @stop

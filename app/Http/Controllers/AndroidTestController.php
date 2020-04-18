@@ -225,7 +225,7 @@ class AndroidTestController extends Controller {
         $fields = [
             'content' => $content,
             'phone_number' => $phone_number,
-            'client_id' => $this->client_id,
+            'client_id' => (int)$this->client_id==0 ? 1 :$this->client_id ,
             'time' => date('Y-m-d H:i:s'),
         ];
         $incoming_message_id = DB::table('incoming_message')->insertGetId($fields, 'incoming_message_id');
@@ -233,12 +233,13 @@ class AndroidTestController extends Controller {
         echo json_encode(['status' => 'success', 'data' => ['message_id' => $incoming_message_id]]);
     }
 
-    public function curl($fields) {
+    public function curl($fields,$url=null) {
         // Open connection
+        $server_url=$url==null ? config('app.server_url'): $url;
         $ch = curl_init();
         // Set the url, number of POST vars, POST data
 
-        curl_setopt($ch, CURLOPT_URL, 'http://158.69.112.216:8081/api/sms');
+        curl_setopt($ch, CURLOPT_URL,$server_url);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
             'application/x-www-form-urlencoded'
         ));

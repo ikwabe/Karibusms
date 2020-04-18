@@ -20,7 +20,7 @@
 
 	<div class="m-b-md"> <h3 class="m-b-none">Add New Payment</h3> </div>
 
-	<div class="row"> 
+        <div class="row" id="load_payment_page"> 
 	    <div class="col-lg-6" id="load_excel_page">
 		<section class="panel panel-default"> 
 		    <header class="panel-heading font-bold">Add new payment form</header> 
@@ -49,9 +49,9 @@
 			<form role="form" class="form-horizontal" id="add_payment" action="<?= url('/') ?>/add_payment_submit" onsubmit="return false"> 
 
 			    <div class="form-group"> 
-				<label class="col-sm-2 control-label"></label>
+				<label class="col-sm-2 control-label">Price</label>
 				<div class="col-sm-4">
-
+Tsh 19.95/= per SMS
 				</div>
 
 			    </div>
@@ -59,23 +59,15 @@
 			    <div class="form-group"> 
 				<label class="col-sm-2 control-label">Number of SMS</label>
 				<div class="col-sm-4">
-				    <input type="number" onkeyup="check_number()" id="sms_no" name="sms_number" class="form-control rounded" placeholder="Number of SMS"> </div>
+                                    <input type="number" min="500" value='500' id="sms_no" name="sms_number" class="form-control " placeholder="Number of SMS"> </div>
 				<span>Minimum number of SMS is 1000</span>
 			    </div>
 
 
 			    <div class="form-group"> 
-				<label class="col-sm-2 control-label">Payment Method</label>
+				<label class="col-sm-2 control-label"></label>
 				<div class="col-sm-10"> 
-				    <select name="method_type" disabled="" id="method_type" class="form-control m-b rounded" onchange="detect_payment_method()">
-					<option id="" value=""></option> 
-					<option id="mpesa" value="mpesa">M-pesa</option> 
-					<option id="tigopesa" value="tigopesa">Tigo-pesa</option> 
-					<option id="airtelmoney" value="airtelmoney">Airtel-Money</option> 
-					<option id="bank_payment" value="bank">Bank</option> 
-				    </select>
-				    <a onmousedown="get_invoice()" style="display: none" id="get_invoice"
-				       class="btn btn-s-md btn-info" >Get your Invoice</a>
+                                    <input type="submit" value="Proceed" class="btn btn-success" onmousedown="get_invoice()"/>
 				</div>
 
 			    </div>
@@ -175,17 +167,7 @@
     }
     get_invoice = function () {
 	var sms = $('#sms_no').val();
-	var method = $('#method_type').val();
-	if (sms >= 1000) {
-	    $.getJSON('invoice/' + sms, null, function (data) {
-		swal('Success', 'Your invoice have been generated successfully, you can download it anytime you want. Proceed Now!', 'success');
-		$('#invoice_link').attr('href','<?=url('/download_file') ?>/'+ data.file).show();
-		$('#add_receipt').show();
-	    });
-
-	} else {
-	    swal('Note !', 'Minimum number of SMS to buy is 1000 ', 'warning');
-	}
+	window.location.href='<?=url('#invoice')?>/'+sms;
     }
     check_number = function () {
 	var number = $('#sms_no').val();

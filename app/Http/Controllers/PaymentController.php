@@ -188,7 +188,17 @@ class PaymentController extends Controller {
         ));
     }
 
+    public function cancelPayment($payment_id = null) {
+        $order_id = $payment_id;
+        $order = array("order_id" => $order_id, 'action' => 'cancel', 'source' => 'karibusms');
+        $controller = new \App\Http\Controllers\AndroidTestController();
+        $controller->curl($order, 'http://localhost/shule/api/payment');
+         DB::connection('admin')->table('admin.invoices')->where('order_id', $order_id)->delete();
+        return redirect(url('/'))->with('success', 'success');
+    }
+
     public function getInvoice($quantity = null, $payment_id = null) {
+
 
         $client = DB::table('client')->where('client_id', session('client_id'))->first();
         if ($payment_id != NULL) {
@@ -203,23 +213,18 @@ class PaymentController extends Controller {
             $sms_price = $this->cost_per_sms;
             $total_price = self::getSmsPrice($quantity);
         }
+        $booking = DB::connection('admin')->table('admin.invoices')->where('sid', session('client_id'))->where('status', 0)->whereNotNull('token')->first();
+        if (count($booking) == 0) {
+            $order_id = 'k' . time();
 
-        $data = view('payment.invoice', compact('client', 'quantity', 'invoice', 'currency', 'sms_price', 'total_price'));
-
-        $file = 'invoice_' . time() . '.doc';
-        $folder = 'media/images/business/' . session('client_id');
-        !is_dir($folder) ? mkdir($folder, 0777, TRUE) : '';
-        $file_path = 'media/images/business/' . session('client_id') . '/' . $file;
-
-        $handle = fopen($file_path, 'wr+');
-        fwrite($handle, $data);
-        fclose($handle);
-        return json_encode(array(
-            'status' => 'success',
-            'message' => 'Invoice generated successfully',
-            'price' => self::getSmsPrice($quantity),
-            'file' => $file
-        ));
+            $phone = str_replace('+', null, validate_phone_number($client->phone_number)[1]);
+            $order = array("order_id" => $order_id, "amount" => $total_price,
+                'buyer_name' => $client->name, 'buyer_phone' => $phone, 'end_point' => '/checkout/create-order', 'action' => 'createOrder', 'client_id' => $client->client_id, 'source' => 'karibusms');
+            $controller = new \App\Http\Controllers\AndroidTestController();
+            $obj = $controller->curl($order, 'http://localhost/shule/api/payment');
+            $booking = DB::connection('admin')->table('admin.invoices')->where('order_id', $order_id)->first();
+        }
+        return view('payment.invoice', compact('client', 'booking', 'quantity', 'invoice', 'currency', 'sms_price', 'total_price'));
     }
 
     private function createInvoice($quantity, $client_id = null) {

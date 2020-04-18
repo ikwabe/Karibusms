@@ -179,7 +179,7 @@ $path = is_file($link) ? url('/') . '/' . $link : url('/') . '/media/images/busi
                             <!--<li> <a href="http://support.karibusms.com" target="_blank">Tickets</a> </li>-->
                             <li> <a href="<?= url('/').'/' ?>help">Help</a> </li>
                             <li class="divider"></li>
-                            <li> <a href="#" onclick="signout()" onmousedown="signOut()">Sign out</a> </li> 
+                            <li> <a href="#" onclick="signout()" onmousedown="signOut()">Log out</a> </li> 
                         </ul>
 
                        

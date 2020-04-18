@@ -119,10 +119,16 @@ return [
     |
     */
 
-    'key' => env('APP_KEY'),
+    'key' => 'base64:59b0nXKheO+xEitOl5AsdFLaLgJWVCF/k4S8806xSgQ=',
 
     'cipher' => 'AES-256-CBC',
 
+    
+    /*
+     * 
+     * other configurations
+     */
+    'server_ip'=>'http://51.77.212.234:8081/api/sms',
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers

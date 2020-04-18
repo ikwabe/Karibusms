@@ -35,8 +35,19 @@
                     <div class="row m-t-xl m-b-xl"> 
                         <div class="col-sm-5 text-center clearfix m-t-xl" data-ride="animated" data-animation="fadeInLeftBig"> 
                             <div class="h3 font-bold m-b-xl">
-                                <img src="media/images/blessed_emoji.png" width="70%" title="Feeling Blessed with karibuSMS" alt="Feeling Blessed with karibuSMS"/>
-                                <p>We know you are doing business, and we want to help you do it better..</p>
+                               
+                                <p>Price Per SMS</p>
+                                <!--<input type='number' id="sms_number " min="1000" class="form-control col-lg-8 col-md-8"/>-->
+                                <h2>Tsh <span id="sms_count">19.95</span>/= only</h2>
+                                <script>
+                                sms_number=function(){
+                                    $('#sms_number').keyup(function(){
+                                        var val=$(this).val();
+                                        $('#sms_count').html(val);
+                                    });
+                                }
+                                $(document).ready(sms_number);
+                                </script>
                             </div> 
                         </div> 
                         <div class="col-sm-7">
