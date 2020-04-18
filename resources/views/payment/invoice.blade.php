@@ -387,12 +387,12 @@ $path = file_exists($link) ? url('/') . '/' . $link : url('/') . '/media/images/
                                                                     <tr> <td>1</td>
                                                                         <td>Payment for Internet Messages</td>
                                                                         <td><?= $sms_price ?></td> 
-                                                                        <td><?= round($quantity, 0) ?></td>
-                                                                        <td><?= $total_price ?></td>
+                                                                        <td><?= round($booking->amount/$sms_price, 0) ?></td>
+                                                                        <td><?= number_format($booking->amount) ?></td>
                                                                     </tr>
                                                                     <tr> 
                                                                         <td colspan="4" class="text-right no-border"><strong>Total</strong></td> 
-                                                                        <td><strong><?= $total_price ?></strong></td> 
+                                                                        <td><strong><?= number_format($booking->amount) ?></strong></td> 
                                                                     </tr> 
                                                                 </tbody> 
                                                             </table>

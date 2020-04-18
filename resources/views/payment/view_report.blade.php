@@ -49,7 +49,7 @@
 				<th>SMS Provided</th>
 				<th>Status</th> 
 				<th>Approved</th> 
-				<th>Invoice</th> 
+				<th>Action</th> 
 				<!--<th>Receipt</th>--> 
 			    </tr> 
 			</thead> 
@@ -74,9 +74,18 @@
 				    ?></td>
 
 					<td><?= $payment->approved == 1 ? 'Yes' : 'Not yet' ?></td>
-					<td><a href="<?= url('/download_file') ?>/<?= $payment->payment_id ?>?tag=invoice" target="_blank" title="Download Invoice">
-						<i class="fa fa-download text-success text-active"></i>
-						<i class="fa fa-download text-success text"></i></a> 
+					<td>
+                                              <?php
+					    if ($payment->confirmed == 1 && $payment->approved == 1) {
+						?>
+                                            <a class="btn btn-success btn-xs" href="<?= url('#view_receipt/') ?><?= $payment->payment_id ?>?tag=invoice" title="View receipt">
+						<i class="fa fa-file"></i> Receipt</a>
+                                            <?php }else{?>
+                                            <a class="btn btn-info btn-xs" href="<?= url('#invoice/'.($payment->amount/$payment->cost_per_sms)) ?>?token=<?=$payment->invoice?>" title="View Invoice">
+						<i class="fa fa-money"></i> Pay</a>
+                                                <a class="btn btn-danger btn-xs" href="<?= url('#deleteinvoice/') ?>?token=<?=$payment->invoice?>" title="View Invoice">
+						<i class="fa fa-trash-o"></i> Delete</a>
+                                            <?php }?>
 
 					</td>
 <!--					<td> 

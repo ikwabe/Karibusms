@@ -191,6 +191,8 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/add_payment', 'PaymentController@addPayment');
     Route::get('/pay_by_card', 'PaymentController@addCardPayment');
     Route::get('/view_report', 'PaymentController@viewPaymentReports');
+    Route::get('/view_receipt/{payment_id}', 'PaymentController@getReceipt');
+   Route::get('/ deleteinvoice', 'PaymentController@cancelPayment');
     Route::get('/invoice/{quantity}', 'PaymentController@getInvoice');
     Route::get('/invoice/cancel/{quantity}', 'PaymentController@cancelPayment');
     Route::get('/submit_receipt', 'PaymentController@addReceipt');

@@ -162,6 +162,7 @@ class PaymentController extends Controller {
     }
 
     public function viewPaymentReports() {
+
         $payments = DB::table('payment')->where('client_id', session('client_id'))->get();
         return view('payment.view_report', compact('payments'));
     }
@@ -174,8 +175,9 @@ class PaymentController extends Controller {
         $sms_price = $payment->cost_per_sms;
         $total_price = $payment->amount;
 
-
-        $data = view('payment.receipt', compact('client', 'quantity', 'invoice', 'currency', 'sms_price', 'total_price'));
+        $booking = DB::connection('admin')->table('admin.invoices')->where('token', $invoice)->first();
+        
+        return view('payment.receipt', compact('client', 'payment', 'quantity', 'invoice', 'currency', 'sms_price', 'total_price'));
 
         $file = 'receipt_' . time() . '.doc';
         $file_path = 'media/images/business/' . session('client_id') . '/' . $file;
@@ -191,12 +193,21 @@ class PaymentController extends Controller {
     }
 
     public function cancelPayment($payment_id = null) {
-        $order_id = $payment_id;
+        
+        $token=request('token');
+        if(strlen($token)>2){
+             $req= DB::connection('admin')->table('admin.invoices')->where('token', $token)->first();
+             $order_id = $req->order_id;
+        }else{
+            $order_id = $payment_id;
+        }
         $order = array("order_id" => $order_id, 'action' => 'cancel', 'source' => 'karibusms');
         $controller = new \App\Http\Controllers\AndroidTestController();
-        $controller->curl($order, 'http://localhost/shule/api/payment');
+        $controller->curl($order, config('app.payment_api_url'));
+        $req= DB::connection('admin')->table('admin.invoices')->where('order_id', $order_id)->first();
         DB::connection('admin')->table('admin.invoices')->where('order_id', $order_id)->delete();
-        return redirect(url('/'))->with('success', 'success');
+        DB::table('payment')->where('invoice',$req->token)->delete();
+        return redirect(url('#view_report'))->with('success', 'success');
     }
 
     public function getInvoice($quantity = null, $payment_id = null) {
@@ -215,7 +226,8 @@ class PaymentController extends Controller {
             $sms_price = $this->cost_per_sms;
             $total_price = self::getSmsPrice($quantity);
         }
-        $booking = DB::connection('admin')->table('admin.invoices')->where('sid', session('client_id'))->where('status', 0)->whereNotNull('token')->where('source', 'karibusms')->first();
+        $booking = DB::connection('admin')->table('admin.invoices')->where('sid', session('client_id'))->where('status', 0)->where('token', request('token'))->where('source', 'karibusms')->first();
+
         if (count($booking) == 0) {
             $order_id = 'k' . time();
 
@@ -228,6 +240,17 @@ class PaymentController extends Controller {
             if (count($check->first()) == 1) {
                 $check->update(['sid' => session('client_id')]);
                 $booking = $check->first();
+                DB::table('payment')->insertGetId([
+                    'client_id' => session('client_id'),
+                    'method' => 'booking',
+                    'amount' => $total_price,
+                    'currency' => 'TZS',
+                    'cost_per_sms' => $this->cost_per_sms,
+                    'invoice' => $booking->token,
+                    'confirmed' => 0,
+                    'approved' => 0,
+                    'payment_per_sms' => 1
+                        ], 'payment_id');
             }
         }
         return view('payment.invoice', compact('client', 'booking', 'quantity', 'invoice', 'currency', 'sms_price', 'total_price'));

@@ -104,7 +104,7 @@
 
                                 </ul>
                             </li>
-                            <li> 
+<!--                            <li> 
                                 <a href="#layout"> 
                                     <i class="fa fa-money icon"> 
                                         <b class="bg-success"></b> 
@@ -123,6 +123,13 @@
                                         <a href="#view_report"> <i class="fa fa-angle-right"></i> <span>View History</span> </a> 
                                     </li> 
                                 </ul>
+                            </li>-->
+                             <li> 
+                                <a href="#view_report">
+                                    <i class="fa fa-money icon">
+                                        <b class="bg-success"></b>
+                                    </i> <span>Payments</span>
+                                </a> 
                             </li>
                             <li> 
                                 <a href="#client_setting">
