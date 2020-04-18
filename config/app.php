@@ -129,6 +129,7 @@ return [
      * other configurations
      */
     'server_ip'=>'http://51.77.212.234:8081/api/sms',
+    'payment_api_url'=>'http://51.77.212.234:8081/api/payment',
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers
