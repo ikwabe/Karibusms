@@ -12,6 +12,7 @@ class PaymentController extends Controller {
     public $currency = 'TZS';
     public $cost_per_sms=20;
     public $exchange_rate=2300;
+    private static $sms_cost=20;
 
     /**
      * Display a listing of the resource.
@@ -276,7 +277,7 @@ class PaymentController extends Controller {
     public static function getSmsPrice($quantity, $payment_price = null) {
         // in case we want to handle discounts and other pricing changes we do here
 
-        return $payment_price == NULL ? $quantity * $this->cost_per_sms : $payment_price;
+        return $payment_price == NULL ? $quantity * self::sms_cost : $payment_price;
     }
 
     public function addReceipt() {
