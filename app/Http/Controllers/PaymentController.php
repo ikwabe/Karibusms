@@ -277,7 +277,7 @@ class PaymentController extends Controller {
     public static function getSmsPrice($quantity, $payment_price = null) {
         // in case we want to handle discounts and other pricing changes we do here
 
-        return $payment_price == NULL ? $quantity * self::sms_cost : $payment_price;
+        return $payment_price == NULL ? $quantity * self::$sms_cost : $payment_price;
     }
 
     public function addReceipt() {
