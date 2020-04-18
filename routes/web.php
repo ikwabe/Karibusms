@@ -225,19 +225,19 @@ Route::get('/auth/redirect/{provider}', 'SocialController@redirect');
 Route::get('/callback/{provider}', 'SocialController@callback');
 
 Auth::routes();
-if (createRoute() != NULL) {
-
-    $route = explode('@', createRoute());
-
-    $file = app_path() . DIRECTORY_SEPARATOR . 'Http' . DIRECTORY_SEPARATOR . 'Controllers' . DIRECTORY_SEPARATOR . $route[0] . '.php';
-
-    if (file_exists($file)) {
-
-        Route::any('/{controller?}/{method?}/{param1?}/{param2?}/{param3?}/{param4?}/{param5?}/{param6?}/{param7?}', createRoute());
-    } else {
-        return view('errors.404');
-    }
-} else {
-    return view('errors.404');
-}
+//if (createRoute() != NULL) {
+//
+//    $route = explode('@', createRoute());
+//
+//    $file = app_path() . DIRECTORY_SEPARATOR . 'Http' . DIRECTORY_SEPARATOR . 'Controllers' . DIRECTORY_SEPARATOR . $route[0] . '.php';
+//
+//    if (file_exists($file)) {
+//
+//        Route::any('/{controller?}/{method?}/{param1?}/{param2?}/{param3?}/{param4?}/{param5?}/{param6?}/{param7?}', createRoute());
+//    } else {
+//        return view('errors.404');
+//    }
+//} else {
+//    return view('errors.404');
+//}
 //Route::get('/home', 'HomeController@index');
