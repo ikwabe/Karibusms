@@ -215,7 +215,7 @@ class PaymentController extends Controller {
             $sms_price = $this->cost_per_sms;
             $total_price = self::getSmsPrice($quantity);
         }
-        $booking = DB::connection('admin')->table('admin.invoices')->where('sid', session('client_id'))->where('status', 0)->whereNotNull('token')->first();
+        $booking = DB::connection('admin')->table('admin.invoices')->where('sid', session('client_id'))->where('status', 0)->whereNotNull('token')->where('source','karibusms')->first();
         if (count($booking) == 0) {
             $order_id = 'k' . time();
 
