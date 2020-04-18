@@ -9,9 +9,9 @@ use DB;
 
 class PaymentController extends Controller {
 
-    private $currency = 'TZS';
-    private $cost_per_sms=20;
-    private $exchange_rate=2300;
+    public $currency = 'TZS';
+    public $cost_per_sms=20;
+    public $exchange_rate=2300;
 
     /**
      * Display a listing of the resource.
@@ -228,7 +228,7 @@ class PaymentController extends Controller {
         return view('payment.invoice', compact('client', 'booking', 'quantity', 'invoice', 'currency', 'sms_price', 'total_price'));
     }
 
-    private function createInvoice($quantity, $client_id = null) {
+    public function createInvoice($quantity, $client_id = null) {
         $id = $client_id == NULL ? session('client_id') : $client_id;
         $check = DB::table('payment')
                         ->where('client_id', $id)
