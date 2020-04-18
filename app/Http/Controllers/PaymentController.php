@@ -223,7 +223,7 @@ class PaymentController extends Controller {
             $order = array("order_id" => $order_id, "amount" => $total_price,
                 'buyer_name' => $client->name, 'buyer_phone' => $phone, 'end_point' => '/checkout/create-order', 'action' => 'createOrder', 'client_id' => $client->client_id, 'source' => 'karibusms');
             $controller = new \App\Http\Controllers\AndroidTestController();
-            $controller->curl($order,config('app.payment_api_url'));
+            $controller->curl(json_encode($order),config('app.payment_api_url'));
             $booking = DB::connection('admin')->table('admin.invoices')->where('order_id', $order_id)->first();
         }
         return view('payment.invoice', compact('client', 'booking', 'quantity', 'invoice', 'currency', 'sms_price', 'total_price'));

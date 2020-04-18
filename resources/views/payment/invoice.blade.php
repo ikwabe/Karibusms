@@ -6,6 +6,7 @@
 $user = App\Http\Controllers\Controller::user_info();
 $link = 'media/images/business/' . $user->client_id . '/' . $user->profile_pic;
 $path = file_exists($link) ? url('/') . '/' . $link : url('/') . '/media/images/business/0/default.png';
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

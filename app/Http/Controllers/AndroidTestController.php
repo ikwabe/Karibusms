@@ -241,7 +241,7 @@ class AndroidTestController extends Controller {
 
         curl_setopt($ch, CURLOPT_URL,$server_url);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            'application/x-www-form-urlencoded'
+            "Content-type: application/json;charset=\"utf-8\"", "Accept: application/json", "Cache-Control: no-cache"
         ));
 
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
@@ -253,6 +253,7 @@ class AndroidTestController extends Controller {
         $result = curl_exec($ch);
         curl_close($ch);
         return $result;
+        
     }
 
     //NEW: Updates messages with their respective sending/delivery status
