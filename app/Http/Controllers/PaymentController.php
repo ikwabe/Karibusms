@@ -10,7 +10,8 @@ use DB;
 class PaymentController extends Controller {
 
     private $currency = 'TZS';
-    private $cost_per_sms;
+    private $cost_per_sms=20;
+    private $exchange_rate=2300;
 
     /**
      * Display a listing of the resource.
@@ -242,19 +243,19 @@ class PaymentController extends Controller {
                 'method' => 'booking',
                 'amount' => self::getSmsPrice($quantity),
                 'currency' => $this->currency,
-                'cost_per_sms' => SMS_PRICE,
+                'cost_per_sms' => $this->cost_per_sms,
                 'invoice' => $invoice,
                 'confirmed' => 0,
                 'approved' => 0,
                 'payment_per_sms' => 1
                     ], 'payment_id');
-            $this->cost_per_sms = SMS_PRICE;
+            $this->cost_per_sms = $this->cost_per_sms;
             $subject = 'karibuSMS Payment Request';
             $client = DB::table('client')->where('client_id', $id)->first();
             $message = 'Hello karibuSMS ,<br/>'
                     . ' Your client ' . $client->firstname . ' has placed an order to buy SMS . These are details'
                     . '<p>Amount: ' . self::getSmsPrice($quantity) . ' </p>'
-                    . '<p>cost per SMS ' . SMS_PRICE . '</p>'
+                    . '<p>cost per SMS ' . $this->cost_per_sms . '</p>'
                     . 'Kindly login into karibusms.com to approve payments <br/>'
                     . 'Thank you';
             $this->sendEmail('swillae1@gmail.com', $subject, $message);
@@ -275,7 +276,7 @@ class PaymentController extends Controller {
     public static function getSmsPrice($quantity, $payment_price = null) {
         // in case we want to handle discounts and other pricing changes we do here
 
-        return $payment_price == NULL ? $quantity * SMS_PRICE : $payment_price;
+        return $payment_price == NULL ? $quantity * $this->cost_per_sms : $payment_price;
     }
 
     public function addReceipt() {
@@ -312,7 +313,7 @@ class PaymentController extends Controller {
         $sms = request('sms');
         $invoice = $this->createInvoice($sms);
         $cardname = request('name');
-        $cost = $sms * SMS_PRICE / EXCHANGE_RATE;
+        $cost = $sms * $this->cost_per_sms / $this->exchange_rate;
         $price = round($cost, 2);
         DB::table('client')
                 ->where('client_id', session('client_id'))
@@ -325,7 +326,7 @@ class PaymentController extends Controller {
             'method' => "'Bank Card'",
             'currency' => "'USD'",
             'client_id' => session('client_id'),
-            'cost_per_sms' => SMS_PRICE / EXCHANGE_RATE,
+            'cost_per_sms' => $this->cost_per_sms / $this->exchange_rate,
             'invoice' => $invoice,
             'confirmed' => 0,
             'approved' => 0,
@@ -414,7 +415,7 @@ class PaymentController extends Controller {
                     'method' => 'Bank Card',
                     'currency' => 'USD',
                     'client_id' => $client->client_id,
-                    'cost_per_sms' => SMS_PRICE / EXCHANGE_RATE,
+                    'cost_per_sms' => $this->cost_per_sms / $this->exchange_rate,
                     'invoice' => $invoice,
                     'confirmed' => 0,
                     'approved' => 0,

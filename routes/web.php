@@ -214,8 +214,6 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/{page?}', 'LandingController@show');
 });
 !defined('HOME') ? define('HOME', url('/') . '/') : '';
-!defined('SMS_PRICE') ? define('SMS_PRICE', 20) : '';
-!defined('EXCHANGE_RATE') ? define('EXCHANGE_RATE', 2300) : '';
 
 Route::auth();
 
