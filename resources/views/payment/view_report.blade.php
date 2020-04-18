@@ -18,12 +18,12 @@
 	<div class="tab-pane col-lg-12">
 
 	    <section class="panel panel-default" style="overflow: scroll;"> 
-		<header class="panel-heading">Payment </header>
+		<header class="panel-heading"><h3>Payment Report</h3> </header>
 		<div class="row text-sm wrapper">
 
 
 		    <div class="col-sm-8"> 
-			<h3>Payment Report</h3>
+			
 			<div class="input-group"> 
 
 			    <span class="input-group-btn"> 

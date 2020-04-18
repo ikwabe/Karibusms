@@ -63,47 +63,7 @@
                                 </ul>
                             </li>
 
-                            <li class=""> 
-                                <a href="#uikit" class="active">
-                                    <i class="fa fa-flask icon"> <b class="bg-success"></b> </i> 
-                                    <span class="pull-right"> <i class="fa fa-angle-down text"></i> <i class="fa fa-angle-up text-active"></i> </span> <span>Contacts</span> 
-                                </a> 
-                                <ul class="nav lt"> 
-                                    <li>
-                                        <a href="#add_people"> <i class="fa fa-angle-right"></i>
-                                            <span>Add</span> </a>
-                                    </li>
-
-                                    <?php
-                                    /*
-                                     * -----------------------------------------------------------------
-                                     * This part we will load categories of people added by this person,
-                                     * for example, if business has got customers, leads, etc, then we
-                                     * will load here and same if organization has got choir, pastors etc
-                                     * ----------------------------------------------------------------
-                                     */
-                                    $categories = \App\Http\Controllers\Controller::get_category();
-                                    $total_people = \App\Http\Controllers\Controller::count_all_people();
-                                    foreach ($categories as $category) {
-                                        ?>
-                                        <li> 
-                                            <a href="#people/<?= encryptApp($category->category_id) ?>">
-                                                <b class="badge bg-info pull-right"></b> 
-                                                <i class="fa fa-angle-right"></i>
-                                                <span><?= $category->name ?></span> 
-                                            </a> 
-                                        </li> 	
-                                    <?php } ?>
-
-                                    <li> 
-                                        <a href="#people/<?= encryptApp("all") ?>">
-                                            <b class="badge bg-info pull-right"><?= $total_people ?></b> 
-                                            <i class="fa fa-angle-right"></i> <span>All Contacts</span>
-                                        </a>
-                                    </li>
-
-                                </ul>
-                            </li>
+                        
 <!--                            <li> 
                                 <a href="#layout"> 
                                     <i class="fa fa-money icon"> 
@@ -124,6 +84,13 @@
                                     </li> 
                                 </ul>
                             </li>-->
+  <li> 
+                                <a href="#people/<?= encryptApp("all") ?>">
+                                    <i class="fa fa-users icon">
+                                        <b class="bg-success"></b>
+                                    </i> <span>Contacts</span>
+                                </a> 
+                            </li>
                              <li> 
                                 <a href="#view_report">
                                     <i class="fa fa-money icon">
