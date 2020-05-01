@@ -87,11 +87,11 @@ class PeopleController extends Controller {
     public function addSubscriberInfo($request) {
         $this->client_id = session('client_id');
         $cat = DB::table('category')
-                ->where(['name' => $request['category'], 'client_id' => $this->client_id])
+                ->where(['name' => isset($request['category']) ? $request['category']:null, 'client_id' => $this->client_id])
                 ->first();
 
         if (empty($cat)) {
-            $category_id = $request['category'] != '' ? DB::table('category')->insertGetId(
+            $category_id = isset($request['category']) && $request['category'] != '' ? DB::table('category')->insertGetId(
                             ['name' => $request['category'], 'client_id' => $this->client_id], 'category_id'
                     ) : NULL;
         } else {
@@ -102,7 +102,7 @@ class PeopleController extends Controller {
          * Check subscriber ID, phone number
          */
         $phone_number = $this->validatePhone(str_replace(' ', '', $request['phone_number']));
-        if (!empty($request['email'])) {
+        if (isset($request['email'])) {
 
             $email = filter_var($request['email'], FILTER_VALIDATE_EMAIL) ?
                     $request['email'] :
@@ -422,6 +422,7 @@ class PeopleController extends Controller {
         $file->storage_path = 'media/images/business/' . $this->client_id . '/';
         $file->upload('excel_file');
         $data = $file->loadExcel($file->storage_path . $file->name);
+       
         $this->checkExcelKeys($data);
         foreach ($data as $key => $value) {
             !empty($value['phone_number']) ?
@@ -443,12 +444,7 @@ class PeopleController extends Controller {
                     'message' => 'phone_number column is not available in File. Please rename a column with phone number to phone_number'
                 )));
                 return false;
-            } else if (!array_key_exists('category', $value)) {
-                die(json_encode(array(
-                    'status' => 'warning',
-                    'message' => 'category column is not available in File. Please rename a column with category/group to category'
-                )));
-            }
+            } 
         }
     }
 

@@ -122,7 +122,7 @@ class FileController extends Controller {
 
 //xlsb ,
     function loadExcel($filename) {
-return $this->fileload($filename);
+        return $this->fileload($filename);
         Excel::load($filename, function($reader) {
             // Getting all results
 
@@ -139,20 +139,22 @@ return $this->fileload($filename);
     }
 
     public function fileload($filename) {
-
-        $objPHPExcel = \PHPExcel_IOFactory::load($filename);
-
-        $sheets = $objPHPExcel->getSheetNames();
-
-        $data = [];
-        foreach ($sheets as $key => $value) {
-            $data[$value] = [];
+        try {
+            $inputFileType = \PHPExcel_IOFactory::identify($filename);
+            $objReader = \PHPExcel_IOFactory::createReader($inputFileType);
+            $objPHPExcel = $objReader->load($filename);
+        } catch (Exception $e) {
+            die('Error loading file "' . pathinfo($filename, PATHINFO_BASENAME) . '": ' . $e->getMessage());
         }
-        foreach ($sheets as $key => $value) {
-            $excel_data = $this->getDataBySheet($objPHPExcel, $key);
-            count($excel_data) > 0 ? array_push($data[$value], $excel_data) : '';
+        $data = $objPHPExcel->getActiveSheet()->toArray(null, true, true, true);
+        $keys= array_shift($data);
+        $result=[];
+        foreach ($data as $value) {
+            
+            $m=array_combine($keys,$value);
+            array_push($result, $m);
         }
-        return $data;
+        return $result;
     }
 
     public function getUserFiles($client_id = null) {
