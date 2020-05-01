@@ -37,7 +37,7 @@ class PeopleController extends Controller {
     public function getPeople($type) {
         $this->client_id = session('client_id');
         $where = $type == 'all' ? '' : " AND b.category_id='" . $type . "'";
-        $sql = "SELECT b.title, b.category_id, c.name as category, b.firstname,b.lastname, b.phone_number,b.email, b.subscriber_info_id, b.regtime, b.accept_sms, b.organization_name  
+        $sql = "SELECT b.*, c.name as category 
          FROM subscriber_info b 
          left JOIN category c ON b.category_id=c.category_id
          where b.client_id='" . $this->client_id . "' $where";
@@ -116,21 +116,21 @@ class PeopleController extends Controller {
                 ->where('phone_number', $phone_number);
         $data = [
             'client_id' => $this->client_id,
-            'title' => !empty($request['title']) ? $request['title'] : '',
-            'firstname' => !empty($request['firstname']) ? $request['firstname'] : '',
-            'lastname' => !empty($request['lastname']) ? $request['lastname'] : '',
-            'imei' => !empty($request['imei']) ? $request['imei'] : '',
+            'title' => isset($request['title']) ? $request['title'] : '',
+            'firstname' => isset($request['firstname']) ? $request['firstname'] : '',
+            'lastname' => isset($request['lastname']) ? $request['lastname'] : '',
+            'imei' => isset($request['imei']) ? $request['imei'] : '',
             'phone_number' => $phone_number,
-            'other_phone_number' => !empty($request['other_phone_number']) ? $request['other_phone_number'] : '',
+            'other_phone_number' => isset($request['other_phone_number']) ? $request['other_phone_number'] : '',
             'email' => $email,
-            'country' => !empty($request['country']) ? $request['country'] : '',
-            'added_by' => !empty($request['added_by']) ? $request['added_by'] : '',
+            'country' => isset($request['country']) ? $request['country'] : '',
+            'added_by' => isset($request['added_by']) ? $request['added_by'] : '',
             'category_id' => $category_id,
-            'organization_name' => !empty($request['organization_name']) ? $request['organization_name'] : '',
-            'promise' => !empty($request['promise']) ? $request['promise'] : '',
-            'promise_submitted' => !empty($request['promise_submitted']) ? $request['promise_submitted'] : '',
-            'organization_position' => !empty($request['organization_position']) ? $request['organization_position'] : '',
-            'organization_description' => !empty($request['organization_description']) ? $request['organization_description'] : ''
+            'organization_name' => isset($request['organization_name']) ? $request['organization_name'] : '',
+            'promise' => isset($request['promise']) ? $request['promise'] : '',
+            'promise_submitted' => isset($request['promise_submitted']) ? $request['promise_submitted'] : '',
+            'organization_position' => isset($request['organization_position']) ? $request['organization_position'] : '',
+            'organization_description' => isset($request['organization_description']) ? $request['organization_description'] : ''
         ];
         if (count($info->first())==0) {
             DB::table('subscriber_info')->insertGetId(

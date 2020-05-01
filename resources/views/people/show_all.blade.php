@@ -79,6 +79,7 @@
                                 <th>Email</th> 
                                 <th>Category</th>
                                 <th>Organization</th>
+                               <?php if ($person->client_id==614){ ?> <th>Amount</th> <?php }?>
                                 <th>Option</th> 
                             </tr> 
                         </thead> 
@@ -96,6 +97,7 @@
                                         <td><?= $person->email ?></td> 
                                         <td><?= $person->category ?></td>
                                         <td><?= $person->organization_name ?></td>
+                                         <?php if ($person->client_id==614){ ?> <td><?= $person->promise_submitted ?></td><?php }?>
                                         <td> 
                                             <a href="#" class="active" data-toggle="class" onclick="delete_subscriber(<?= $person->subscriber_info_id ?>);" title="Delete">
                                                 <i class="fa fa-trash-o text-success text-active"></i>
